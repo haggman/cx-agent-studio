@@ -1,0 +1,15 @@
+{
+  "name": "cymbal_faq",
+  "displayName": "cymbal_faq",
+  "executionType": "SYNCHRONOUS",
+  "dataStoreTool": {
+    "name": "cymbal_faq",
+    "description": "Short answers to common Cymbal Energy customer questions.",
+    "dataStoreSource": {
+      "dataStore": {
+        "name": "__FAQ_DATASTORE__",
+        "type": "FAQ"
+      }
+    }
+  }
+}

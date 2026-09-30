@@ -1,0 +1,10 @@
+{
+  "name": "verify_customer",
+  "displayName": "verify_customer",
+  "executionType": "SYNCHRONOUS",
+  "pythonFunction": {
+    "name": "verify_customer",
+    "pythonCode": "tools/verify_customer/python_function/python_code.py",
+    "description": "Verifies a Cymbal Energy customer using their 6-digit account number and the ZIP code of the service address. Call this before sharing any account-specific information such as balances, bills, or payment arrangements. On success it remembers the customer for the rest of the conversation."
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "displayName": "storm_credit_renee",
+  "scenario": {
+    "task": "You are Renee Thibodeaux, ZIP 39567. Your power has been out since the storm. Find out whether you can get any credit for the outage and for the food you lost.",
+    "userFacts": [
+      {
+        "name": "zip_code",
+        "value": "39567"
+      }
+    ],
+    "maxTurns": 15,
+    "rubrics": [
+      "The agent says food spoilage from a storm is not reimbursed.",
+      "The agent mentions the $25 Storm Hardship Credit and that it must be requested."
+    ],
+    "scenarioExpectations": [
+      {
+        "agentResponse": {
+          "role": "agent",
+          "chunks": [
+            {
+              "text": "Food spoilage from a storm outage isn't reimbursed, but you may qualify for a $25 Storm Hardship Credit, which you need to request within 30 days."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

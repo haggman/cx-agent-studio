@@ -1,0 +1,14 @@
+{
+  "name": "cymbal_energy_care_agent",
+  "displayName": "cymbal_energy_care_agent",
+  "description": "Assists Cymbal Energy customers with power outages, billing inquiries and payment arrangements.",
+  "instruction": "agents/cymbal_energy_care_agent/instruction.txt",
+  "tools": [
+    "verify_customer",
+    "check_outage",
+    "report_outage",
+    "get_bill_summary",
+    "create_payment_arrangement",
+    "end_session"
+  ]
+}

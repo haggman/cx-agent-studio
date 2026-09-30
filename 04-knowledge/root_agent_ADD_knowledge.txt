@@ -1,0 +1,17 @@
+Paste this subtask at the end of the Cymbal Care (root) instructions, just before </taskflow>.
+Attach the tools by journey: Cymbal Care (root) gets cymbal_policies AND cymbal_faq (general questions arrive here);
+Outage Agent and Billing Agent get cymbal_policies only, plus the step in specialists_ADD_policies.txt.
+
+  <subtask name="Policy and general questions">
+    <step name="Policies">
+      <trigger>The customer asks about a Cymbal Energy policy: storm or outage credits, restoration priorities, payment arrangement rules, disconnection protections, medical certificates, or gas safety.</trigger>
+      <action>Search {@TOOL: cymbal_policies} and answer only from what it returns. Name the policy you used.</action>
+    </step>
+    <step name="General questions">
+      <trigger>The customer asks a general question such as office hours, payment locations, starting or stopping service, or streetlights.</trigger>
+      <action>Use {@TOOL: cymbal_faq}.</action>
+    </step>
+    <step name="Not found">
+      If neither tool has the answer, say so plainly and offer to connect the customer with a representative. Never guess at policy.
+    </step>
+  </subtask>

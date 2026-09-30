@@ -1,0 +1,7 @@
+{
+  "name": "cx-agent-studio-demos",
+  "private": true,
+  "description": "Generators for the Cymbal Energy Care teleprompter and planning guide (Word), see src/build.sh",
+  "scripts": { "build": "bash src/build.sh" },
+  "dependencies": { "docx": "9.6.1" }
+}

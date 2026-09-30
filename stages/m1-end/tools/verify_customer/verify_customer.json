@@ -1,0 +1,10 @@
+{
+  "name": "verify_customer",
+  "displayName": "verify_customer",
+  "executionType": "SYNCHRONOUS",
+  "pythonFunction": {
+    "name": "verify_customer",
+    "pythonCode": "tools/verify_customer/python_function/python_code.py",
+    "description": "Verifies the customer with their account number and service ZIP code."
+  }
+}

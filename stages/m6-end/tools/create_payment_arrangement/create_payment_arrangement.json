@@ -1,0 +1,10 @@
+{
+  "name": "create_payment_arrangement",
+  "displayName": "create_payment_arrangement",
+  "executionType": "SYNCHRONOUS",
+  "pythonFunction": {
+    "name": "create_payment_arrangement",
+    "pythonCode": "tools/create_payment_arrangement/python_function/python_code.py",
+    "description": "Creates a payment arrangement that spreads the verified customer's current balance over equal monthly installments added to future bills. Cymbal Energy policy decides eligibility; this tool enforces it and returns approved true or false with the reason. The customer must be verified first with verify_customer."
+  }
+}

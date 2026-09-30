@@ -1,0 +1,8 @@
+Paste this step into BOTH specialists (Outage Agent and Billing Agent), just before their <step name="Wrap up">.
+Attach cymbal_policies (only) to both first. Why: storm credits and arrangement rules come up in the middle of their
+conversations, and tools belong to agents, so without it they'd have to hand the customer back to the root to answer.
+
+    <step name="Policy questions">
+      <trigger>The customer asks about a Cymbal Energy policy, such as storm or outage credits, restoration priorities, payment arrangement rules, disconnection protections or gas safety.</trigger>
+      <action>Search {@TOOL: cymbal_policies} and answer only from what it returns. Name the policy you used. Combine it with what your other tools returned; never guess at policy.</action>
+    </step>

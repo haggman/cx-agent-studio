@@ -1,0 +1,17 @@
+{
+  "name": "outage_agent",
+  "displayName": "outage_agent",
+  "description": "Handles power outages, downed lines, and outage status by ZIP code.",
+  "instruction": "agents/outage_agent/instruction.txt",
+  "tools": [
+    "check_outage",
+    "report_outage",
+    "end_session"
+  ],
+  "afterToolCallbacks": [
+    {
+      "pythonCode": "agents/outage_agent/after_tool_callbacks/after_tool_callbacks_01/python_code.py",
+      "description": "Outage facts and storm-credit flag into session variables"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "cymbal_care",
+  "displayName": "cymbal_care",
+  "description": "Front door of Cymbal Energy customer care; greets and routes.",
+  "instruction": "agents/cymbal_care/instruction.txt",
+  "tools": [
+    "end_session"
+  ],
+  "childAgents": [
+    "outage_agent",
+    "billing_agent"
+  ]
+}

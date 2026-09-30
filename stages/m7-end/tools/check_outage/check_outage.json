@@ -1,0 +1,10 @@
+{
+  "name": "check_outage",
+  "displayName": "check_outage",
+  "executionType": "SYNCHRONOUS",
+  "pythonFunction": {
+    "name": "check_outage",
+    "pythonCode": "tools/check_outage/python_function/python_code.py",
+    "description": "Checks for a known power outage at a Cymbal Energy service ZIP code and returns its status, cause, crew status and estimated restoration time. If zip_code is empty, the verified customer's service ZIP is used. Only quote restoration times exactly as returned by this tool."
+  }
+}

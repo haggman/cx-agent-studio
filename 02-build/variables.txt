@@ -1,0 +1,11 @@
+Create these eight variables (Variables button on the right side of the builder > Create a variable).
+
+Name                   Type     Default   Written by                 Description
+is_authenticated       Yes/No   No        verify_customer (tool)     True once verification succeeds
+account_id             Text     (empty)   verify_customer (tool)     6-digit Cymbal Energy account number
+customer_name          Text     (empty)   verify_customer (tool)     Verified customer's name
+service_zip            Text     (empty)   verify_customer (tool)     ZIP code of the verified service address
+outage_id              Text     (empty)   after-tool callback        Outage the customer is affected by
+estimated_restoration  Text     (empty)   after-tool callback        ETR exactly as the outage system returned it
+hours_without_power    Number   0         after-tool callback        Hours the outage has lasted
+storm_credit_eligible  Yes/No   No        after-tool callback        >72 hours during a declared Major Storm Event

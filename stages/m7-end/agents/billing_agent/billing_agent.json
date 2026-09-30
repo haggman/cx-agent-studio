@@ -1,0 +1,13 @@
+{
+  "name": "billing_agent",
+  "displayName": "billing_agent",
+  "description": "Handles bills, balances, payments and payment arrangements.",
+  "instruction": "agents/billing_agent/instruction.txt",
+  "tools": [
+    "verify_customer",
+    "get_bill_summary",
+    "create_payment_arrangement",
+    "end_session",
+    "cymbal_policies"
+  ]
+}

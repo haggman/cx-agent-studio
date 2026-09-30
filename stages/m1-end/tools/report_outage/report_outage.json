@@ -1,0 +1,10 @@
+{
+  "name": "report_outage",
+  "displayName": "report_outage",
+  "executionType": "SYNCHRONOUS",
+  "pythonFunction": {
+    "name": "report_outage",
+    "pythonCode": "tools/report_outage/python_function/python_code.py",
+    "description": "Creates a trouble ticket for a power problem."
+  }
+}

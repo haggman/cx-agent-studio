@@ -1,0 +1,26 @@
+{
+  "displayName": "payment_scam_warning",
+  "description": "Warns customers about gift-card and crypto payment scams.",
+  "enabled": true,
+  "contentFilter": {
+    "bannedContentsInUserInput": [
+      "gift card",
+      "gift cards",
+      "bitcoin",
+      "crypto",
+      "cryptocurrency",
+      "prepaid card",
+      "cash app"
+    ],
+    "matchType": "SIMPLE_STRING_MATCH"
+  },
+  "action": {
+    "respondImmediately": {
+      "responses": [
+        {
+          "text": "Cymbal Energy will never ask you to pay with gift cards, prepaid cards or cryptocurrency, and we never threaten same-day disconnection by phone. If someone contacted you asking for that, it is a scam: please hang up and call us at the number on your bill."
+        }
+      ]
+    }
+  }
+}

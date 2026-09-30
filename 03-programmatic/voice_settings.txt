@@ -1,0 +1,15 @@
+M3 slides 25-29: Native audio. Settings (gear icon, right side of the builder).
+
+BEFORE: write down the current Global model here: ______________________
+
+1. Settings > Global model: choose gemini-3.1-flash-live (audio-to-audio, the native audio on slide 29). Save.
+   The list also has composite-v1 (GA Sep 24): a listener + thinking + speaker cascade built for strict instruction
+   following and tool calls. Name it as the newest option; M7 block 24 uses it for the recording disclaimer.
+2. Settings > Basic > Behavior:
+     Voice ............................ pick one and play the sample
+     Ambient sounds ................... pick a call-center style ambience
+     Allow user interruptions ......... ON
+     Adapt when interrupted ........... ON
+3. Preview agent: click the microphone and talk.
+
+AFTER the demo: set Global model back to the value above, so text previews stay fast.

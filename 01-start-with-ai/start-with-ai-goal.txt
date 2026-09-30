@@ -1,0 +1,1 @@
+Build a customer care agent for Cymbal Energy, an electric and natural gas utility on the Mississippi Gulf Coast, that helps customers check and report power outages and answers questions about their bill, including setting up a payment arrangement.

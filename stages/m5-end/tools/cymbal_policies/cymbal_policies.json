@@ -1,0 +1,15 @@
+{
+  "name": "cymbal_policies",
+  "displayName": "cymbal_policies",
+  "executionType": "SYNCHRONOUS",
+  "dataStoreTool": {
+    "name": "cymbal_policies",
+    "description": "Cymbal Energy policies: storm restoration and outage credits, payment arrangements and disconnection, natural gas safety.",
+    "dataStoreSource": {
+      "dataStore": {
+        "name": "__POLICIES_DATASTORE__",
+        "type": "UNSTRUCTURED"
+      }
+    }
+  }
+}

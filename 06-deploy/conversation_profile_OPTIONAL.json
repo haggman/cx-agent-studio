@@ -1,0 +1,8 @@
+{
+  "displayName": "Cymbal Energy - virtual agent first",
+  "automatedAgentConfig": {
+    "agent": "projects/PROJECT_ID/locations/us/apps/APP_ID"
+  },
+  "useBidiStreaming": true,
+  "languageCode": "en-US"
+}

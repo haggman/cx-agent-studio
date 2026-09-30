@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cymbal Energy | Outage Center</title>
+<!--
+  M6 demo page (fictional company). Serve it over http, not by double-clicking:
+    cd to this folder, then:  python3 -m http.server 8000
+    open http://localhost:8000/cymbal-energy-outage-center.html
+  Paste the web widget code from CX Agent Studio (Deploy > your web widget channel) between the two PASTE markers
+  at the bottom of this file, save, and reload the page.
+-->
+<style>
+  :root { --navy:#0b2a4a; --blue:#1f6fd1; --amber:#f5a623; --ink:#1d2733; --muted:#5b6b7c; --bg:#f4f7fb; --card:#fff; --line:#dde5ee; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color:var(--ink); background:var(--bg); }
+  header { background:var(--navy); color:#fff; }
+  .bar { max-width:1100px; margin:0 auto; padding:14px 20px; display:flex; align-items:center; gap:28px; flex-wrap:wrap; }
+  .logo { font-weight:700; font-size:22px; letter-spacing:.3px; display:flex; align-items:center; gap:10px; }
+  .logo span.mark { width:30px; height:30px; border-radius:50%; background:conic-gradient(var(--amber) 0 50%, #4fb3ff 50% 100%); display:inline-block; }
+  nav a { color:#cfe0f5; text-decoration:none; margin-right:18px; font-size:15px; }
+  nav a.on { color:#fff; border-bottom:2px solid var(--amber); padding-bottom:3px; }
+  .alert { background:var(--amber); color:#2a1a00; }
+  .alert .bar { padding:10px 20px; font-size:15px; }
+  main { max-width:1100px; margin:0 auto; padding:26px 20px 80px; }
+  h1 { font-size:30px; margin:0 0 6px; color:var(--navy); }
+  .sub { color:var(--muted); margin:0 0 22px; }
+  .grid { display:grid; grid-template-columns: 2fr 1fr; gap:20px; }
+  @media (max-width: 820px) { .grid { grid-template-columns: 1fr; } }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:18px 20px; }
+  .card h2 { font-size:18px; margin:0 0 12px; color:var(--navy); }
+  .map { height:260px; border-radius:8px; background:
+      radial-gradient(circle at 62% 58%, rgba(214,48,49,.55) 0 38px, transparent 39px),
+      radial-gradient(circle at 30% 40%, rgba(245,166,35,.55) 0 18px, transparent 19px),
+      linear-gradient(160deg, #d9e8f7 0 55%, #9cc3e8 55% 100%);
+      position:relative; border:1px solid var(--line); }
+  .map .pin { position:absolute; font-size:12px; background:#fff; border:1px solid var(--line); border-radius:6px; padding:3px 7px; }
+  .map .gulf { position:absolute; right:14px; bottom:10px; color:#1c4f82; font-size:13px; font-style:italic; }
+  table { width:100%; border-collapse:collapse; font-size:14px; }
+  th, td { text-align:left; padding:8px 6px; border-bottom:1px solid var(--line); }
+  th { color:var(--muted); font-weight:600; }
+  .pill { display:inline-block; padding:2px 8px; border-radius:999px; font-size:12px; font-weight:600; }
+  .red { background:#fde2e1; color:#a61b1b; } .amber { background:#fff1d6; color:#8a5a00; } .green { background:#dff5e6; color:#1b6b3a; }
+  .tips li { margin:6px 0; }
+  .chat-hint { margin-top:20px; font-size:14px; color:var(--muted); }
+  footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="bar">
+    <div class="logo"><span class="mark"></span>Cymbal Energy</div>
+    <nav><a href="#">My Account</a><a href="#">Pay My Bill</a><a class="on" href="#">Outages</a><a href="#">Safety</a><a href="#">Contact</a></nav>
+  </div>
+</header>
+<div class="alert"><div class="bar"><strong>Tropical Storm Delphine (MSE-2026-04):</strong>&nbsp;crews from four states are restoring service. Smell gas? Leave now and call 1-800-555-0199.</div></div>
+<main>
+  <h1>Outage Center</h1>
+  <p class="sub">Check an outage, report a problem, or ask our virtual assistant. Updated every 15 minutes.</p>
+  <div class="grid">
+    <section class="card">
+      <h2>Current outages</h2>
+      <div class="map">
+        <span class="pin" style="left:57%;top:40%">Pascagoula · 2,140 out</span>
+        <span class="pin" style="left:18%;top:26%">Gautier · 310 out</span>
+        <span class="gulf">Gulf of Mexico</span>
+      </div>
+      <table style="margin-top:14px">
+        <tr><th>Area</th><th>ZIP</th><th>Customers out</th><th>Status</th><th>Estimated restoration</th></tr>
+        <tr><td>Pascagoula</td><td>39567</td><td>2,140</td><td><span class="pill red">Crew on site</span></td><td>11:00 PM tonight</td></tr>
+        <tr><td>Moss Point</td><td>39562</td><td>310</td><td><span class="pill amber">Crew en route</span></td><td>4:30 PM today</td></tr>
+        <tr><td>Moss Point</td><td>39563</td><td>0</td><td><span class="pill green">Restored</span></td><td>n/a</td></tr>
+        <tr><td>Ocean Springs</td><td>39564</td><td>0</td><td><span class="pill green">Restored</span></td><td>n/a</td></tr>
+      </table>
+    </section>
+    <aside class="card">
+      <h2>Storm safety</h2>
+      <ul class="tips">
+        <li>Stay at least <strong>35 feet</strong> from downed lines.</li>
+        <li>Run generators outdoors, 20 feet from the house.</li>
+        <li>Out more than 72 hours? You may qualify for a Storm Hardship Credit.</li>
+      </ul>
+      <p class="chat-hint">Questions about your outage or bill? Open the chat in the corner to talk to our virtual assistant.</p>
+    </aside>
+  </div>
+</main>
+<footer>Cymbal Energy is a fictional company. Demo page for Build Agents with CX Agent Studio.</footer>
+
+<!-- ===== PASTE the web widget code from CX Agent Studio below this line ===== -->
+
+<!-- ===== PASTE above this line ===== -->
+</body>
+</html>

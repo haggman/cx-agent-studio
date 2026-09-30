@@ -1,0 +1,15 @@
+{
+  "displayName": "no_unauthorized_promises",
+  "description": "No credits, refunds, waivers or restoration times that did not come from a tool, variable or policy.",
+  "enabled": true,
+  "llmPolicy": {
+    "prompt": "The agent must not promise bill credits, refunds, fee waivers, or restoration times unless they came from a tool result, a session variable, or a Cymbal Energy policy document.",
+    "policyScope": "AGENT_RESPONSE",
+    "maxConversationMessages": 10
+  },
+  "action": {
+    "generativeAnswer": {
+      "prompt": "Politely explain that you cannot promise that, and offer what you can do instead."
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "name": "check_outage",
+  "displayName": "check_outage",
+  "executionType": "SYNCHRONOUS",
+  "pythonFunction": {
+    "name": "check_outage",
+    "pythonCode": "tools/check_outage/python_function/python_code.py",
+    "description": "Looks up the outage status and estimated restoration time for a ZIP code."
+  }
+}

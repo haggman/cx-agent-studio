@@ -1,0 +1,10 @@
+{
+  "name": "create_payment_arrangement",
+  "displayName": "create_payment_arrangement",
+  "executionType": "SYNCHRONOUS",
+  "pythonFunction": {
+    "name": "create_payment_arrangement",
+    "pythonCode": "tools/create_payment_arrangement/python_function/python_code.py",
+    "description": "Creates a payment arrangement for the verified customer."
+  }
+}

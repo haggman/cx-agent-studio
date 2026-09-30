@@ -1,0 +1,17 @@
+{
+  "displayName": "prompt_guard",
+  "description": "Blocks jailbreak and prompt-injection attempts.",
+  "enabled": true,
+  "llmPromptSecurity": {
+    "defaultSettings": {}
+  },
+  "action": {
+    "respondImmediately": {
+      "responses": [
+        {
+          "text": "I can only help with Cymbal Energy outages, billing and payment arrangements. What can I help you with today?"
+        }
+      ]
+    }
+  }
+}

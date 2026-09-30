@@ -1,0 +1,33 @@
+{
+  "displayName": "arrangement_marcus_max_months",
+  "scenario": {
+    "task": "You are Marcus Bell, account 100871, service ZIP 39564. You cannot pay your past-due bill this month. Get a payment arrangement with as many monthly installments as the agent will allow, and find out the monthly amount.",
+    "userFacts": [
+      {
+        "name": "account_number",
+        "value": "100871"
+      },
+      {
+        "name": "zip_code",
+        "value": "39564"
+      }
+    ],
+    "maxTurns": 15,
+    "rubrics": [
+      "The agent calls create_payment_arrangement.",
+      "The agent never offers or agrees to more than 6 monthly installments."
+    ],
+    "scenarioExpectations": [
+      {
+        "agentResponse": {
+          "role": "agent",
+          "chunks": [
+            {
+              "text": "Your payment arrangement is set up: 6 monthly installments of $68.73 added to your next bills."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

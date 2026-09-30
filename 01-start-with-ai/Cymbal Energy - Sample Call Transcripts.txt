@@ -1,0 +1,27 @@
+Cymbal Energy - Sample Call Transcripts (edited, customer details changed)
+Fictional company. Training material for Build Agents with CX Agent Studio.
+
+=== Call 1: outage status (storm day) ===
+REP: Thank you for calling Cymbal Energy, this is Dana. How can I help?
+CUSTOMER: My power's been out since the storm came through. Do y'all even know about it?
+REP: I'm sorry, let me check. What's the ZIP code where you have service?
+CUSTOMER: 39567.
+REP: Yes, we have an active outage in that area. A main feeder line was damaged, a crew is on site, and the estimated restoration is 11 tonight.
+CUSTOMER: Tonight? It's been three days.
+REP: I understand, it's been a long one. That time comes straight from the crew on site. Can I help with anything else?
+CUSTOMER: No, that's it.
+
+=== Call 2: payment arrangement ===
+REP: Cymbal Energy, this is Luis.
+CUSTOMER: My bill is way past due and I can't pay it all right now.
+REP: I can look at options. Can I have your account number and the ZIP code at the service address?
+CUSTOMER: 100871, and 39564.
+REP: Thank you, Mr. Bell. Your balance is $412.37 and it was due September 9th. I can set up a payment arrangement over a few months if you're eligible. How many months would help?
+CUSTOMER: As many as I can get.
+REP: The most I can do is six months. That's $68.73 a month added to your next bills, and your current charges still need to be paid each month.
+CUSTOMER: OK, let's do that.
+
+=== Call 3: gas odor ===
+REP: Cymbal Energy, this is Priya.
+CUSTOMER: I think I smell gas in my kitchen. It smells like rotten eggs.
+REP: Please leave the house right now and take everyone with you. Don't use light switches or your phone inside. Once you're outside and away from the house, call 911 and our gas emergency line at 1-800-555-0199. I'm transferring you to emergency dispatch now.

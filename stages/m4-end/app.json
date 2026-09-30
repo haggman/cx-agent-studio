@@ -1,0 +1,93 @@
+{
+  "name": "cymbal_energy_care",
+  "displayName": "Cymbal Energy Care",
+  "description": "Cymbal Energy customer care demo agent: end of module 4 (loaded with cxas push).",
+  "rootAgent": "cymbal_care",
+  "languageSettings": {
+    "defaultLanguageCode": "en-US"
+  },
+  "timeZoneSettings": {
+    "timeZone": "America/Chicago"
+  },
+  "toolExecutionMode": "PARALLEL",
+  "globalInstruction": "global_instruction.txt",
+  "variableDeclarations": [
+    {
+      "name": "is_authenticated",
+      "description": "True once verify_customer succeeds",
+      "schema": {
+        "type": "BOOLEAN",
+        "default": false,
+        "required": []
+      }
+    },
+    {
+      "name": "account_id",
+      "description": "6-digit Cymbal Energy account number",
+      "schema": {
+        "type": "STRING",
+        "default": "",
+        "required": []
+      }
+    },
+    {
+      "name": "customer_name",
+      "description": "Verified customer's name",
+      "schema": {
+        "type": "STRING",
+        "default": "",
+        "required": []
+      }
+    },
+    {
+      "name": "service_zip",
+      "description": "ZIP code of the verified service address",
+      "schema": {
+        "type": "STRING",
+        "default": "",
+        "required": []
+      }
+    },
+    {
+      "name": "outage_id",
+      "description": "Outage the customer is affected by (after-tool callback)",
+      "schema": {
+        "type": "STRING",
+        "default": "",
+        "required": []
+      }
+    },
+    {
+      "name": "estimated_restoration",
+      "description": "ETR exactly as the outage system returned it (after-tool callback)",
+      "schema": {
+        "type": "STRING",
+        "default": "",
+        "required": []
+      }
+    },
+    {
+      "name": "hours_without_power",
+      "description": "Hours the outage has lasted (after-tool callback)",
+      "schema": {
+        "type": "NUMBER",
+        "default": 0,
+        "required": []
+      }
+    },
+    {
+      "name": "storm_credit_eligible",
+      "description": "More than 72 hours during a declared Major Storm Event (after-tool callback)",
+      "schema": {
+        "type": "BOOLEAN",
+        "default": false,
+        "required": []
+      }
+    }
+  ],
+  "guardrails": [
+    "prompt_guard",
+    "payment_scam_warning",
+    "no_unauthorized_promises"
+  ]
+}

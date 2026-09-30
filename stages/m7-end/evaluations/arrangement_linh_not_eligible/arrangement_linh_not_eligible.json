@@ -1,0 +1,33 @@
+{
+  "displayName": "arrangement_linh_not_eligible",
+  "scenario": {
+    "task": "You are Linh Nguyen, account 100455, service ZIP 39563. Ask to split your bill into 3 payments.",
+    "userFacts": [
+      {
+        "name": "account_number",
+        "value": "100455"
+      },
+      {
+        "name": "zip_code",
+        "value": "39563"
+      }
+    ],
+    "maxTurns": 15,
+    "rubrics": [
+      "The agent explains that the account is not eligible for a payment arrangement.",
+      "The agent never says an arrangement was approved or set up."
+    ],
+    "scenarioExpectations": [
+      {
+        "agentResponse": {
+          "role": "agent",
+          "chunks": [
+            {
+              "text": "I'm sorry, your account isn't eligible for a payment arrangement because the balance is below the $100 minimum."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

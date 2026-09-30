@@ -1,0 +1,10 @@
+{
+  "name": "get_bill_summary",
+  "displayName": "get_bill_summary",
+  "executionType": "SYNCHRONOUS",
+  "pythonFunction": {
+    "name": "get_bill_summary",
+    "pythonCode": "tools/get_bill_summary/python_function/python_code.py",
+    "description": "Returns the verified customer's balance, due date and last payment."
+  }
+}

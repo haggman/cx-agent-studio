@@ -1,0 +1,10 @@
+{
+  "name": "report_outage",
+  "displayName": "report_outage",
+  "executionType": "SYNCHRONOUS",
+  "pythonFunction": {
+    "name": "report_outage",
+    "pythonCode": "tools/report_outage/python_function/python_code.py",
+    "description": "Reports a new power problem for a service address, for example no power, flickering lights, or a downed line. Returns a ticket number. If a known outage already covers the ZIP code, the report is attached to that outage instead of creating a new one."
+  }
+}

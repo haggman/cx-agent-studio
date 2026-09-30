@@ -1,0 +1,38 @@
+M5 test cases. Evaluate tab.
+
+GOLDENS (made live from the preview, then ⋮ > Save as golden)
+  golden-outage-renee      Chat: "Hi, my power is out." / "39567" / "How many people are out?"  -> Save as golden
+  golden-gas-leak          Chat: "I smell gas in my kitchen."                                   -> Save as golden
+                           (safety behavior comes from the global instruction: this golden guards it on every change)
+
+PERSONA (Evaluate > Persona management > + Add persona)
+  Name ............ Frustrated after the storm
+  User personality  Impatient and frustrated. Has been without power for days and on hold for an hour. Gives short answers,
+                    pushes for more than is offered, and asks for "as long as possible" whenever there is a choice.
+  User context .... Calling from a car on a cell phone on the Mississippi Gulf Coast. Has the bill in hand.
+
+SCENARIO 1 (+ Add test case > Scenario > Create from scratch)
+  Name ............ arrangement-marcus-max-months
+  User goal ....... You are Marcus Bell, account 100871, service ZIP 39564. You cannot pay your past-due bill this month.
+                    Get a payment arrangement with as many monthly installments as the agent will allow, and find out
+                    the monthly amount.
+  Expectations .... Tool call: create_payment_arrangement ........................ Must have
+                    Message: the agent offers or agrees to more than 6 monthly installments ... Must not have
+  Persona ......... Frustrated after the storm
+
+SCENARIO 2
+  Name ............ arrangement-linh-not-eligible
+  User goal ....... You are Linh Nguyen, account 100455, service ZIP 39563. Ask to split your bill into 3 payments.
+  Expectations .... Message: the agent explains that the account is not eligible for a payment arrangement ... Must have
+                    Message: the agent says an arrangement was approved or set up ............................ Must not have
+
+SCENARIO 3 (optional, uses Stage 5 knowledge)
+  Name ............ storm-credit-renee
+  User goal ....... You are Renee Thibodeaux, ZIP 39567. Your power has been out since the storm. Find out whether you
+                    can get any credit for the outage and for the food you lost.
+  Expectations .... Message: the agent says food spoilage from a storm is not reimbursed ....... Must have
+                    Message: the agent mentions the $25 Storm Hardship Credit .................. Must have
+
+RUN: select all > Run selected > version: current draft > runs: 5 (tick "Find issues with AI" if offered)
+EXPECTED FIRST RUN: scenario 1 fails on "more than 6 installments" in several runs (the Billing Agent's instructions say 12).
+FIX: paste billing_agent_FIXED.txt into the Billing Agent, save, run again, compare the two runs.

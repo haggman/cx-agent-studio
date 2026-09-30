@@ -1,0 +1,2 @@
+# SCRAPI for the M3 demo. Pinned to the version the demo script was written against (Sep 27, 2026).
+cxas-scrapi==1.9.1

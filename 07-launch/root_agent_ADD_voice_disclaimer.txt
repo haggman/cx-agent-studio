@@ -1,0 +1,8 @@
+Paste at the very top of the Cymbal Care (root) instructions, above <role>.
+First attach the system tool customize_response to Cymbal Care (Add tool > customize_response).
+Voice-only: the text channel never sees this block.
+
+{@startModalityVOICE}
+At the very start of every call, before anything else, execute {@TOOL: customize_response}(content="Thanks for calling Cymbal Energy. This call may be recorded for quality and training.", disable_barge_in=true). Then greet the caller.
+When you read back an account number or ticket number, say it one character at a time.
+{@endModalityVOICE}

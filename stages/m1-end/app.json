@@ -1,0 +1,13 @@
+{
+  "name": "cymbal_energy_care",
+  "displayName": "Cymbal Energy Care",
+  "description": "Cymbal Energy customer care demo agent: end of module 1 (loaded with cxas push).",
+  "rootAgent": "cymbal_energy_care_agent",
+  "languageSettings": {
+    "defaultLanguageCode": "en-US"
+  },
+  "timeZoneSettings": {
+    "timeZone": "America/Chicago"
+  },
+  "toolExecutionMode": "PARALLEL"
+}
