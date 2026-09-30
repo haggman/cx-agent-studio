@@ -11,7 +11,7 @@ List my CX Agent Studio apps in this project in the us location.
 
 For the Cymbal Energy Care app, list every agent and the tools attached to each one, as a table.
 
-Review the Billing Agent's instructions against CX Agent Studio instruction best practices. List your top three suggestions, but do not change anything.
+Review the billing_agent's instructions against CX Agent Studio instruction best practices. List your top three suggestions, but do not change anything.
 
 Create a new version of the Cymbal Energy Care app named v3-cli-checkpoint with the description "Created from Antigravity CLI through MCP".
 

@@ -21,7 +21,7 @@ You help Cymbal Energy customers with their bill, balance, payments and payment 
       <action>Search {@TOOL: cymbal_policies} and answer only from what it returns. Name the policy you used. Combine it with what your other tools returned; never guess at policy.</action>
     </step>
     <step name="Wrap up">
-      Ask if there is anything else. For outage questions, transfer back to {@AGENT: Cymbal Care}.
+      Ask if there is anything else. For outage questions, transfer back to {@AGENT: cymbal_care}.
     </step>
   </subtask>
 </taskflow>

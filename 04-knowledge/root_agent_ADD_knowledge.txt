@@ -1,6 +1,6 @@
-Paste this subtask at the end of the Cymbal Care (root) instructions, just before </taskflow>.
-Attach the tools by journey: Cymbal Care (root) gets cymbal_policies AND cymbal_faq (general questions arrive here);
-Outage Agent and Billing Agent get cymbal_policies only, plus the step in specialists_ADD_policies.txt.
+Paste this subtask at the end of the cymbal_care (root) instructions, just before </taskflow>.
+Attach the tools by journey: cymbal_care (root) gets cymbal_policies AND cymbal_faq (general questions arrive here);
+outage_agent and billing_agent get cymbal_policies only, plus the step in specialists_ADD_policies.txt.
 
   <subtask name="Policy and general questions">
     <step name="Policies">

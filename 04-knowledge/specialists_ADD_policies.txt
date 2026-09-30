@@ -1,4 +1,4 @@
-Paste this step into BOTH specialists (Outage Agent and Billing Agent), just before their <step name="Wrap up">.
+Paste this step into BOTH specialists (outage_agent and billing_agent), just before their <step name="Wrap up">.
 Attach cymbal_policies (only) to both first. Why: storm credits and arrangement rules come up in the middle of their
 conversations, and tools belong to agents, so without it they'd have to hand the customer back to the root to answer.
 

@@ -34,5 +34,5 @@ SCENARIO 3 (optional, uses Stage 5 knowledge)
                     Message: the agent mentions the $25 Storm Hardship Credit .................. Must have
 
 RUN: select all > Run selected > version: current draft > runs: 5 (tick "Find issues with AI" if offered)
-EXPECTED FIRST RUN: scenario 1 fails on "more than 6 installments" in several runs (the Billing Agent's instructions say 12).
-FIX: paste billing_agent_FIXED.txt into the Billing Agent, save, run again, compare the two runs.
+EXPECTED FIRST RUN: scenario 1 fails on "more than 6 installments" in several runs (the billing_agent's instructions say 12).
+FIX: paste billing_agent_FIXED.txt into the billing_agent, save, run again, compare the two runs.

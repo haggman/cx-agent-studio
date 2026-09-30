@@ -2,7 +2,7 @@ from typing import Any
 
 
 def after_tool_callback(tool: Tool, input: dict[str, Any], callback_context: CallbackContext, tool_response: dict[str, Any]) -> Optional[dict[str, Any]]:
-    """Runs after every tool call on the Outage Agent. When check_outage returns an active outage,
+    """Runs after every tool call on the outage_agent. When check_outage returns an active outage,
     copy the outage facts into session variables and work out storm-credit eligibility in code:
     more than 72 hours out during a declared Major Storm Event (policy OP-110).
     Returns None, so the tool's own response reaches the model unchanged."""

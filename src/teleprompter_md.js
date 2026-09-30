@@ -55,8 +55,8 @@ K.blocks.forEach((b, i) => {
       "**CLOUD SHELL · 1–2 minutes · skip it if the live build is on track**", "",
       "```text", `bash ~/cx-agent-studio/catch_up.sh ${b.module.slice(1)}`, "```", "", `→ *Loads ${c.version}. ${c.has}*`, "",
       "Then: console ▸ refresh the page ▸ Preview agent ▸ Start new conversation.", "",
-      "It replaces everything in the app with that stage (version history stays). Loaded agents are named cymbal_care, outage_agent and billing_agent: " +
-      "read \"Outage Agent\" in the script as outage_agent.", "");
+      "It replaces everything in the app with that stage (version history stays). Agent names match the live build " +
+      "(cymbal_care, outage_agent, billing_agent).", "");
   }
   add("---", "", `<a name="b${b.n}"></a>`, "",
     `## ${b.n} · ${b.module} · ${slides(b)}${b.footer ? ` (footer ${b.footer})` : ""}`, "",

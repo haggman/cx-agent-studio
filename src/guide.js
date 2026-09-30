@@ -30,7 +30,7 @@ add(box([
   bullet("One app, built live in front of the room, that gains one capability per module. Nothing is pre-built except the data files."),
   bullet([run("Every stage ends with a saved version (v1 … v7). The reset at the start of any block is \"Versions ▸ restore the previous one\". Last night's dry-run app, renamed "), run("Cymbal Energy Care (dry run)", { bold: true }), run(", is the backup for every stage.")]),
   bullet("The main thread is the storm credit: in M1 the agent guesses at the freezer-credit question; in M2 an after-tool callback turns the outage data into a storm_credit_eligible flag; in M4 the policy PDF supplies the details ($25, request within 30 days). Gas safety is a global-instruction behavior, guarded by a golden in M5."),
-  bullet("One planted bug: the Billing Agent's instructions say \"up to 12 monthly installments\" while the tool enforces 6. Nobody mentions it until the M5 evaluation catches it."),
+  bullet("One planted bug: the billing_agent's instructions say \"up to 12 monthly installments\" while the tool enforces 6. Nobody mentions it until the M5 evaluation catches it."),
   bullet("M1 is live. At each module break one command catches the app up to the end of the previous module (section 3.2): bash ~/cx-agent-studio/catch_up.sh <module you are about to teach>. Use it every break for a guaranteed start state, or only when a live build went sideways."),
   bullet("Slow things are started early and revisited: Start with AI (slide 13 → 26) and evaluation runs (M5 slide 27 → 31). Data store indexing (about 15 minutes) is a cooking show: setup.sh builds both stores ahead of time, in class you walk the create dialog under another name and cancel, then open the ones made earlier."),
 ], C.blue, W, 12));
@@ -41,7 +41,7 @@ add(P("Cymbal Energy delivers electricity and natural gas to about 212,000 custo
 add(P("Why a utility: it exercises every module naturally. Identity and lookups (tools and variables), rules that must not be left to a prompt (payment arrangements in code), tool results that should become state (the storm-credit callback), a safety behavior every agent must share (gas leaks, in the global instruction), policies nobody can guess (storm credit, data stores), a voice channel people really use, card numbers to redact, and a human hand-off."));
 add(table(["Stage", "Module", "The agent gains", "Version"], [
   ["1", "M1", "Start with AI draft from a requirements PDF + call transcripts; first conversation; the planted storm question", "v1-start-with-ai"],
-  ["2", "M2", "Root + Outage Agent + Billing Agent; global instruction (incl. gas safety); Restructure instructions; 8 variables; after-tool callback that writes outage state and the storm-credit flag; 5 Python tools; Prompt Guard, scam blocklist, no-promises rule", "v2-multi-agent"],
+  ["2", "M2", "Root + outage_agent + billing_agent; global instruction (incl. gas safety); Restructure instructions; 8 variables; after-tool callback that writes outage state and the storm-credit flag; 5 Python tools; Prompt Guard, scam blocklist, no-promises rule", "v2-multi-agent"],
   ["3", "M3", "SCRAPI from Cloud Shell; Antigravity CLI + MCP creates a version; native audio call with an interruption", "v3-cli-checkpoint, v3-day1"],
   ["4", "M4", "cymbal_policies (3 PDFs) and cymbal_faq (CSV) data store tools; the storm question answered with a citation", "v4-knowledge"],
   ["5", "M5", "Two goldens, a frustrated persona, two scenarios; the eval catches the 12-installment bug; fix and re-run", "v5-evaluated"],
@@ -100,7 +100,7 @@ add(H3("What it does, so nothing surprises you"));
   "Safe in a brand-new Cloud Shell: the only prerequisite is the pack unzipped in ~/cx-agent-studio (3.1, step 2). It enables the three APIs, installs cxas-scrapi 1.9.1 if it's missing or a different version, and puts ~/.local/bin on the PATH itself.",
   "Before M4 onward it runs the same checks as setup.sh for the bucket and the two data stores (creating only what's missing) and fills their names into the data store tools: before M4 the tools are there but not attached (the cooking-show dish), before M5 onward they're attached. Before M7 it checks the DLP templates, and from M7 on it points the cymbal-web widget channel at the new version.",
   "It pushes stages/m<N-1>-end over the app named exactly \"Cymbal Energy Care\" with cxas push --overwrite (creating the app if there isn't one), then saves the version, but only if no version with that name exists yet, so a second run doesn't pile up duplicates (it keeps the one you saved live, if any). --overwrite replaces every agent, tool and guardrail in the app, so anything built live is gone; the version history stays, so live versions can still be restored.",
-  "Loaded agents are snake_case: cymbal_care, outage_agent, billing_agent (and cymbal_energy_care_agent for the M1 draft). The importer resolves the root agent, sub-agents and {@AGENT: …} references by display name, and names with spaces fail with 400 Reference not found (that was the first push error). The teleprompter's \"Outage Agent\" means outage_agent after a catch-up.",
+  "Loaded agents are snake_case: cymbal_care, outage_agent, billing_agent (and cymbal_energy_care_agent for the M1 draft). The importer resolves the root agent, sub-agents and {@AGENT: …} references by display name, and names with spaces fail with 400 Reference not found (that was the first push error). The live build uses the same names (block 4 creates them), so a catch-up looks exactly like what you built by hand.",
   "If it stops, it prints the line it stopped at. Copy the whole output. The folders are generated by src/make_stages.py from the same files the live demo pastes; bash ~/cx-agent-studio/stages/load_stage.sh N does the same thing addressed by the module that just ended.",
 ].forEach(t => add(bullet(t)));
 add(stepBox({ tag: "SHELL", label: "CLOUD SHELL · optional tonight: build every restore point in order", text: "bash ~/cx-agent-studio/stages/build_all_stages.sh", expect: "Saves v1 … v7 (skips names that already exist). Uses the data stores setup.sh built." }, W, 20));
@@ -160,12 +160,12 @@ add(table(["Doc", "The facts the demo relies on"], [
 ], [3000, 7080]));
 add(H2("Building blocks"));
 add(table(["Kind", "Name", "Where", "Notes"], [
-  ["Agent", "Cymbal Care (root)", "—", "Greets, routes; later the knowledge subtask and the voice block"],
-  ["Agent", "Outage Agent", "sub-agent", "check_outage, report_outage (+ both data stores)"],
-  ["Agent", "Billing Agent", "sub-agent", "verify_customer, get_bill_summary, create_payment_arrangement (+ both data stores)"],
+  ["Agent", "cymbal_care (root)", "—", "Greets, routes; later the knowledge subtask and the voice block"],
+  ["Agent", "outage_agent", "sub-agent", "check_outage, report_outage (+ both data stores)"],
+  ["Agent", "billing_agent", "sub-agent", "verify_customer, get_bill_summary, create_payment_arrangement (+ both data stores)"],
   ["Variable", "is_authenticated · account_id · customer_name · service_zip", "app", "Written by verify_customer; read by every agent"],
   ["Variable", "outage_id · estimated_restoration · hours_without_power · storm_credit_eligible", "app", "Written by the after-tool callback"],
-  ["Callback", "after_tool_callback (outage state)", "Outage Agent", "After check_outage: writes outage_id, estimated_restoration, hours_without_power, storm_credit_eligible (>72 h in a declared storm); returns None so the tool response is unchanged"],
+  ["Callback", "after_tool_callback (outage state)", "outage_agent", "After check_outage: writes outage_id, estimated_restoration, hours_without_power, storm_credit_eligible (>72 h in a declared storm); returns None so the tool response is unchanged"],
   ["Guardrails", "Prompt Guard · Payment scam warning (blocklist) · No unauthorized promises (rule)", "app", "Safety filter left at Balanced"],
   ["Data stores", "cymbal_policies (Unstructured) · cymbal_faq (FAQ)", "tools", "gs://PROJECT_ID-cymbal-energy/cymbal-energy/policies/ and …/faq/cymbal_energy_faq.csv"],
   ["System tools", "end_session · customize_response", "all agents / root", "end_session attached by default; customize_response added in M7"],

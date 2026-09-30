@@ -65,7 +65,7 @@ cx-agent-studio/                       ~/cx-agent-studio in Cloud Shell
 Tropical Storm Delphine has just come through. A feeder is down in Pascagoula (ZIP 39567), 2,140 customers have been out for 76 hours, and a Major Storm Event is declared. The demo follows two threads through the course:
 
 - **The freezer question.** In Module 1, a customer asks for a credit for spoiled food and the draft agent makes up an answer. In Module 2, an after-tool callback turns outage data into a `storm_credit_eligible` flag. In Module 4, the storm policy PDF supplies the real answer: no reimbursement for spoilage, but a $25 Storm Hardship Credit that has to be requested within 30 days.
-- **The planted bug.** The Billing Agent's instructions promise "up to 12 monthly installments", while the Python tool enforces 2–6. Nobody mentions it until the Module 5 evaluation catches it.
+- **The planted bug.** The billing_agent's instructions promise "up to 12 monthly installments", while the Python tool enforces 2–6. Nobody mentions it until the Module 5 evaluation catches it.
 
 ## The demos
 
@@ -74,7 +74,7 @@ Tropical Storm Delphine has just come through. A feeder is down in Pascagoula (Z
 | 1 | M1 · 13 | Create the app and let Start with AI build a first draft | |
 | 2 | M1 · 26–29 | Review the AI draft and have the first conversation | `v1-start-with-ai` |
 | 3 | M2 · 3–4 | Product tour on our own draft | |
-| 4 | M2 · 11 | From one agent to a team: root + Outage Agent + Billing Agent | |
+| 4 | M2 · 11 | From one agent to a team: root + outage_agent + billing_agent | |
 | 5 | M2 · 19, 26–27 | Global instruction (brand voice) and Restructure instructions | |
 | 6 | M2 · 28–30 | Variables: the agent's memory | |
 | 7 | M2 · 40 | After-tool callback: turn a tool result into state | |
@@ -142,7 +142,7 @@ It loads the agent as it stands at the **end of the previous module** over the a
 - It works in a brand-new Cloud Shell. It enables the APIs and installs SCRAPI itself, and from Module 4 on it runs the same bucket and data store checks as `setup.sh`.
 - It pushes `stages/m<N>-end/` with `cxas push --overwrite`. That replaces every agent, tool and guardrail in the app, so anything built live is gone. Version history stays.
 - It saves one version per name and stage content. Running it again skips the version, a version it saved from older stage files is replaced, and a version you saved yourself is kept.
-- Loaded agents are named `cymbal_care`, `outage_agent` and `billing_agent`. The importer resolves agent references by display name, and names with spaces fail with `400 Reference not found`, so the teleprompter's "Outage Agent" is `outage_agent` after a catch-up.
+- Loaded agents are named `cymbal_care`, `outage_agent` and `billing_agent`. The importer resolves agent references by display name, and names with spaces fail with `400 Reference not found`. The live build in the teleprompter uses the same names, so a catch-up looks exactly like what you built by hand.
 - A failed push is retried automatically, up to three times, 30 seconds apart. The first push into a brand-new project sometimes fails with `500 an internal error has occurred` and works a moment later. Before each attempt it looks the app up again, so a retry never creates a second app.
 - If it stops, it prints the line it stopped on.
 

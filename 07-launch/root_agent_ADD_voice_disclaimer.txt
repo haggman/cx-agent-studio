@@ -1,5 +1,5 @@
-Paste at the very top of the Cymbal Care (root) instructions, above <role>.
-First attach the system tool customize_response to Cymbal Care (Add tool > customize_response).
+Paste at the very top of the cymbal_care (root) instructions, above <role>.
+First attach the system tool customize_response to cymbal_care (Add tool > customize_response).
 Voice-only: the text channel never sees this block.
 
 {@startModalityVOICE}

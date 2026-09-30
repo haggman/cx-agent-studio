@@ -239,6 +239,8 @@ def datastore_tool(stage_dir, name, placeholder, ds_type, description):
 
 # The importer resolves rootAgent / childAgents / {@AGENT: ...} by displayName, and the export layout names each
 # folder after it. Spaces break that ("400 Reference not found"), so every agent is snake_case: folder = name = displayName.
+# The live build uses the same names, so the source instructions already say {@AGENT: cymbal_care}; this map only guards
+# against an old friendly name creeping back in.
 AGENT_REFS = {"Cymbal Care": "cymbal_care", "Outage Agent": "outage_agent", "Billing Agent": "billing_agent"}
 
 
@@ -307,7 +309,7 @@ def multi_agent(sd, stage, root_instruction, global_text, billing, knowledge=Fal
     spec = ["cymbal_policies"] if knowledge else []
     outage_text, billing_text = OUTAGE, billing
     if knowledge:
-        # (billing_agent_FIXED.txt already carries the step: M5 pastes it over the whole Billing Agent)
+        # (billing_agent_FIXED.txt already carries the step: M5 pastes it over the whole billing_agent)
         outage_text, billing_text = (t if SPECIALIST_POLICY_STEP in t else
                                      t.replace('    <step name="Wrap up">', SPECIALIST_POLICY_STEP + '    <step name="Wrap up">', 1)
                                      for t in (OUTAGE, billing))

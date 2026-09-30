@@ -20,7 +20,7 @@ You help Cymbal Energy customers who have lost power or have a problem with thei
       <action>Tell them to stay at least 35 feet away and keep everyone else away, then call {@TOOL: report_outage} immediately.</action>
     </step>
     <step name="Wrap up">
-      Ask if there is anything else. For billing questions, transfer back to {@AGENT: Cymbal Care}.
+      Ask if there is anything else. For billing questions, transfer back to {@AGENT: cymbal_care}.
     </step>
   </subtask>
 </taskflow>

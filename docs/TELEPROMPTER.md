@@ -11,7 +11,7 @@ One agent that grows through both days. One section per demo block: slide first,
 | 1 | M1 · 13 | 6 | [Create the app and let Start with AI build a first draft](#b1) |  |
 | 2 | M1 · 26–29 | 8 | [Review the AI draft and have the first conversation](#b2) | v1-start-with-ai |
 | 3 | M2 · 3–4 | 5 | [Product tour on our own draft](#b3) |  |
-| 4 | M2 · 11 | 8 | [From one agent to a team: root + Outage Agent + Billing Agent](#b4) |  |
+| 4 | M2 · 11 | 8 | [From one agent to a team: root + outage_agent + billing_agent](#b4) |  |
 | 5 | M2 · 19, 26–27 | 7 | [Global instruction (brand voice) and Restructure instructions](#b5) |  |
 | 6 | M2 · 28–30 | 6 | [Variables: the agent's memory](#b6) |  |
 | 7 | M2 · 40 | 8 | [After-tool callback: turn a tool result into state](#b7) |  |
@@ -121,7 +121,7 @@ Stop on 26 (Document-based building), then 29 (simulator) · ~8 min · Stage 1
 
 **DO**
 
-Review resources: Cymbal Energy Care Agent (root) + five Python placeholder tools (expand check_outage to show the stub) ▸ accept / apply
+Review resources: the root agent (Start with AI names it; the catch-up copy is cymbal_energy_care_agent) + five Python placeholder tools (expand check_outage to show the stub) ▸ accept / apply
 
 **TYPE in Preview**
 
@@ -179,7 +179,7 @@ bash ~/cx-agent-studio/catch_up.sh 2
 
 Then: console ▸ refresh the page ▸ Preview agent ▸ Start new conversation.
 
-It replaces everything in the app with that stage (version history stays). Loaded agents are named cymbal_care, outage_agent and billing_agent: read "Outage Agent" in the script as outage_agent.
+It replaces everything in the app with that stage (version history stays). Agent names match the live build (cymbal_care, outage_agent, billing_agent).
 
 ---
 
@@ -221,7 +221,7 @@ Preview agent (bottom left): Start new conversation · Conversation history · S
 
 ## 4 · M2 · slide 11
 
-### From one agent to a team: root + Outage Agent + Billing Agent
+### From one agent to a team: root + outage_agent + billing_agent
 
 Stop on 11 (Demo: Design your agent graph) · ~8 min · Stage 2
 
@@ -237,20 +237,20 @@ Stop on 11 (Demo: Design your agent graph) · ~8 min · Stage 2
 
 **DO**
 
-Root agent title bar ▸ name: Cymbal Care ▸ description: Front door of Cymbal Energy customer care; greets and routes. ▸ Save
+Root agent title bar ▸ name: cymbal_care ▸ description: Front door of Cymbal Energy customer care; greets and routes. ▸ Save
 
 **DO**
 
-+ under the root ▸ Add sub-agent ▸ name: Outage Agent ▸ description: Handles power outages, downed lines, and outage status by ZIP code. ▸ instruction: Help customers with power outages.
++ under the root ▸ Add sub-agent ▸ name: outage_agent ▸ description: Handles power outages, downed lines, and outage status by ZIP code. ▸ instruction: Help customers with power outages.
 
 **DO**
 
-+ under the root ▸ Add sub-agent ▸ name: Billing Agent ▸ description: Handles bills, balances, payments and payment arrangements. ▸ instruction: Help customers with their bill.
++ under the root ▸ Add sub-agent ▸ name: billing_agent ▸ description: Handles bills, balances, payments and payment arrangements. ▸ instruction: Help customers with their bill.
 
 **PASTE file ▸ where**
 
 02-build/instructions/root_agent.txt  
-▸ replace ALL of Cymbal Care's instructions ▸ Save
+▸ replace ALL of cymbal_care's instructions ▸ Save
 
 **TYPE in Preview**
 
@@ -258,7 +258,7 @@ Root agent title bar ▸ name: Cymbal Care ▸ description: Front door of Cymbal
 My lights are out.
 ```
 
-→ *Trace shows a transfer from Cymbal Care to Outage Agent. It has no tools yet; that's slide 82.*
+→ *Trace shows a transfer from cymbal_care to outage_agent. It has no tools yet; that's slide 82.*
 
 **TYPE in Preview**
 
@@ -266,7 +266,7 @@ My lights are out.
 Actually, what's my balance?
 ```
 
-→ *Transfer to Billing Agent.*
+→ *Transfer to billing_agent.*
 
 > **If it goes wrong:** If {@AGENT: …} pastes as plain text, delete it and re-insert with @ so it becomes a real reference. Leave the Start with AI tools alone for now; we replace them on slide 82.
 
@@ -296,7 +296,7 @@ Stop on 19 (Instruction layers and team roles), then 26–27 (AI Augmentation) �
 
 **DO**
 
-Slide 26: Outage Agent ▸ instructions ▸ PASTE (one plain paragraph):  
+Slide 26: outage_agent ▸ instructions ▸ PASTE (one plain paragraph):  
 &nbsp;&nbsp;&nbsp;&nbsp;02-build/instructions/outage_agent_prose.txt  
 ▸ Restructure instructions (the button may be labeled Structure)
 
@@ -308,7 +308,7 @@ Slide 26: Outage Agent ▸ instructions ▸ PASTE (one plain paragraph):
 hey my power went out again, ZIP 39567
 ```
 
-→ *Tone follows the global instruction (calm, short) even though the Outage Agent's own instructions never mention tone.*
+→ *Tone follows the global instruction (calm, short) even though the outage_agent's own instructions never mention tone.*
 
 **TYPE in Preview ▸ NEW CONVERSATION**
 
@@ -386,15 +386,15 @@ Stop on 40 (Demo: Create a callback) · ~8 min · Stage 2
 Tools ▸ check_outage placeholder ▸ select ALL its code ▸ PASTE:  
 &nbsp;&nbsp;&nbsp;&nbsp;02-build/tools/check_outage.py  
 ▸ Save   (only this one now; the other four on slide 82)  
-Outage Agent ▸ Add tool ▸ check_outage   ·   Cymbal Care ▸ remove check_outage (x)
+outage_agent ▸ Add tool ▸ check_outage   ·   cymbal_care ▸ remove check_outage (x)
 
 **DO**
 
-Outage Agent title bar ▸ Add callback ▸ After tool ▸ PASTE:  
+outage_agent title bar ▸ Add callback ▸ After tool ▸ PASTE:  
 &nbsp;&nbsp;&nbsp;&nbsp;02-build/callbacks/outage_state_after_tool.py  
 ▸ Done ▸ Save
 
-**TYPE at the end of the Outage Agent instructions (use the { menu) ▸ Save**
+**TYPE at the end of the outage_agent instructions (use the { menu) ▸ Save**
 
 ```text
 If {storm_credit_eligible} is true, tell the customer they may qualify for a storm hardship credit and offer to explain how to request it.
@@ -450,7 +450,7 @@ create_payment_arrangement ▸ Test Tool ▸ installments = 12
 
 → *approved false: "Customer is not verified" — the tool enforces the rules itself, no matter what the prompt says.*
 
-> **If it goes wrong:** If a placeholder won't save after the paste (signature or type mismatch), delete it and create a new tool with the same name: Tools ▸ + ▸ Python code ▸ paste ▸ Create. Test Tool errors on set_variable/get_variable usually mean the variables from block 6 are missing or misspelled. Don't point out the Billing Agent's "up to 12 monthly installments" line. It contradicts the tool (max 6) on purpose: the evaluation in M5 catches it.
+> **If it goes wrong:** If a placeholder won't save after the paste (signature or type mismatch), delete it and create a new tool with the same name: Tools ▸ + ▸ Python code ▸ paste ▸ Create. Test Tool errors on set_variable/get_variable usually mean the variables from block 6 are missing or misspelled. Don't point out the billing_agent's "up to 12 monthly installments" line. It contradicts the tool (max 6) on purpose: the evaluation in M5 catches it.
 
 ---
 
@@ -474,14 +474,14 @@ Stop on 82 (still on the tools demo slide) · ~6 min · Stage 2
 **DO**
 
 Attach (hover agent ▸ Add tool):  
-&nbsp;&nbsp;Outage Agent: report_outage (check_outage is already there)  
-&nbsp;&nbsp;Billing Agent: verify_customer, get_bill_summary, create_payment_arrangement  
-Cymbal Care: REMOVE the remaining four (x) — Start with AI attached them to the root; the root only routes now
+&nbsp;&nbsp;outage_agent: report_outage (check_outage is already there)  
+&nbsp;&nbsp;billing_agent: verify_customer, get_bill_summary, create_payment_arrangement  
+cymbal_care: REMOVE the remaining four (x) — Start with AI attached them to the root; the root only routes now
 
 **PASTE file ▸ where**
 
-02-build/instructions/outage_agent.txt ▸ Outage Agent instructions (replace ALL; it keeps the storm-credit step)  
-02-build/instructions/billing_agent.txt ▸ Billing Agent instructions (replace ALL)  
+02-build/instructions/outage_agent.txt ▸ outage_agent instructions (replace ALL; it keeps the storm-credit step)  
+02-build/instructions/billing_agent.txt ▸ billing_agent instructions (replace ALL)  
 ▸ Save
 
 **TYPE in Preview ▸ NEW CONVERSATION**
@@ -490,7 +490,7 @@ Cymbal Care: REMOVE the remaining four (x) — Start with AI attached them to th
 What's my balance?
 ```
 
-→ *Billing Agent asks for account number and ZIP.*
+→ *billing_agent asks for account number and ZIP.*
 
 **TYPE in Preview**
 
@@ -506,9 +506,9 @@ What's my balance?
 Is my power still out?
 ```
 
-→ *Transfers to Outage Agent, does NOT ask for the ZIP again (read {service_zip}), quotes 11:00 PM tonight.*
+→ *Transfers to outage_agent, does NOT ask for the ZIP again (read {service_zip}), quotes 11:00 PM tonight.*
 
-> **If it goes wrong:** If an agent says it has no way to look something up, the tool isn't attached to THAT agent (tools are per agent). Don't point out the "up to 12 monthly installments" line in the Billing Agent: M5's evaluation catches it.
+> **If it goes wrong:** If an agent says it has no way to look something up, the tool isn't attached to THAT agent (tools are per agent). Don't point out the "up to 12 monthly installments" line in the billing_agent: M5's evaluation catches it.
 
 ---
 
@@ -572,7 +572,7 @@ bash ~/cx-agent-studio/catch_up.sh 3
 
 Then: console ▸ refresh the page ▸ Preview agent ▸ Start new conversation.
 
-It replaces everything in the app with that stage (version history stays). Loaded agents are named cymbal_care, outage_agent and billing_agent: read "Outage Agent" in the script as outage_agent.
+It replaces everything in the app with that stage (version history stays). Agent names match the live build (cymbal_care, outage_agent, billing_agent).
 
 ---
 
@@ -666,7 +666,7 @@ For the Cymbal Energy Care app in the us location, list every agent and the tool
 **TYPE in Antigravity CLI**
 
 ```text
-Review the Billing Agent's instructions against CX Agent Studio instruction best practices. List your top three suggestions, but do not change anything.
+Review the billing_agent's instructions against CX Agent Studio instruction best practices. List your top three suggestions, but do not change anything.
 ```
 
 **TYPE in Antigravity CLI · approve create_app_version**
@@ -839,22 +839,22 @@ Stop on 41 (Demo: create data stores) · ~8 min · Stage 4
 
 Tools ▸ cymbal_policies: point at the grounding setting (slide 74 comes back to it)  
 Attach by journey (hover ▸ Add tool):  
-&nbsp;&nbsp;&nbsp;&nbsp;Cymbal Care (root):  cymbal_policies AND cymbal_faq  
-&nbsp;&nbsp;&nbsp;&nbsp;Outage Agent:        cymbal_policies  
-&nbsp;&nbsp;&nbsp;&nbsp;Billing Agent:       cymbal_policies
+&nbsp;&nbsp;&nbsp;&nbsp;cymbal_care (root):  cymbal_policies AND cymbal_faq  
+&nbsp;&nbsp;&nbsp;&nbsp;outage_agent:        cymbal_policies  
+&nbsp;&nbsp;&nbsp;&nbsp;billing_agent:       cymbal_policies
 
 → *Tools belong to agents: once the root hands off, only the specialist's tools exist. The last question below settles the debate.*
 
 **PASTE file ▸ where**
 
 04-knowledge/root_agent_ADD_knowledge.txt (the <subtask> block only)  
-▸ end of Cymbal Care instructions, just before </taskflow> ▸ Save
+▸ end of cymbal_care instructions, just before </taskflow> ▸ Save
 
 **PASTE file ▸ where**
 
 04-knowledge/specialists_ADD_policies.txt (the <step> block only)  
-▸ Outage Agent instructions, just before <step name="Wrap up"> ▸ Save  
-▸ Billing Agent instructions, same place ▸ Save
+▸ outage_agent instructions, just before <step name="Wrap up"> ▸ Save  
+▸ billing_agent instructions, same place ▸ Save
 
 **NEW CONVERSATION ▸ YESTERDAY'S QUESTION**
 
@@ -878,7 +878,7 @@ How do I report a streetlight that is out?
 I'm account 100234, ZIP 39567. Is my power still out, and do I qualify for the storm credit?
 ```
 
-→ *check_outage says 76 hours in MSE-2026-04, so yes: eligible, request within 30 days of restoration. Trace: both calls happen inside Outage Agent, with no hand-back to the root.*
+→ *check_outage says 76 hours in MSE-2026-04, so yes: eligible, request within 30 days of restoration. Trace: both calls happen inside outage_agent, with no hand-back to the root.*
 
 **SAVE VERSION**
 
@@ -900,17 +900,19 @@ Stop on 69 (Debugging data store responses) · ~3 min · Stage 4 · **optional**
 
 - Continue from block 16
 
-**TYPE in Preview**
+**TYPE in Preview ▸ NEW CONVERSATION**
 
 ```text
-Do you sell rooftop solar panels?
+What's your policy related to excess energy generated by solar panels?
 ```
 
-→ *Not in the content: the agent says it doesn't know and offers a representative (the Not found step).*
+→ *A policy question, so it searches cymbal_policies, but no policy covers net metering: the agent says it doesn't have that policy and offers a representative (the Not found step).*
 
 **DO**
 
-Trace: the data store call returned nothing; point at the grounding setting on the tool (slide 74)
+Trace: the cymbal_policies call ran but returned nothing relevant; point at the grounding setting on the tool (slide 74)
+
+> **If it goes wrong:** If the answer leans on the generator backfeed warning in the gas safety guide (the only nearby content), that's loss type 2, ungrounded stretch: raise the grounding threshold on the tool (slide 74) and ask again. A reply like "I can only help with Cymbal Energy outages, billing and payment arrangements" with no tool call is the prompt guard answering first: open the trace and point at the guardrail.
 
 ---
 
@@ -926,7 +928,7 @@ bash ~/cx-agent-studio/catch_up.sh 5
 
 Then: console ▸ refresh the page ▸ Preview agent ▸ Start new conversation.
 
-It replaces everything in the app with that stage (version history stays). Loaded agents are named cymbal_care, outage_agent and billing_agent: read "Outage Agent" in the script as outage_agent.
+It replaces everything in the app with that stage (version history stays). Agent names match the live build (cymbal_care, outage_agent, billing_agent).
 
 ---
 
@@ -1055,12 +1057,12 @@ Results: Marcus scenario fails "more than 6 installments" in some runs ▸ open 
 
 **DO**
 
-Billing Agent instructions: find "up to 12 monthly installments" — the bug planted on day 1
+billing_agent instructions: find "up to 12 monthly installments" — the bug planted on day 1
 
 **PASTE file ▸ where**
 
 05-evaluate/billing_agent_FIXED.txt  
-▸ Billing Agent instructions (replace ALL) ▸ Save
+▸ billing_agent instructions (replace ALL) ▸ Save
 
 → *Same instructions with the 2–6 rule; it already includes the M4 policy step, so nothing is lost.*
 
@@ -1090,7 +1092,7 @@ bash ~/cx-agent-studio/catch_up.sh 6
 
 Then: console ▸ refresh the page ▸ Preview agent ▸ Start new conversation.
 
-It replaces everything in the app with that stage (version history stays). Loaded agents are named cymbal_care, outage_agent and billing_agent: read "Outage Agent" in the script as outage_agent.
+It replaces everything in the app with that stage (version history stays). Agent names match the live build (cymbal_care, outage_agent, billing_agent).
 
 ---
 
@@ -1237,7 +1239,7 @@ bash ~/cx-agent-studio/catch_up.sh 7
 
 Then: console ▸ refresh the page ▸ Preview agent ▸ Start new conversation.
 
-It replaces everything in the app with that stage (version history stays). Loaded agents are named cymbal_care, outage_agent and billing_agent: read "Outage Agent" in the script as outage_agent.
+It replaces everything in the app with that stage (version history stays). Agent names match the live build (cymbal_care, outage_agent, billing_agent).
 
 ---
 
@@ -1261,12 +1263,12 @@ Stop on 20 (Voice: complex ID, slow speech) · ~5 min · Stage 7 · **optional**
 
 **DO**
 
-Cymbal Care ▸ Add tool ▸ customize_response
+cymbal_care ▸ Add tool ▸ customize_response
 
 **PASTE file ▸ where**
 
 07-launch/root_agent_ADD_voice_disclaimer.txt (the {@startModalityVOICE} … {@endModalityVOICE} block)  
-▸ TOP of Cymbal Care instructions ▸ Save
+▸ TOP of cymbal_care instructions ▸ Save
 
 **DO**
 

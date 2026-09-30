@@ -32,7 +32,7 @@ Every guardrail must have an `action`: a guardrail without one makes every turn 
 
 ## Names
 
-Every agent, tool and guardrail is snake_case with folder = `name` = `displayName`. The importer resolves `rootAgent`, `childAgents`, agent `tools` and `{@AGENT: ...}` references by display name, and display names with spaces ("Outage Agent") fail with `400 Reference not found`. That was the cause of the first push error (Sep 28, 2026). This matches the app exports shipped in the cxas-scrapi 1.9.1 examples.
+Every agent, tool and guardrail is snake_case with folder = `name` = `displayName`. The importer resolves `rootAgent`, `childAgents`, agent `tools` and `{@AGENT: ...}` references by display name, and display names with spaces (such as "Outage Agent") fail with `400 Reference not found`. That was the cause of the first push error (Sep 28, 2026). This matches the app exports shipped in the cxas-scrapi 1.9.1 examples.
 
 `--overwrite` makes the app match the folder exactly: anything built live that isn't in the stage is removed. Version history is kept.
 

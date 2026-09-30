@@ -49,7 +49,7 @@ K.blocks.forEach((b, i) => {
     add(P("", { before: 0, after: 40 }));
     add(stepBox({ tag: "DO", text: "Console: refresh the page ▸ Preview agent ▸ Start new conversation" }, W, 22));
     add(P("", { before: 0, after: 40 }));
-    add(P([run("NOTE  ", { bold: true, color: C.teal, size: 18 }), run("It replaces everything in the app with that stage (version history stays). Loaded agents are named cymbal_care, outage_agent and billing_agent: the importer needs snake_case names, so read \"Outage Agent\" in the script as outage_agent. If it stops with an error, the last lines say where; copy the whole output.", { size: 18, color: C.gray })]));
+    add(P([run("NOTE  ", { bold: true, color: C.teal, size: 18 }), run("It replaces everything in the app with that stage (version history stays). Agent names match the live build (cymbal_care, outage_agent, billing_agent). If it stops with an error, the last lines say where; copy the whole output.", { size: 18, color: C.gray })]));
   }
   add(new Paragraph({ children: [new PageBreak()] }));
   const head = [run(slideLabel(b), { bold: true, size: 48, color: C.orange })];
