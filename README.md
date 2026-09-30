@@ -143,6 +143,7 @@ It loads the agent as it stands at the **end of the previous module** over the a
 - It pushes `stages/m<N>-end/` with `cxas push --overwrite`. That replaces every agent, tool and guardrail in the app, so anything built live is gone. Version history stays.
 - It saves one version per name and stage content. Running it again skips the version, a version it saved from older stage files is replaced, and a version you saved yourself is kept.
 - Loaded agents are named `cymbal_care`, `outage_agent` and `billing_agent`. The importer resolves agent references by display name, and names with spaces fail with `400 Reference not found`, so the teleprompter's "Outage Agent" is `outage_agent` after a catch-up.
+- A failed push is retried automatically, up to three times, 30 seconds apart. The first push into a brand-new project sometimes fails with `500 an internal error has occurred` and works a moment later. Before each attempt it looks the app up again, so a retry never creates a second app.
 - If it stops, it prints the line it stopped on.
 
 `stages/load_stage.sh N` does the same thing, addressed by the module that just ended (`catch_up.sh M` = `load_stage.sh M-1`). `stages/build_all_stages.sh` saves every version, v1 through v7, in order. See [stages/README.md](stages/README.md).
@@ -194,6 +195,7 @@ These are baked into the scripts, and worth knowing if you build your own:
 - **Agent names in imported apps must be snake_case** (folder = `name` = `displayName`). Display names with spaces fail with `400 Reference not found`.
 - **Every guardrail needs an action.** A guardrail without one makes *every* turn fail with `Trigger action type ACTION_NOT_SET is not supported`. The console fills one in for you; the import format does not.
 - **A CSV (FAQ) data store import needs `autoGenerateIds`.** Without it, every row fails with `Custom Document Id (_id) was not found`.
+- **The first import into a new project can fail with a 500 and then succeed.** The loader retries the push for you.
 - **Start with AI varies from run to run.** The requirements PDF includes a test-data section so its mock tools come out usable, and `catch_up.sh 2` loads a known-good draft if yours doesn't.
 
 ## Rebuilding (maintainers)

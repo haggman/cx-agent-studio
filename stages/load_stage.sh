@@ -55,14 +55,27 @@ fi
 
 python3 "$HERE/stage_helpers.py" fill "$WORK" "${FILL[@]}"
 
-APP="$(python3 "$HERE/stage_helpers.py" find-app)"
 echo "== Pushing stage $N (m${N}-end)"
-if [ -n "$APP" ]; then
-  cxas push --app-dir "$WORK" --to "$APP" --project-id "$PROJECT_ID" --location us --overwrite
-else
-  cxas push --app-dir "$WORK" --display-name "Cymbal Energy Care" --project-id "$PROJECT_ID" --location us
+# Retry: the first push into a brand-new project can fail inside the import with "500 an internal error has occurred"
+# (first-use provisioning, or data stores created seconds earlier) and succeed a moment later. Look the app up again
+# before every attempt, so a retry always overwrites the same app and never creates a second one.
+WAIT="${PUSH_RETRY_WAIT:-30}"
+for ATTEMPT in 1 2 3; do
   APP="$(python3 "$HERE/stage_helpers.py" find-app)"
-fi
+  if [ -n "$APP" ]; then
+    PUSH=(cxas push --app-dir "$WORK" --to "$APP" --project-id "$PROJECT_ID" --location us --overwrite)
+  else
+    PUSH=(cxas push --app-dir "$WORK" --display-name "Cymbal Energy Care" --project-id "$PROJECT_ID" --location us)
+  fi
+  if "${PUSH[@]}"; then break; fi
+  if [ "$ATTEMPT" -eq 3 ]; then
+    echo "Push failed 3 times. Run the same command again in a few minutes; if it keeps failing, copy the output above."
+    exit 1
+  fi
+  echo "   push failed (attempt $ATTEMPT of 3): retrying in ${WAIT} seconds (a brand-new project often needs one retry)"
+  sleep "$WAIT"
+done
+APP="$(python3 "$HERE/stage_helpers.py" find-app)"
 # One version per name and stage content: reruns skip it, stage files changed since last time replace it,
 # and a version you saved yourself in class is kept.
 HASH="$(cd "$SRC" && find . -type f | LC_ALL=C sort | xargs cat | sha256sum | cut -c1-8)"

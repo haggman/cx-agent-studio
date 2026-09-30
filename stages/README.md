@@ -26,7 +26,7 @@ The only prerequisite is the pack unzipped in `~/cx-agent-studio` (`~/cx-agent-s
 
 ## Safe to rerun
 
-Every script checks before it creates. `catch_up.sh` saves one version per name and stage content: a rerun with the same stage files skips it, a version it saved from older stage files is replaced (its description carries a content hash), and a version you saved yourself in class is kept. `--overwrite` makes the app's content match the stage folder each time.
+Every script checks before it creates. `catch_up.sh` saves one version per name and stage content: a rerun with the same stage files skips it, a version it saved from older stage files is replaced (its description carries a content hash), and a version you saved yourself in class is kept. `--overwrite` makes the app's content match the stage folder each time. A failed push is retried up to three times, 30 seconds apart (set `PUSH_RETRY_WAIT` to change the wait), because the first import into a brand-new project can fail with a 500 and succeed a moment later. The app is looked up again before each attempt, so a retry overwrites it rather than creating a second one.
 
 Every guardrail must have an `action`: a guardrail without one makes every turn fail with `Trigger action type ACTION_NOT_SET is not supported` (the Sep 30 prompt_guard bug; `make_stages.py` now refuses to build one).
 
