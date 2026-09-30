@@ -15,7 +15,7 @@ bash "$PACK/setup/cloudshell_setup.sh"
 
 echo "== 2/6 SCRAPI"
 WANT="$(sed -n 's/^cxas-scrapi==//p' "$PACK/03-programmatic/requirements.txt")"
-HAVE="$(python3 -m pip show cxas-scrapi 2>/dev/null | sed -n 's/^Version: //p')"
+HAVE="$(python3 -m pip show cxas-scrapi 2>/dev/null | sed -n 's/^Version: //p' || true)"  # not installed yet (fresh Cloud Shell) is fine
 if [ "$HAVE" = "$WANT" ] && command -v cxas >/dev/null; then
   echo "   ✓ cxas-scrapi $HAVE"
 else

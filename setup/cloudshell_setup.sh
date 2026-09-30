@@ -19,4 +19,4 @@ gcloud storage cp --quiet 04-knowledge/policies/*.pdf "${BUCKET}/cymbal-energy/p
 gcloud storage cp --quiet 04-knowledge/faq/cymbal_energy_faq.csv "${BUCKET}/cymbal-energy/faq/"
 sed "s#gs://BUCKET#${BUCKET}#g" 04-knowledge/metadata/policies_metadata.jsonl > /tmp/policies_metadata.jsonl
 gcloud storage cp --quiet /tmp/policies_metadata.jsonl "${BUCKET}/cymbal-energy/metadata/"
-echo "   ✓ $(gcloud storage ls -r "${BUCKET}/cymbal-energy/" | grep -c '[^/]$') files in ${BUCKET}/cymbal-energy/"
+echo "   ✓ $(gcloud storage ls -r "${BUCKET}/cymbal-energy/" | grep -c '[^/]$' || true) files in ${BUCKET}/cymbal-energy/"

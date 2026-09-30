@@ -23,12 +23,12 @@ echo "== Project $PROJECT_ID: APIs (a few seconds when already on)"
 gcloud services enable ces.googleapis.com discoveryengine.googleapis.com dlp.googleapis.com --quiet
 
 WANT="$(sed -n 's/^cxas-scrapi==//p' "$PACK/03-programmatic/requirements.txt")"
-HAVE="$(python3 -m pip show cxas-scrapi 2>/dev/null | sed -n 's/^Version: //p')"
+HAVE="$(python3 -m pip show cxas-scrapi 2>/dev/null | sed -n 's/^Version: //p' || true)"  # not installed yet (fresh Cloud Shell) is fine
 if [ "$HAVE" != "$WANT" ] || ! command -v cxas >/dev/null; then
   echo "== Installing SCRAPI (cxas-scrapi $WANT, about a minute the first time)"
   python3 -m pip install --quiet --user --disable-pip-version-check -r "$PACK/03-programmatic/requirements.txt"
 fi
-echo "   cxas-scrapi $(python3 -m pip show cxas-scrapi 2>/dev/null | sed -n 's/^Version: //p')"
+echo "   cxas-scrapi $(python3 -m pip show cxas-scrapi 2>/dev/null | sed -n 's/^Version: //p' || true)"  # not installed yet (fresh Cloud Shell) is fine
 
 WORK="$(mktemp -d)/cymbal_energy_care"
 cp -r "$SRC" "$WORK"
