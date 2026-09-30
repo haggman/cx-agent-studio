@@ -1,6 +1,6 @@
 M3 slides 22-24: Antigravity CLI (agy) + the CX Agent Studio MCP server.
 Start it from a folder WITHOUT skills so the demo stays predictable:
-    cd ~/cymbal/03-programmatic && agy
+    cd ~/cx-agent-studio/03-programmatic && agy
 
 Type these one at a time. MCP tool calls ask for approval by default: approve each one out loud (human in the loop).
 
@@ -16,8 +16,8 @@ Review the Billing Agent's instructions against CX Agent Studio instruction best
 Create a new version of the Cymbal Energy Care app named v3-cli-checkpoint with the description "Created from Antigravity CLI through MCP".
 
 ----------------------------------------------------------------------
-OPTIONAL: the CXAS agent skills (installed by antigravity_setup.sh into ~/cymbal-skills)
-    /quit, then:  cd ~/cymbal-skills && agy
+OPTIONAL: the CXAS agent skills (installed by antigravity_setup.sh into ~/cx-agent-studio-skills)
+    /quit, then:  cd ~/cx-agent-studio-skills && agy
 Type / to see the skills as slash commands (cxas-agent-foundry, cxas-sim-eval, cxas-loss-analysis, ...), then:
 
 /cxas-agent-foundry Give me a quick architecture overview of the Cymbal Energy Care app: agents, tools, callbacks and variables. Read only, change nothing.

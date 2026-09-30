@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Load Cymbal Energy Care as it should look at the END of a module, and save the matching version.
-#   bash ~/cymbal/stages/load_stage.sh 3        # end of M3 -> ready for the M4 demos
-# (Easier to remember: bash ~/cymbal/catch_up.sh 4  = "get me ready to teach module 4".)
+#   bash ~/cx-agent-studio/stages/load_stage.sh 3        # end of M3 -> ready for the M4 demos
+# (Easier to remember: bash ~/cx-agent-studio/catch_up.sh 4  = "get me ready to teach module 4".)
 # It overwrites the app named "Cymbal Energy Care" (creating it if missing) with stages/m<N>-end,
 # using `cxas push --overwrite` and then SCRAPI Versions.create_version (cxas-scrapi 1.9.1).
 # Safe in a brand-new Cloud Shell and safe to re-run: it enables the APIs and installs SCRAPI itself, from stage 3 on

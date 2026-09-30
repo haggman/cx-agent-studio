@@ -10,32 +10,32 @@ Everything that isn't a lesson is scripted. One command sets up a project, and o
 
 ## Quick start (Cloud Shell)
 
-You need a Google Cloud project where you're **Owner**. Cloud Shell always starts in your home folder (`~`), so these commands work in anyone's Cloud Shell. Clone into a folder named `cymbal`, because every script and doc uses `~/cymbal/...`:
+You need a Google Cloud project where you're **Owner**. Cloud Shell always starts in your home folder (`~`), so these commands work in anyone's Cloud Shell. The clone lands in `~/cx-agent-studio`, which is where every script and doc expects it:
 
 ```bash
-cd ~ && git clone https://github.com/haggman/cx-agent-studio-demos.git cymbal
-bash ~/cymbal/setup.sh          # everything that isn't a lesson; safe to rerun
+cd ~ && git clone https://github.com/haggman/cx-agent-studio.git
+bash ~/cx-agent-studio/setup.sh          # everything that isn't a lesson; safe to rerun
 ```
 
 Then open [docs/TELEPROMPTER.md](docs/TELEPROMPTER.md) and start at block 1, or jump ahead:
 
 ```bash
-bash ~/cymbal/catch_up.sh 4        # the agent as it stands at the start of Module 4
-bash ~/cymbal/catch_up.sh done     # the finished agent
+bash ~/cx-agent-studio/catch_up.sh 4        # the agent as it stands at the start of Module 4
+bash ~/cx-agent-studio/catch_up.sh done     # the finished agent
 ```
 
 After a catch-up, refresh the CX Agent Studio console (`ces.cloud.google.com`, location **us**) and start a new preview conversation.
 
-To pick up later changes, run `git -C ~/cymbal pull`.
+To pick up later changes, run `git -C ~/cx-agent-studio pull`.
 
-**No git?** Download `cymbal-energy-demo-pack.zip` from this repo. In Cloud Shell, go to ⋮ (More) ▸ Upload, then run `unzip -o ~/cymbal-energy-demo-pack.zip -d ~/cymbal && bash ~/cymbal/setup.sh`. The zip holds exactly what Cloud Shell needs (no docs or generators), in the same place. Use either the clone or the zip, not both, because git won't clone into a folder that already has files.
+**No git?** Download `cymbal-energy-demo-pack.zip` from this repo. In Cloud Shell, go to ⋮ (More) ▸ Upload, then run `unzip -o ~/cymbal-energy-demo-pack.zip -d ~/cx-agent-studio && bash ~/cx-agent-studio/setup.sh`. The zip holds exactly what Cloud Shell needs (no docs or generators), in the same place. Use either the clone or the zip, not both, because git won't clone into a folder that already has files.
 
 ---
 
 ## What's in the repo
 
 ```
-cx-agent-studio-demos/                 clone it as ~/cymbal in Cloud Shell
+cx-agent-studio/                       ~/cx-agent-studio in Cloud Shell
 ├── README.md                          you are here
 ├── setup.sh                           one-time project setup, safe to rerun
 ├── catch_up.sh                        catch the agent up to the start of any module
@@ -122,7 +122,7 @@ The only manual setup step is signing in to Antigravity the first time you run `
 ### `catch_up.sh`: start any module from a known state
 
 ```bash
-bash ~/cymbal/catch_up.sh <module you are about to teach, 2-7>     # or: done
+bash ~/cx-agent-studio/catch_up.sh <module you are about to teach, 2-7>     # or: done
 ```
 
 It loads the agent as it stands at the **end of the previous module** over the app named exactly "Cymbal Energy Care" (creating the app if there isn't one), then saves that module's version.

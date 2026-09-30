@@ -12,6 +12,6 @@ node src/teleprompter_md.js docs/TELEPROMPTER.md
 node src/guide.js "docs/PLANNING GUIDE - CX Agent Studio - Cymbal Energy.docx"
 find . -name __pycache__ -prune -exec rm -rf {} +
 rm -f cymbal-energy-demo-pack.zip
-# the zip holds exactly what Cloud Shell needs at ~/cymbal (no docs/, src/ or repo files)
+# the zip holds exactly what Cloud Shell needs at ~/cx-agent-studio (no docs/, src/ or repo files)
 zip -qr cymbal-energy-demo-pack.zip setup.sh catch_up.sh setup 0*-* stages -x '*.DS_Store' '*/__pycache__/*'
 echo "built: module folders, stages/, docs/, cymbal-energy-demo-pack.zip"

@@ -17,7 +17,7 @@ const add = (...l) => out.push(...l);
 add("# Teleprompter · Build Agents with CX Agent Studio · Cymbal Energy Care", "",
   "One agent that grows through both days. One section per demo block: slide first, then the start state, the files, and every click and line to type. " +
   "Code boxes have a copy button. Slide numbers are PDF page numbers of the course decks (the printed footer number follows when it differs). " +
-  "Files are in this repo (cloned to `~/cymbal` in Cloud Shell). The Word version with the same content is `TELEPROMPTER - CX Agent Studio - Cymbal Energy.docx`.", "",
+  "Files are in this repo (cloned to `~/cx-agent-studio` in Cloud Shell). The Word version with the same content is `TELEPROMPTER - CX Agent Studio - Cymbal Energy.docx`.", "",
   "→ marks what a good result looks like.", "");
 
 [1, 2].forEach(day => {
@@ -29,9 +29,9 @@ add("# Teleprompter · Build Agents with CX Agent Studio · Cymbal Energy Care",
 
 add("## Catch-up between modules", "",
   "M1 is live. At each module break, one Cloud Shell command loads the end of the previous module over \"Cymbal Energy Care\" and saves its version, " +
-  "so every module starts from the state this script expects. It works in a fresh Cloud Shell; the only prerequisite is the pack at `~/cymbal`.", "",
+  "so every module starts from the state this script expects. It works in a fresh Cloud Shell; the only prerequisite is the pack at `~/cx-agent-studio`.", "",
   "| Before | Cloud Shell | Loads |", "|---|---|---|");
-K.CATCH_UP.forEach(c => add(`| ${c.module === "done" ? "Finished app" : c.module} | \`bash ~/cymbal/catch_up.sh ${c.module === "done" ? "done" : c.module.slice(1)}\` | ${c.version} |`));
+K.CATCH_UP.forEach(c => add(`| ${c.module === "done" ? "Finished app" : c.module} | \`bash ~/cx-agent-studio/catch_up.sh ${c.module === "done" ? "done" : c.module.slice(1)}\` | ${c.version} |`));
 add("");
 
 const stepMd = (s) => {
@@ -53,7 +53,7 @@ K.blocks.forEach((b, i) => {
     const c = K.CATCH_UP.find(x => x.module === b.module);
     add("---", "", `## Before ${b.module} · catch-up (at the break)`, "",
       "**CLOUD SHELL · 1–2 minutes · skip it if the live build is on track**", "",
-      "```text", `bash ~/cymbal/catch_up.sh ${b.module.slice(1)}`, "```", "", `→ *Loads ${c.version}. ${c.has}*`, "",
+      "```text", `bash ~/cx-agent-studio/catch_up.sh ${b.module.slice(1)}`, "```", "", `→ *Loads ${c.version}. ${c.has}*`, "",
       "Then: console ▸ refresh the page ▸ Preview agent ▸ Start new conversation.", "",
       "It replaces everything in the app with that stage (version history stays). Loaded agents are named cymbal_care, outage_agent and billing_agent: " +
       "read \"Outage Agent\" in the script as outage_agent.", "");

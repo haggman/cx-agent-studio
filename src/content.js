@@ -20,9 +20,9 @@ const VERSIONS = [
   ["v7-launch-ready", "M7", "Voice disclaimer + redaction of cards, SSNs and phone numbers in logs"],
 ];
 const STAGE_OF = { "v1-start-with-ai": 1, "v2-multi-agent": 2, "v3-day1": 3, "v4-knowledge": 4, "v5-evaluated": 5, "v6-escalation": 6, "v7-launch-ready": 7 };
-const restore = (v) => [`On track? Continue. Behind or broken? Cloud Shell:  bash ~/cymbal/catch_up.sh ${STAGE_OF[v] + 1}   (loads ${v}, 1–2 min)`,
+const restore = (v) => [`On track? Continue. Behind or broken? Cloud Shell:  bash ~/cx-agent-studio/catch_up.sh ${STAGE_OF[v] + 1}   (loads ${v}, 1–2 min)`,
   `Or: Versions button (right side) ▸ ${v} ▸ ⋮ ▸ Restore`, "Preview agent ▸ Start new conversation"];
-// Catch-up between modules: bash ~/cymbal/catch_up.sh <module you are about to teach> loads the end of the previous module.
+// Catch-up between modules: bash ~/cx-agent-studio/catch_up.sh <module you are about to teach> loads the end of the previous module.
 const CATCH_UP = [
   { module: "M2", version: "v1-start-with-ai", has: "One agent (cymbal_energy_care_agent) + five placeholder tools that answer from the requirements doc's test data: account 123456, ZIP 39562 (outage, bill, tickets)." },
   { module: "M3", version: "v2-multi-agent", has: "cymbal_care (root) + outage_agent + billing_agent, global instruction, 8 variables, after-tool callback, 5 real tools, 3 guardrails. Billing still says 12 installments." },
@@ -197,10 +197,10 @@ const blocks = [
 {
   id: "m3-scrapi", day: 1, module: "M3", n: 10, stage: 3, slides: "15", stop: "15 (Demo: CXAS SCRAPI preview)",
   title: "SCRAPI: the same agent, from Python", mins: 7,
-  reset: restore("v2-multi-agent").concat(["Cloud Shell open in the pack folder (cd ~/cymbal)"]),
+  reset: restore("v2-multi-agent").concat(["Cloud Shell open in the pack folder (cd ~/cx-agent-studio)"]),
   files: ["03-programmatic/scrapi_demo.py", "03-programmatic/requirements.txt (cxas-scrapi==1.9.1)", "03-programmatic/scrapi_commands.sh"],
   steps: [
-    { tag: "SHELL", text: "cd ~/cymbal/03-programmatic\npip install --quiet --user -r requirements.txt && export PATH=\"$HOME/.local/bin:$PATH\"" },
+    { tag: "SHELL", text: "cd ~/cx-agent-studio/03-programmatic\npip install --quiet --user -r requirements.txt && export PATH=\"$HOME/.local/bin:$PATH\"" },
     { tag: "SHELL", text: "python3 scrapi_demo.py", expect: "Lists apps, the three agents, the tools, then a two-turn conversation run from code (tool calls and results printed)." },
     { tag: "SHELL", text: "cxas pull \"Cymbal Energy Care\" --target-dir ./cymbal-care --project-id \"$(gcloud config get-value project)\" --location us\nfind ./cymbal-care -type f | head -40", expect: "The whole agent as files: instructions, tools, callbacks. Diff it, review it, commit it." },
   ],
@@ -211,18 +211,18 @@ const blocks = [
 {
   id: "m3-cli", day: 1, module: "M3", n: 12, stage: 3, slides: "22–24", stop: "24 (AI-Driven Agent Management)",
   title: "Antigravity CLI + MCP: talk to the agent's design", mins: 7,
-  reset: ["Continue from block 11 (Cloud Shell)", "antigravity_setup.sh already run last night (MCP server configured, skills in ~/cymbal-skills)"],
+  reset: ["Continue from block 11 (Cloud Shell)", "antigravity_setup.sh already run last night (MCP server configured, skills in ~/cx-agent-studio-skills)"],
   files: ["03-programmatic/antigravity_prompts.txt", "03-programmatic/antigravity_setup.sh (setup only)"],
   steps: [
-    { tag: "SHELL", text: "cd ~/cymbal/03-programmatic && agy" },
+    { tag: "SHELL", text: "cd ~/cx-agent-studio/03-programmatic && agy" },
     { tag: "CLI", label: "TYPE in Antigravity CLI", text: "/mcp", expect: "MCP Manager: the CX Agent Studio server shows Connected. Esc to close." },
     { tag: "CLI", label: "TYPE in Antigravity CLI · approve each MCP call out loud", text: "For the Cymbal Energy Care app in the us location, list every agent and the tools attached to each one, as a table." },
     { tag: "CLI", label: "TYPE in Antigravity CLI", text: "Review the Billing Agent's instructions against CX Agent Studio instruction best practices. List your top three suggestions, but do not change anything." },
     { tag: "CLI", label: "TYPE in Antigravity CLI · approve create_app_version", text: "Create a new version of the Cymbal Energy Care app named v3-cli-checkpoint with the description \"Created from Antigravity CLI through MCP\"." },
     { tag: "DO", text: "Console ▸ Versions: v3-cli-checkpoint is there ▸ /quit in agy" },
-    { tag: "OPTIONAL", label: "OPTIONAL · the CXAS agent skills", text: "cd ~/cymbal-skills && agy ▸ type / to show the cxas-* skills ▸\n/cxas-agent-foundry Give me a quick architecture overview of the Cymbal Energy Care app: agents, tools, callbacks and variables. Read only, change nothing." },
+    { tag: "OPTIONAL", label: "OPTIONAL · the CXAS agent skills", text: "cd ~/cx-agent-studio-skills && agy ▸ type / to show the cxas-* skills ▸\n/cxas-agent-foundry Give me a quick architecture overview of the Cymbal Energy Care app: agents, tools, callbacks and variables. Read only, change nothing." },
   ],
-  gotcha: "Server not Connected in /mcp: rerun antigravity_setup.sh (step 3 writes ~/.gemini/config/mcp_config.json). First agy launch prints a sign-in URL: open it, sign in, paste the code. Start agy in ~/cymbal/03-programmatic, NOT ~/cymbal-skills, for the core demo: the foundry skill would take over with its own checklist. If agy spots the 12-installment line, smile: \"hold that thought until tomorrow.\"",
+  gotcha: "Server not Connected in /mcp: rerun antigravity_setup.sh (step 3 writes ~/.gemini/config/mcp_config.json). First agy launch prints a sign-in URL: open it, sign in, paste the code. Start agy in ~/cx-agent-studio/03-programmatic, NOT ~/cx-agent-studio-skills, for the core demo: the foundry skill would take over with its own checklist. If agy spots the 12-installment line, smile: \"hold that thought until tomorrow.\"",
   why: "The same hosted MCP server works from Antigravity, Gemini CLI or Claude Code: CX Agent Studio's design-time API becomes tools a coding agent can call, with a human approving each change.",
   say: ["I didn't click anything. Antigravity read the design through MCP, asked my permission, and made a version, which shows up in the console change history with my name on it.",
         "Gemini CLI was the tool on these slides; Google moved it to Antigravity CLI this summer. Same MCP server, same idea."],
@@ -248,14 +248,14 @@ const blocks = [
 {
   id: "m4-kickoff", day: 2, module: "M4", n: 13, stage: 4, slides: "2–3", stop: "3 (Introduction to Agent Search), before any content",
   title: "Cooking show: build a data store tool, then pull the finished one out of the oven", mins: 4,
-  reset: ["Day 2 morning ran bash ~/cymbal/setup.sh and bash ~/cymbal/catch_up.sh 4: Tools already lists cymbal_policies and cymbal_faq (not attached to any agent)",
+  reset: ["Day 2 morning ran bash ~/cx-agent-studio/setup.sh and bash ~/cx-agent-studio/catch_up.sh 4: Tools already lists cymbal_policies and cymbal_faq (not attached to any agent)",
           "Preview agent ▸ Start new conversation"],
   files: ["gs://PROJECT_ID-cymbal-energy/cymbal-energy/policies/ (3 PDFs)", "gs://PROJECT_ID-cymbal-energy/cymbal-energy/faq/cymbal_energy_faq.csv"],
   steps: [
     { tag: "DO", label: "DO · THE LIVE PART (a different name, and CANCEL at the end)", text: "Tools ▸ + ▸ Data store ▸ Cloud Storage\n  Name: cymbal_policies_live      (NOT cymbal_policies)\n  Description: Cymbal Energy policies: storm restoration and outage credits, payment arrangements and disconnection, natural gas safety.\n  Data type: Unstructured data\n  Source: gs://PROJECT_ID-cymbal-energy/cymbal-energy/policies/\n  Sync frequency: One time\n▸ hover over Create ▸ Cancel", expect: "Say: \"Indexing takes about 15 minutes, so, like a cooking show, I put one in the oven earlier.\"" },
     { tag: "DO", label: "DO · OUT OF THE OVEN", text: "Tools list: cymbal_policies and cymbal_faq are already there\n▸ open cymbal_policies: it points at the cymbal-policies data store (unstructured, the 3 PDFs)\n▸ open cymbal_faq: it points at the cymbal-faq data store (FAQ, the CSV)", expect: "Both built last night by setup.sh through the API: same result as the dialog. Not attached to any agent yet: that's block 16, on slide 41." },
   ],
-  gotcha: "Clicked Create by mistake? No harm: cymbal_policies_live is a separate store the scripts ignore; delete that tool after class (Tools ▸ ⋮ ▸ Delete). cymbal_policies / cymbal_faq missing from Tools? Cloud Shell: bash ~/cymbal/catch_up.sh 4, then refresh. Showing the stores in the AI Applications data store console? Switch its location from global to us (they live with the app, in us).",
+  gotcha: "Clicked Create by mistake? No harm: cymbal_policies_live is a separate store the scripts ignore; delete that tool after class (Tools ▸ ⋮ ▸ Delete). cymbal_policies / cymbal_faq missing from Tools? Cloud Shell: bash ~/cx-agent-studio/catch_up.sh 4, then refresh. Showing the stores in the AI Applications data store console? Switch its location from global to us (they live with the app, in us).",
   why: "Students see the whole create flow without the class waiting 15 minutes for indexing. The same stores could be built by API, which is how setup.sh made them.",
   say: ["Remember yesterday's freezer question? The agent made up an answer because it has never read our policies. Here's how you give it the policies.",
         "Indexing takes about 15 minutes, so like a cooking show, I did this earlier. Here's one I made last night, with the same settings you just watched me type."],
@@ -287,7 +287,7 @@ const blocks = [
     { tag: "TYPE", label: "TYPE (new conversation): tool + knowledge in one answer", text: "I'm account 100234, ZIP 39567. Is my power still out, and do I qualify for the storm credit?", expect: "check_outage says 76 hours in MSE-2026-04, so yes: eligible, request within 30 days of restoration. Trace: both calls happen inside Outage Agent, with no hand-back to the root." },
     { tag: "VERSION", text: "Versions ▸ + Create version ▸ v4-knowledge" },
   ],
-  gotcha: "No answer or \"this link may help\"? The grounding threshold is too high (slide 74), or indexing isn't finished: bash ~/cymbal/setup.sh reports each store as \"already has documents\" once the import is done.",
+  gotcha: "No answer or \"this link may help\"? The grounding threshold is too high (slide 74), or indexing isn't finished: bash ~/cx-agent-studio/setup.sh reports each store as \"already has documents\" once the import is done.",
   why: "The last question combines a live system (the outage tool) with a policy document: RAG and tools together, which neither can do alone. It is also why the tools are scoped by journey: root only would force a hand-back mid-answer, and a separate policy agent would turn every mixed question into a sub-agent handoff (latency and lost context). The FAQ stays on the root, where general questions arrive. In production you would go one step further: a policy store per domain.",
   say: ["Where should the policies live? On the root, on a policy agent, or on each specialist? Tools belong to agents, so once the root hands you to the Outage Agent, only its tools exist. Watch the last question: it needs the outage tool and the storm policy in the same answer.",
         "Same question as yesterday. Yesterday it guessed. Today it cites a policy and gets the one detail nobody would guess: the $25 credit isn't automatic."],
@@ -374,11 +374,11 @@ const blocks = [
 {
   id: "m6-api", day: 2, module: "M6", n: 21, stage: 6, slides: "17–18", stop: "18 (API access code)",
   title: "The same agent over the API", mins: 5,
-  reset: ["Continue from block 21", "Cloud Shell in ~/cymbal/06-deploy"],
+  reset: ["Continue from block 21", "Cloud Shell in ~/cx-agent-studio/06-deploy"],
   files: ["06-deploy/api_demo.sh"],
   steps: [
     { tag: "DO", text: "Deploy ▸ cymbal-web ▸ copy the deployment name: …/apps/APP_ID/deployments/DEPLOYMENT_ID" },
-    { tag: "SHELL", text: "cd ~/cymbal/06-deploy && bash api_demo.sh APP_ID DEPLOYMENT_ID", expect: "Two turns printed: greeting, then Renee's outage with the 11:00 PM ETR." },
+    { tag: "SHELL", text: "cd ~/cx-agent-studio/06-deploy && bash api_demo.sh APP_ID DEPLOYMENT_ID", expect: "Two turns printed: greeting, then Renee's outage with the 11:00 PM ETR." },
   ],
   gotcha: "PERMISSION_DENIED: you need the Customer Engagement Suite Client role (roles/ces.client) or Owner. Invalid session ID: the script builds a valid one; don't shorten it.",
   why: "Your own app or IVR gets the exact agent the website has: same version, same guardrails.",
@@ -419,10 +419,10 @@ const blocks = [
 {
   id: "m7-redaction", day: 2, module: "M7", n: 24, stage: 7, slides: "29–30", stop: "30 (Demo: Enable redaction)",
   title: "Redact card numbers, SSNs and phone numbers from the logs", mins: 7,
-  reset: ["Continue from block 24 (or bash ~/cymbal/catch_up.sh 7)", "Cloud Shell in ~/cymbal/07-launch"],
+  reset: ["Continue from block 24 (or bash ~/cx-agent-studio/catch_up.sh 7)", "Cloud Shell in ~/cx-agent-studio/07-launch"],
   files: ["07-launch/dlp_templates.sh"],
   steps: [
-    { tag: "SHELL", text: "cd ~/cymbal/07-launch && bash dlp_templates.sh", expect: "✓ for all four templates (setup.sh already made them; safe to rerun), then the two names to paste." },
+    { tag: "SHELL", text: "cd ~/cx-agent-studio/07-launch && bash dlp_templates.sh", expect: "✓ for all four templates (setup.sh already made them; safe to rerun), then the two names to paste." },
     { tag: "DO", text: "Settings ▸ Advanced ▸ Logging ▸ Enable redaction ON ▸ (the script printed these; swap in your project ID)\n  Inspect template: projects/PROJECT_ID/locations/us/inspectTemplates/cymbal-inspect\n  De-identify template: projects/PROJECT_ID/locations/us/deidentifyTemplates/cymbal-deidentify\n▸ Save   (if us is rejected, use locations/global)" },
     { tag: "TYPE", label: "TYPE in Preview ▸ NEW CONVERSATION", text: "Can I just give you my card? It's 4111 1111 1111 1111, and call me back at 228-555-0147.", expect: "Agent refuses the card (global instruction) and points to the payment page." },
     { tag: "DO", text: "Preview ▸ Conversation history ▸ that conversation", expect: "[CREDIT_CARD_NUMBER] and [PHONE_NUMBER] instead of the digits." },
@@ -451,13 +451,13 @@ const blocks = [
 blocks.forEach((b, i) => { b.n = i + 1; });
 // The "before day N" checklists (Word and Markdown teleprompters share them)
 const MORNING = {
-  1: ["Cloud Shell:  bash ~/cymbal/setup.sh   (safe to rerun: every line should start with ✓)",
+  1: ["Cloud Shell:  bash ~/cx-agent-studio/setup.sh   (safe to rerun: every line should start with ✓)",
       "Last night's app renamed \"Cymbal Energy Care (dry run)\" — it's your backup at every stage",
       "ces.cloud.google.com open on the class project · Cloud Shell in a second tab",
       "File browser open on 01-start-with-ai in your local clone (the two upload files)",
       "Mic and speakers working in the browser (M3 voice)"],
-  2: ["Cloud Shell:  bash ~/cymbal/setup.sh   (both data stores should say \"already has documents\": the M4 dish is cooked)",
-      "Cloud Shell:  bash ~/cymbal/catch_up.sh 4   (end-of-M3 agent + cymbal_policies and cymbal_faq sitting in Tools, not attached)",
+  2: ["Cloud Shell:  bash ~/cx-agent-studio/setup.sh   (both data stores should say \"already has documents\": the M4 dish is cooked)",
+      "Cloud Shell:  bash ~/cx-agent-studio/catch_up.sh 4   (end-of-M3 agent + cymbal_policies and cymbal_faq sitting in Tools, not attached)",
       "VS Code has 06-deploy/cymbal-energy-outage-center.html open (paste markers at the bottom)",
       "Local terminal ready for python3 -m http.server 8000 in 06-deploy"],
 };

@@ -3,9 +3,9 @@
 Run of show: do the M1 demos live. At each module break, catch the app up to the end of the previous module:
 
 ```bash
-bash ~/cymbal/catch_up.sh 2      # before M2: loads the end of M1 (v1-start-with-ai)
-bash ~/cymbal/catch_up.sh 5      # before M5: loads the end of M4 (v4-knowledge)
-bash ~/cymbal/catch_up.sh done   # the finished app (v7-launch-ready)
+bash ~/cx-agent-studio/catch_up.sh 2      # before M2: loads the end of M1 (v1-start-with-ai)
+bash ~/cx-agent-studio/catch_up.sh 5      # before M5: loads the end of M4 (v4-knowledge)
+bash ~/cx-agent-studio/catch_up.sh done   # the finished app (v7-launch-ready)
 ```
 
 `catch_up.sh M` = `stages/load_stage.sh M-1`. Either one pushes `mN-end/` over the app named "Cymbal Energy Care" with SCRAPI (`cxas push --overwrite --create-version`) and saves the matching version. Then refresh the console and start a new preview conversation.
@@ -22,7 +22,7 @@ bash ~/cymbal/catch_up.sh done   # the finished app (v7-launch-ready)
 
 ## Fresh Cloud Shell
 
-The only prerequisite is the pack unzipped in `~/cymbal` (`~/cymbal/setup.sh` does the rest of the prep, and is safe to rerun). The loader itself enables the ces, discoveryengine and dlp APIs, installs `cxas-scrapi==1.9.1` if it's missing or a different version, and adds `~/.local/bin` to the PATH. From m3 on it makes sure the bucket and the two data stores exist (`stage_helpers.py ensure-datastores`: creates only what's missing, imports only into an empty store) and fills their names into the data store tools. It prefers the stores with IDs `cymbal-policies` / `cymbal-faq`, never picks one with "live" in the name (the M4 cooking-show leftover), and can be overridden with `POLICIES_DATASTORE=... FAQ_DATASTORE=...`.
+The only prerequisite is the pack unzipped in `~/cx-agent-studio` (`~/cx-agent-studio/setup.sh` does the rest of the prep, and is safe to rerun). The loader itself enables the ces, discoveryengine and dlp APIs, installs `cxas-scrapi==1.9.1` if it's missing or a different version, and adds `~/.local/bin` to the PATH. From m3 on it makes sure the bucket and the two data stores exist (`stage_helpers.py ensure-datastores`: creates only what's missing, imports only into an empty store) and fills their names into the data store tools. It prefers the stores with IDs `cymbal-policies` / `cymbal-faq`, never picks one with "live" in the name (the M4 cooking-show leftover), and can be overridden with `POLICIES_DATASTORE=... FAQ_DATASTORE=...`.
 
 ## Safe to rerun
 

@@ -31,7 +31,7 @@ add(box([
   bullet([run("Every stage ends with a saved version (v1 … v7). The reset at the start of any block is \"Versions ▸ restore the previous one\". Last night's dry-run app, renamed "), run("Cymbal Energy Care (dry run)", { bold: true }), run(", is the backup for every stage.")]),
   bullet("The main thread is the storm credit: in M1 the agent guesses at the freezer-credit question; in M2 an after-tool callback turns the outage data into a storm_credit_eligible flag; in M4 the policy PDF supplies the details ($25, request within 30 days). Gas safety is a global-instruction behavior, guarded by a golden in M5."),
   bullet("One planted bug: the Billing Agent's instructions say \"up to 12 monthly installments\" while the tool enforces 6. Nobody mentions it until the M5 evaluation catches it."),
-  bullet("M1 is live. At each module break one command catches the app up to the end of the previous module (section 3.2): bash ~/cymbal/catch_up.sh <module you are about to teach>. Use it every break for a guaranteed start state, or only when a live build went sideways."),
+  bullet("M1 is live. At each module break one command catches the app up to the end of the previous module (section 3.2): bash ~/cx-agent-studio/catch_up.sh <module you are about to teach>. Use it every break for a guaranteed start state, or only when a live build went sideways."),
   bullet("Slow things are started early and revisited: Start with AI (slide 13 → 26) and evaluation runs (M5 slide 27 → 31). Data store indexing (about 15 minutes) is a cooking show: setup.sh builds both stores ahead of time, in class you walk the create dialog under another name and cancel, then open the ones made earlier."),
 ], C.blue, W, 12));
 
@@ -69,15 +69,15 @@ add(bullet("If Day 1 slips and M3 moves to Day 2 morning, blocks 11–13 move wi
 // ------------------------------------------------------------------ 3. setup
 add(H1("3. Setup"));
 add(H2("3.1 Tonight: load the project and do one full dry run"));
-add(P("Any Google Cloud project where you are Owner works (the class uses a long-running Qwiklabs project, good for a week). Everything below happens in that project, in Cloud Shell. Everything the demos run lives in the repo, which the scripts expect at ~/cymbal (Cloud Shell always starts in ~, so this works in anyone's Cloud Shell). Paste these one box at a time:"));
+add(P("Any Google Cloud project where you are Owner works (the class uses a long-running Qwiklabs project, good for a week). Everything below happens in that project, in Cloud Shell. Everything the demos run lives in the repo, which the scripts expect at ~/cx-agent-studio (Cloud Shell always starts in ~, so this works in anyone's Cloud Shell). Paste these one box at a time:"));
 const shellSteps = [
   ["Step 1 · Point Cloud Shell at the class project", "gcloud config get-value project",
    "Prints your project ID. If it's empty or wrong: gcloud config set project YOUR_PROJECT_ID, then run it again."],
-  ["Step 2 · Put the pack at ~/cymbal (clone the repo, or upload the zip)", "cd ~ && git clone https://github.com/haggman/cx-agent-studio-demos.git cymbal\nls ~/cymbal/",
-   "Shows 01-start-with-ai … 07-launch, setup, stages, setup.sh and catch_up.sh. Later updates: git -C ~/cymbal pull. No git? Cloud Shell ▸ ⋮ (More) ▸ Upload ▸ cymbal-energy-demo-pack.zip, then unzip -o ~/cymbal-energy-demo-pack.zip -d ~/cymbal (same folder, same paths; use one way or the other, since git won't clone into a folder that already has files)."],
-  ["Step 3 · One command for everything that isn't a lesson (safe to rerun)", "bash ~/cymbal/setup.sh",
-   "Six numbered steps; each line starts with ✓ (already there) or + (created now). 1 APIs and bucket (3 policy PDFs, FAQ CSV, metadata JSONL). 2 SCRAPI 1.9.1. 3 the two M4 data stores, cymbal-policies and cymbal-faq, created through the Discovery Engine API and imported once (indexing then runs about 15 minutes on its own). 4 the M7 DLP templates in us and global. 5 Antigravity: the CX Agent Studio MCP server in ~/.gemini/config/mcp_config.json, Cloud Shell's broken Vertex plugin parked, CXAS skills in ~/cymbal-skills. 6 whether the app exists. Run it again in the morning: every line should be ✓, and both data stores should say \"already has documents\"."],
-  ["Step 4 · Sign in to Antigravity once (the only interactive step)", "cd ~/cymbal/03-programmatic && agy     (open the sign-in URL, paste the code back, type /mcp, check Connected, /quit)",
+  ["Step 2 · Put the pack at ~/cx-agent-studio (clone the repo, or upload the zip)", "cd ~ && git clone https://github.com/haggman/cx-agent-studio.git\nls ~/cx-agent-studio/",
+   "Shows 01-start-with-ai … 07-launch, setup, stages, setup.sh and catch_up.sh. Later updates: git -C ~/cx-agent-studio pull. No git? Cloud Shell ▸ ⋮ (More) ▸ Upload ▸ cymbal-energy-demo-pack.zip, then unzip -o ~/cymbal-energy-demo-pack.zip -d ~/cx-agent-studio (same folder, same paths; use one way or the other, since git won't clone into a folder that already has files)."],
+  ["Step 3 · One command for everything that isn't a lesson (safe to rerun)", "bash ~/cx-agent-studio/setup.sh",
+   "Six numbered steps; each line starts with ✓ (already there) or + (created now). 1 APIs and bucket (3 policy PDFs, FAQ CSV, metadata JSONL). 2 SCRAPI 1.9.1. 3 the two M4 data stores, cymbal-policies and cymbal-faq, created through the Discovery Engine API and imported once (indexing then runs about 15 minutes on its own). 4 the M7 DLP templates in us and global. 5 Antigravity: the CX Agent Studio MCP server in ~/.gemini/config/mcp_config.json, Cloud Shell's broken Vertex plugin parked, CXAS skills in ~/cx-agent-studio-skills. 6 whether the app exists. Run it again in the morning: every line should be ✓, and both data stores should say \"already has documents\"."],
+  ["Step 4 · Sign in to Antigravity once (the only interactive step)", "cd ~/cx-agent-studio/03-programmatic && agy     (open the sign-in URL, paste the code back, type /mcp, check Connected, /quit)",
    "The CX Agent Studio server shows Connected. No MCP enable command is needed: the endpoint comes with the ces API."],
 ];
 shellSteps.forEach(([title, cmd, expectText]) => { add(stepBox({ tag: "SHELL", label: "CLOUD SHELL · " + title, text: cmd, expect: expectText }, W, 20)); add(P("", { before: 0, after: 40 })); });
@@ -91,30 +91,30 @@ const setupSteps = [
 setupSteps.forEach((c, i) => add(P([run((i + 1) + ".  ", { bold: true, color: C.blue })].concat(c))));
 add(H2("3.2 Catch-up between modules (the stage loader)"));
 add(P("Run of show: do the M1 demos live. At each break after that, run one Cloud Shell command that loads the app as it should look at the end of the previous module and saves that version, then refresh the console. Every module then starts from exactly the state the teleprompter expects, whatever happened live. The teleprompter has a CATCH-UP page before M2, M3, M5, M6 and M7 (for M4 it's the first line of the Day 2 morning list)."));
-add(stepBox({ tag: "SHELL", label: "CLOUD SHELL · before teaching module N", text: "bash ~/cymbal/catch_up.sh N          # N = the module you are about to teach: 2 … 7\nbash ~/cymbal/catch_up.sh done       # the finished app (end of M7)", expect: "About 1–2 minutes. Then console ▸ refresh ▸ Preview agent ▸ Start new conversation." }, W, 20));
+add(stepBox({ tag: "SHELL", label: "CLOUD SHELL · before teaching module N", text: "bash ~/cx-agent-studio/catch_up.sh N          # N = the module you are about to teach: 2 … 7\nbash ~/cx-agent-studio/catch_up.sh done       # the finished app (end of M7)", expect: "About 1–2 minutes. Then console ▸ refresh ▸ Preview agent ▸ Start new conversation." }, W, 20));
 add(P("", { before: 0, after: 40 }));
 add(table(["Before", "Command", "Loads", "What the app has afterwards"], K.CATCH_UP.map(c => [c.module === "done" ? "Finished" : c.module,
   "catch_up.sh " + (c.module === "done" ? "done" : c.module.slice(1)), c.version, c.has]), [900, 1700, 1900, 5580], { size: 18 }));
 add(H3("What it does, so nothing surprises you"));
 [
-  "Safe in a brand-new Cloud Shell: the only prerequisite is the pack unzipped in ~/cymbal (3.1, step 2). It enables the three APIs, installs cxas-scrapi 1.9.1 if it's missing or a different version, and puts ~/.local/bin on the PATH itself.",
+  "Safe in a brand-new Cloud Shell: the only prerequisite is the pack unzipped in ~/cx-agent-studio (3.1, step 2). It enables the three APIs, installs cxas-scrapi 1.9.1 if it's missing or a different version, and puts ~/.local/bin on the PATH itself.",
   "Before M4 onward it runs the same checks as setup.sh for the bucket and the two data stores (creating only what's missing) and fills their names into the data store tools: before M4 the tools are there but not attached (the cooking-show dish), before M5 onward they're attached. Before M7 it checks the DLP templates, and from M7 on it points the cymbal-web widget channel at the new version.",
   "It pushes stages/m<N-1>-end over the app named exactly \"Cymbal Energy Care\" with cxas push --overwrite (creating the app if there isn't one), then saves the version, but only if no version with that name exists yet, so a second run doesn't pile up duplicates (it keeps the one you saved live, if any). --overwrite replaces every agent, tool and guardrail in the app, so anything built live is gone; the version history stays, so live versions can still be restored.",
   "Loaded agents are snake_case: cymbal_care, outage_agent, billing_agent (and cymbal_energy_care_agent for the M1 draft). The importer resolves the root agent, sub-agents and {@AGENT: …} references by display name, and names with spaces fail with 400 Reference not found (that was the first push error). The teleprompter's \"Outage Agent\" means outage_agent after a catch-up.",
-  "If it stops, it prints the line it stopped at. Copy the whole output. The folders are generated by src/make_stages.py from the same files the live demo pastes; bash ~/cymbal/stages/load_stage.sh N does the same thing addressed by the module that just ended.",
+  "If it stops, it prints the line it stopped at. Copy the whole output. The folders are generated by src/make_stages.py from the same files the live demo pastes; bash ~/cx-agent-studio/stages/load_stage.sh N does the same thing addressed by the module that just ended.",
 ].forEach(t => add(bullet(t)));
-add(stepBox({ tag: "SHELL", label: "CLOUD SHELL · optional tonight: build every restore point in order", text: "bash ~/cymbal/stages/build_all_stages.sh", expect: "Saves v1 … v7 (skips names that already exist). Uses the data stores setup.sh built." }, W, 20));
+add(stepBox({ tag: "SHELL", label: "CLOUD SHELL · optional tonight: build every restore point in order", text: "bash ~/cx-agent-studio/stages/build_all_stages.sh", expect: "Saves v1 … v7 (skips names that already exist). Uses the data stores setup.sh built." }, W, 20));
 add(H2("3.3 Morning of day 1 (5 minutes)"));
-["bash ~/cymbal/setup.sh: every line ✓",
+["bash ~/cx-agent-studio/setup.sh: every line ✓",
  "No app named exactly \"Cymbal Energy Care\" exists (only the dry run)",
  "ces.cloud.google.com open on the class project; Cloud Shell in a second tab",
  "Your file browser open on 01-start-with-ai in your local clone (the two files for the Start with AI upload)",
  "Browser microphone permission granted for ces.cloud.google.com; headset or speakers connected"].forEach(t => add(bullet(t)));
 add(H2("3.4 Morning of day 2 (5 minutes)"));
-["bash ~/cymbal/setup.sh (both data stores say \"already has documents\"), then bash ~/cymbal/catch_up.sh 4 (end-of-M3 agent plus cymbal_policies and cymbal_faq in Tools, not attached: block 14 needs them there)",
+["bash ~/cx-agent-studio/setup.sh (both data stores say \"already has documents\"), then bash ~/cx-agent-studio/catch_up.sh 4 (end-of-M3 agent plus cymbal_policies and cymbal_faq in Tools, not attached: block 14 needs them there)",
  "VS Code: 06-deploy/cymbal-energy-outage-center.html open (the PASTE markers are at the bottom)",
  "A local terminal ready for python3 -m http.server 8000 in 06-deploy of your local clone",
- "Cloud Shell still has ~/cymbal (Cloud Shell home persists; clone again or re-upload the zip if the project was reset)"].forEach(t => add(bullet(t)));
+ "Cloud Shell still has ~/cx-agent-studio (Cloud Shell home persists; clone again or re-upload the zip if the project was reset)"].forEach(t => add(bullet(t)));
 
 // ------------------------------------------------------------------ 4. blocks
 add(H1("4. Block by block: why, talk track, steps, expected results"));
@@ -203,7 +203,7 @@ add(P("CX Agent Studio docs changed as recently as September 24. These click pat
   "Evaluations: persona selection at run time, the Find issues with AI checkbox (needs 3+ runs), and how scenario expectations are entered.",
   "Web widget: which snippet the console generates (<chat-messenger> in the current docs, <ces-messenger> on the slide), whether localhost works with public access on and origin check off.",
   "api_demo.sh: runSession on /v1/ with the widget's deployment; your user needs Owner or roles/ces.client.",
-  "Antigravity CLI: the CX Agent Studio server shows Connected in /mcp; MCP calls prompt for approval; the optional skills appear as / commands when agy starts in ~/cymbal-skills (hooks from cxas init are registered for Claude Code and Gemini CLI only, not Antigravity).",
+  "Antigravity CLI: the CX Agent Studio server shows Connected in /mcp; MCP calls prompt for approval; the optional skills appear as / commands when agy starts in ~/cx-agent-studio-skills (hooks from cxas init are registered for Claude Code and Gemini CLI only, not Antigravity).",
   "Data stores built by API (setup.sh) live in the us multi-region, next to the app (the AI Applications console lists global by default: switch the location to us). Sep 29 dry run: cymbal-policies indexed 3 documents; the first cymbal-faq import failed on every row (\"Custom Document Id (_id) was not found\") and is fixed with autoGenerateIds; rerun setup.sh to retry it. After catch_up.sh 4, cymbal_policies and cymbal_faq appear in Tools pointing at the indexed stores, and cymbal_faq answers verbatim like a UI-made FAQ store (created as NO_CONTENT + CSV import). If the FAQ one misbehaves, delete that tool and create it in the UI from the same CSV.",
   "Redaction: whether the template fields appear under Settings ▸ Advanced ▸ Logging, and which location (us or global) the templates must be in. The script creates both.",
   "SCRAPI: scrapi_demo.py was rewritten against the installed cxas-scrapi 1.9.1 API (Agents and Tools take app_name, not project/location); pinned in requirements.txt. Listing apps in location us confirmed working on Sep 27.",

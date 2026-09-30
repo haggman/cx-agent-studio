@@ -16,7 +16,7 @@ add(P([
   run("DO", { bold: true, size: 20, color: C.purple }), run(" clicks  ·  ", { size: 20, color: C.gray }),
   run("TYPE", { bold: true, size: 20, color: C.orange }), run(" verbatim  ·  ", { size: 20, color: C.gray }),
   run("PASTE / SHELL", { bold: true, size: 20, color: C.teal }), run(" files and commands  ·  ", { size: 20, color: C.gray }),
-  run("SAVE VERSION", { bold: true, size: 20, color: C.green }), run("  ·  grey → what a good result looks like. Files are in the repo (cloned to ~/cymbal in Cloud Shell).", { size: 20, color: C.gray }),
+  run("SAVE VERSION", { bold: true, size: 20, color: C.green }), run("  ·  grey → what a good result looks like. Files are in the repo (cloned to ~/cx-agent-studio in Cloud Shell).", { size: 20, color: C.gray }),
 ], { after: 80 }));
 
 [1, 2].forEach(day => {
@@ -28,9 +28,9 @@ add(P([
 
 add(new Paragraph({ children: [new PageBreak()] }));
 add(P([run("CATCH-UP BETWEEN MODULES", { bold: true, size: 26, color: C.teal })], { before: 0, after: 20 }));
-add(P([run("M1 is live. At each module break, one Cloud Shell command loads the end of the previous module over \"Cymbal Energy Care\" and saves its version, so every module starts from the state this script expects. Works in a fresh Cloud Shell: it enables the APIs and installs SCRAPI itself. The only prerequisite is the pack unzipped in ~/cymbal.", { size: 20, color: C.gray })], { after: 60 }));
+add(P([run("M1 is live. At each module break, one Cloud Shell command loads the end of the previous module over \"Cymbal Energy Care\" and saves its version, so every module starts from the state this script expects. Works in a fresh Cloud Shell: it enables the APIs and installs SCRAPI itself. The only prerequisite is the pack unzipped in ~/cx-agent-studio.", { size: 20, color: C.gray })], { after: 60 }));
 add(table(["Before", "Cloud Shell", "Loads"], K.CATCH_UP.map(c => [c.module === "done" ? "Finished app" : c.module,
-  "bash ~/cymbal/catch_up.sh " + (c.module === "done" ? "done" : c.module.slice(1)), c.version]), [1300, 5040, 3700], { size: 19 }));
+  "bash ~/cx-agent-studio/catch_up.sh " + (c.module === "done" ? "done" : c.module.slice(1)), c.version]), [1300, 5040, 3700], { size: 19 }));
 
 const morning = K.MORNING;
 
@@ -44,7 +44,7 @@ K.blocks.forEach((b, i) => {
     const c = K.CATCH_UP.find(x => x.module === b.module);
     add(new Paragraph({ children: [new PageBreak()] }));
     add(P([run("BEFORE " + b.module + " · CATCH-UP (at the break)", { bold: true, size: 40, color: C.teal })], { before: 0, after: 80 }));
-    add(stepBox({ tag: "SHELL", label: "CLOUD SHELL · 1–2 minutes · skip it if the live build is on track", text: "bash ~/cymbal/catch_up.sh " + b.module.slice(1),
+    add(stepBox({ tag: "SHELL", label: "CLOUD SHELL · 1–2 minutes · skip it if the live build is on track", text: "bash ~/cx-agent-studio/catch_up.sh " + b.module.slice(1),
       expect: "Loads " + c.version + ". " + c.has }, W, 24));
     add(P("", { before: 0, after: 40 }));
     add(stepBox({ tag: "DO", text: "Console: refresh the page ▸ Preview agent ▸ Start new conversation" }, W, 22));

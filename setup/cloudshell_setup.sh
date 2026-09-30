@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Cymbal Energy demo: APIs + bucket. Normally run for you by ~/cymbal/setup.sh.
+# Cymbal Energy demo: APIs + bucket. Normally run for you by ~/cx-agent-studio/setup.sh.
 # Safe to run any number of times: enabling an enabled API is a no-op, the bucket is created only if missing,
 # and the copy just refreshes the same five files.
 set -euo pipefail

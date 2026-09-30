@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # M3 slides 22-24: Antigravity CLI (agy) + the CX Agent Studio MCP server + the CXAS agent skills, in Cloud Shell.
-# Run once per project (tonight), from anywhere:   bash ~/cymbal/03-programmatic/antigravity_setup.sh
+# Run once per project (tonight), from anywhere:   bash ~/cx-agent-studio/03-programmatic/antigravity_setup.sh
 # Checked Sep 27, 2026 against: CX Agent Studio MCP docs (endpoint https://ces.googleapis.com/mcp, scope .../auth/ces,
 # enabled with the ces API), Antigravity CLI docs (serverUrl + authProviderType, ~/.gemini/config/mcp_config.json,
 # workspace skills in .agents/skills), and cxas-scrapi 1.9.1 (`cxas init` installs skills into .agents/skills).
@@ -53,13 +53,13 @@ PY
 fi
 
 echo "== 4. CXAS agent skills in their own workspace (Antigravity reads .agents/skills in the folder you start agy in)"
-mkdir -p ~/cymbal-skills && cd ~/cymbal-skills
+mkdir -p ~/cx-agent-studio-skills && cd ~/cx-agent-studio-skills
 pip install --quiet --user -r "$HERE/requirements.txt" uv
 # `cxas init` looks for its bundled skills under sys.prefix (/usr/share/...), but a --user install puts them in
 # ~/.local/share/cxas-scrapi/skills, so copy them from there (same files cxas init would copy).
 SKILLS_SRC="$(python3 -c 'import site; print(site.USER_BASE)')/share/cxas-scrapi/skills"
 if [ -d "$SKILLS_SRC" ]; then
-  cp -r "$SKILLS_SRC/." ~/cymbal-skills/ && echo "   copied CXAS skills from $SKILLS_SRC"
+  cp -r "$SKILLS_SRC/." ~/cx-agent-studio-skills/ && echo "   copied CXAS skills from $SKILLS_SRC"
 else
   cxas init --force || echo "   could not find the bundled skills; see the planning guide section 6"
 fi
@@ -87,6 +87,6 @@ echo "   skills:"; ls .agents/skills
 echo "   gecx-config.json:"; cat gecx-config.json
 
 echo
-echo "Done. For the demo:  cd ~/cymbal/03-programmatic && agy        (MCP only, no skills: keeps the demo predictable)"
-echo "Optional skills:     cd ~/cymbal-skills && agy                   (adds /cxas-agent-foundry and the other CXAS skills)"
+echo "Done. For the demo:  cd ~/cx-agent-studio/03-programmatic && agy        (MCP only, no skills: keeps the demo predictable)"
+echo "Optional skills:     cd ~/cx-agent-studio-skills && agy                   (adds /cxas-agent-foundry and the other CXAS skills)"
 echo "First agy launch in Cloud Shell prints a sign-in URL: open it, sign in, paste the code back."

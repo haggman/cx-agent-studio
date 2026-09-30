@@ -1,6 +1,6 @@
 # Teleprompter · Build Agents with CX Agent Studio · Cymbal Energy Care
 
-One agent that grows through both days. One section per demo block: slide first, then the start state, the files, and every click and line to type. Code boxes have a copy button. Slide numbers are PDF page numbers of the course decks (the printed footer number follows when it differs). Files are in this repo (cloned to `~/cymbal` in Cloud Shell). The Word version with the same content is `TELEPROMPTER - CX Agent Studio - Cymbal Energy.docx`.
+One agent that grows through both days. One section per demo block: slide first, then the start state, the files, and every click and line to type. Code boxes have a copy button. Slide numbers are PDF page numbers of the course decks (the printed footer number follows when it differs). Files are in this repo (cloned to `~/cx-agent-studio` in Cloud Shell). The Word version with the same content is `TELEPROMPTER - CX Agent Studio - Cymbal Energy.docx`.
 
 → marks what a good result looks like.
 
@@ -42,23 +42,23 @@ One agent that grows through both days. One section per demo block: slide first,
 
 ## Catch-up between modules
 
-M1 is live. At each module break, one Cloud Shell command loads the end of the previous module over "Cymbal Energy Care" and saves its version, so every module starts from the state this script expects. It works in a fresh Cloud Shell; the only prerequisite is the pack at `~/cymbal`.
+M1 is live. At each module break, one Cloud Shell command loads the end of the previous module over "Cymbal Energy Care" and saves its version, so every module starts from the state this script expects. It works in a fresh Cloud Shell; the only prerequisite is the pack at `~/cx-agent-studio`.
 
 | Before | Cloud Shell | Loads |
 |---|---|---|
-| M2 | `bash ~/cymbal/catch_up.sh 2` | v1-start-with-ai |
-| M3 | `bash ~/cymbal/catch_up.sh 3` | v2-multi-agent |
-| M4 | `bash ~/cymbal/catch_up.sh 4` | v3-day1 |
-| M5 | `bash ~/cymbal/catch_up.sh 5` | v4-knowledge |
-| M6 | `bash ~/cymbal/catch_up.sh 6` | v5-evaluated |
-| M7 | `bash ~/cymbal/catch_up.sh 7` | v6-escalation |
-| Finished app | `bash ~/cymbal/catch_up.sh done` | v7-launch-ready |
+| M2 | `bash ~/cx-agent-studio/catch_up.sh 2` | v1-start-with-ai |
+| M3 | `bash ~/cx-agent-studio/catch_up.sh 3` | v2-multi-agent |
+| M4 | `bash ~/cx-agent-studio/catch_up.sh 4` | v3-day1 |
+| M5 | `bash ~/cx-agent-studio/catch_up.sh 5` | v4-knowledge |
+| M6 | `bash ~/cx-agent-studio/catch_up.sh 6` | v5-evaluated |
+| M7 | `bash ~/cx-agent-studio/catch_up.sh 7` | v6-escalation |
+| Finished app | `bash ~/cx-agent-studio/catch_up.sh done` | v7-launch-ready |
 
 ---
 
 ## Before day 1
 
-- [ ] Cloud Shell:  bash ~/cymbal/setup.sh   (safe to rerun: every line should start with ✓)
+- [ ] Cloud Shell:  bash ~/cx-agent-studio/setup.sh   (safe to rerun: every line should start with ✓)
 - [ ] Last night's app renamed "Cymbal Energy Care (dry run)" — it's your backup at every stage
 - [ ] ces.cloud.google.com open on the class project · Cloud Shell in a second tab
 - [ ] File browser open on 01-start-with-ai in your local clone (the two upload files)
@@ -172,7 +172,7 @@ Versions ▸ + Create version ▸ v1-start-with-ai
 **CLOUD SHELL · 1–2 minutes · skip it if the live build is on track**
 
 ```text
-bash ~/cymbal/catch_up.sh 2
+bash ~/cx-agent-studio/catch_up.sh 2
 ```
 
 → *Loads v1-start-with-ai. One agent (cymbal_energy_care_agent) + five placeholder tools that answer from the requirements doc's test data: account 123456, ZIP 39562 (outage, bill, tickets).*
@@ -193,7 +193,7 @@ Stop on 4 (Product demonstration) · ~5 min · Stage 2
 
 **RESET TO START STATE**
 
-- On track? Continue. Behind or broken? Cloud Shell:  bash ~/cymbal/catch_up.sh 2   (loads v1-start-with-ai, 1–2 min)
+- On track? Continue. Behind or broken? Cloud Shell:  bash ~/cx-agent-studio/catch_up.sh 2   (loads v1-start-with-ai, 1–2 min)
 - Or: Versions button (right side) ▸ v1-start-with-ai ▸ ⋮ ▸ Restore
 - Preview agent ▸ Start new conversation
 
@@ -227,7 +227,7 @@ Stop on 11 (Demo: Design your agent graph) · ~8 min · Stage 2
 
 **RESET TO START STATE**
 
-- On track? Continue. Behind or broken? Cloud Shell:  bash ~/cymbal/catch_up.sh 2   (loads v1-start-with-ai, 1–2 min)
+- On track? Continue. Behind or broken? Cloud Shell:  bash ~/cx-agent-studio/catch_up.sh 2   (loads v1-start-with-ai, 1–2 min)
 - Or: Versions button (right side) ▸ v1-start-with-ai ▸ ⋮ ▸ Restore
 - Preview agent ▸ Start new conversation
 
@@ -565,7 +565,7 @@ Versions ▸ + Create version ▸ v2-multi-agent
 **CLOUD SHELL · 1–2 minutes · skip it if the live build is on track**
 
 ```text
-bash ~/cymbal/catch_up.sh 3
+bash ~/cx-agent-studio/catch_up.sh 3
 ```
 
 → *Loads v2-multi-agent. cymbal_care (root) + outage_agent + billing_agent, global instruction, 8 variables, after-tool callback, 5 real tools, 3 guardrails. Billing still says 12 installments.*
@@ -586,10 +586,10 @@ Stop on 15 (Demo: CXAS SCRAPI preview) · ~7 min · Stage 3
 
 **RESET TO START STATE**
 
-- On track? Continue. Behind or broken? Cloud Shell:  bash ~/cymbal/catch_up.sh 3   (loads v2-multi-agent, 1–2 min)
+- On track? Continue. Behind or broken? Cloud Shell:  bash ~/cx-agent-studio/catch_up.sh 3   (loads v2-multi-agent, 1–2 min)
 - Or: Versions button (right side) ▸ v2-multi-agent ▸ ⋮ ▸ Restore
 - Preview agent ▸ Start new conversation
-- Cloud Shell open in the pack folder (cd ~/cymbal)
+- Cloud Shell open in the pack folder (cd ~/cx-agent-studio)
 
 **FILES**
 
@@ -600,7 +600,7 @@ Stop on 15 (Demo: CXAS SCRAPI preview) · ~7 min · Stage 3
 **CLOUD SHELL**
 
 ```text
-cd ~/cymbal/03-programmatic
+cd ~/cx-agent-studio/03-programmatic
 pip install --quiet --user -r requirements.txt && export PATH="$HOME/.local/bin:$PATH"
 ```
 
@@ -636,7 +636,7 @@ Stop on 24 (AI-Driven Agent Management) · ~7 min · Stage 3
 **RESET TO START STATE**
 
 - Continue from block 11 (Cloud Shell)
-- antigravity_setup.sh already run last night (MCP server configured, skills in ~/cymbal-skills)
+- antigravity_setup.sh already run last night (MCP server configured, skills in ~/cx-agent-studio-skills)
 
 **FILES**
 
@@ -646,7 +646,7 @@ Stop on 24 (AI-Driven Agent Management) · ~7 min · Stage 3
 **CLOUD SHELL**
 
 ```text
-cd ~/cymbal/03-programmatic && agy
+cd ~/cx-agent-studio/03-programmatic && agy
 ```
 
 **TYPE in Antigravity CLI**
@@ -681,10 +681,10 @@ Console ▸ Versions: v3-cli-checkpoint is there ▸ /quit in agy
 
 **OPTIONAL · the CXAS agent skills**
 
-cd ~/cymbal-skills && agy ▸ type / to show the cxas-* skills ▸  
+cd ~/cx-agent-studio-skills && agy ▸ type / to show the cxas-* skills ▸  
 /cxas-agent-foundry Give me a quick architecture overview of the Cymbal Energy Care app: agents, tools, callbacks and variables. Read only, change nothing.
 
-> **If it goes wrong:** Server not Connected in /mcp: rerun antigravity_setup.sh (step 3 writes ~/.gemini/config/mcp_config.json). First agy launch prints a sign-in URL: open it, sign in, paste the code. Start agy in ~/cymbal/03-programmatic, NOT ~/cymbal-skills, for the core demo: the foundry skill would take over with its own checklist. If agy spots the 12-installment line, smile: "hold that thought until tomorrow."
+> **If it goes wrong:** Server not Connected in /mcp: rerun antigravity_setup.sh (step 3 writes ~/.gemini/config/mcp_config.json). First agy launch prints a sign-in URL: open it, sign in, paste the code. Start agy in ~/cx-agent-studio/03-programmatic, NOT ~/cx-agent-studio-skills, for the core demo: the foundry skill would take over with its own checklist. If agy spots the 12-installment line, smile: "hold that thought until tomorrow."
 
 ---
 
@@ -740,8 +740,8 @@ Versions ▸ + Create version ▸ v3-day1
 
 ## Before day 2
 
-- [ ] Cloud Shell:  bash ~/cymbal/setup.sh   (both data stores should say "already has documents": the M4 dish is cooked)
-- [ ] Cloud Shell:  bash ~/cymbal/catch_up.sh 4   (end-of-M3 agent + cymbal_policies and cymbal_faq sitting in Tools, not attached)
+- [ ] Cloud Shell:  bash ~/cx-agent-studio/setup.sh   (both data stores should say "already has documents": the M4 dish is cooked)
+- [ ] Cloud Shell:  bash ~/cx-agent-studio/catch_up.sh 4   (end-of-M3 agent + cymbal_policies and cymbal_faq sitting in Tools, not attached)
 - [ ] VS Code has 06-deploy/cymbal-energy-outage-center.html open (paste markers at the bottom)
 - [ ] Local terminal ready for python3 -m http.server 8000 in 06-deploy
 
@@ -757,7 +757,7 @@ Stop on 3 (Introduction to Agent Search), before any content · ~4 min · Stage 
 
 **RESET TO START STATE**
 
-- Day 2 morning ran bash ~/cymbal/setup.sh and bash ~/cymbal/catch_up.sh 4: Tools already lists cymbal_policies and cymbal_faq (not attached to any agent)
+- Day 2 morning ran bash ~/cx-agent-studio/setup.sh and bash ~/cx-agent-studio/catch_up.sh 4: Tools already lists cymbal_policies and cymbal_faq (not attached to any agent)
 - Preview agent ▸ Start new conversation
 
 **FILES**
@@ -785,7 +785,7 @@ Tools list: cymbal_policies and cymbal_faq are already there
 
 → *Both built last night by setup.sh through the API: same result as the dialog. Not attached to any agent yet: that's block 16, on slide 41.*
 
-> **If it goes wrong:** Clicked Create by mistake? No harm: cymbal_policies_live is a separate store the scripts ignore; delete that tool after class (Tools ▸ ⋮ ▸ Delete). cymbal_policies / cymbal_faq missing from Tools? Cloud Shell: bash ~/cymbal/catch_up.sh 4, then refresh. Showing the stores in the AI Applications data store console? Switch its location from global to us (they live with the app, in us).
+> **If it goes wrong:** Clicked Create by mistake? No harm: cymbal_policies_live is a separate store the scripts ignore; delete that tool after class (Tools ▸ ⋮ ▸ Delete). cymbal_policies / cymbal_faq missing from Tools? Cloud Shell: bash ~/cx-agent-studio/catch_up.sh 4, then refresh. Showing the stores in the AI Applications data store console? Switch its location from global to us (they live with the app, in us).
 
 ---
 
@@ -884,7 +884,7 @@ I'm account 100234, ZIP 39567. Is my power still out, and do I qualify for the s
 
 Versions ▸ + Create version ▸ v4-knowledge
 
-> **If it goes wrong:** No answer or "this link may help"? The grounding threshold is too high (slide 74), or indexing isn't finished: bash ~/cymbal/setup.sh reports each store as "already has documents" once the import is done.
+> **If it goes wrong:** No answer or "this link may help"? The grounding threshold is too high (slide 74), or indexing isn't finished: bash ~/cx-agent-studio/setup.sh reports each store as "already has documents" once the import is done.
 
 ---
 
@@ -919,7 +919,7 @@ Trace: the data store call returned nothing; point at the grounding setting on t
 **CLOUD SHELL · 1–2 minutes · skip it if the live build is on track**
 
 ```text
-bash ~/cymbal/catch_up.sh 5
+bash ~/cx-agent-studio/catch_up.sh 5
 ```
 
 → *Loads v4-knowledge. + the data store tools attached by journey (root: policies + FAQ; outage and billing: policies), the knowledge subtask in the root and a policy step in each specialist.*
@@ -940,7 +940,7 @@ Stop on 10 (Create a Golden test case) · ~6 min · Stage 5
 
 **RESET TO START STATE**
 
-- On track? Continue. Behind or broken? Cloud Shell:  bash ~/cymbal/catch_up.sh 5   (loads v4-knowledge, 1–2 min)
+- On track? Continue. Behind or broken? Cloud Shell:  bash ~/cx-agent-studio/catch_up.sh 5   (loads v4-knowledge, 1–2 min)
 - Or: Versions button (right side) ▸ v4-knowledge ▸ ⋮ ▸ Restore
 - Preview agent ▸ Start new conversation
 
@@ -1083,7 +1083,7 @@ Run selected again on v5-evaluated ▸ compare the two runs side by side
 **CLOUD SHELL · 1–2 minutes · skip it if the live build is on track**
 
 ```text
-bash ~/cymbal/catch_up.sh 6
+bash ~/cx-agent-studio/catch_up.sh 6
 ```
 
 → *Loads v5-evaluated. + Billing fixed (6 installments), the frustrated persona, three scenario evaluations.*
@@ -1104,7 +1104,7 @@ Stop on 13 (web widget code) · ~8 min · Stage 6
 
 **RESET TO START STATE**
 
-- On track? Continue. Behind or broken? Cloud Shell:  bash ~/cymbal/catch_up.sh 6   (loads v5-evaluated, 1–2 min)
+- On track? Continue. Behind or broken? Cloud Shell:  bash ~/cx-agent-studio/catch_up.sh 6   (loads v5-evaluated, 1–2 min)
 - Or: Versions button (right side) ▸ v5-evaluated ▸ ⋮ ▸ Restore
 - Preview agent ▸ Start new conversation
 - VS Code + a Terminal on the Mac
@@ -1156,7 +1156,7 @@ Stop on 18 (API access code) · ~5 min · Stage 6
 **RESET TO START STATE**
 
 - Continue from block 21
-- Cloud Shell in ~/cymbal/06-deploy
+- Cloud Shell in ~/cx-agent-studio/06-deploy
 
 **FILES**
 
@@ -1169,7 +1169,7 @@ Deploy ▸ cymbal-web ▸ copy the deployment name: …/apps/APP_ID/deployments/
 **CLOUD SHELL**
 
 ```text
-cd ~/cymbal/06-deploy && bash api_demo.sh APP_ID DEPLOYMENT_ID
+cd ~/cx-agent-studio/06-deploy && bash api_demo.sh APP_ID DEPLOYMENT_ID
 ```
 
 → *Two turns printed: greeting, then Renee's outage with the 11:00 PM ETR.*
@@ -1230,7 +1230,7 @@ Deploy ▸ cymbal-web ▸ change version to v6-escalation ▸ Cloud Shell:  bash
 **CLOUD SHELL · 1–2 minutes · skip it if the live build is on track**
 
 ```text
-bash ~/cymbal/catch_up.sh 7
+bash ~/cx-agent-studio/catch_up.sh 7
 ```
 
 → *Loads v6-escalation. + escalation lines in the global instruction; web widget channel cymbal-web on v6.*
@@ -1251,7 +1251,7 @@ Stop on 20 (Voice: complex ID, slow speech) · ~5 min · Stage 7 · **optional**
 
 **RESET TO START STATE**
 
-- On track? Continue. Behind or broken? Cloud Shell:  bash ~/cymbal/catch_up.sh 7   (loads v6-escalation, 1–2 min)
+- On track? Continue. Behind or broken? Cloud Shell:  bash ~/cx-agent-studio/catch_up.sh 7   (loads v6-escalation, 1–2 min)
 - Or: Versions button (right side) ▸ v6-escalation ▸ ⋮ ▸ Restore
 - Preview agent ▸ Start new conversation
 
@@ -1302,8 +1302,8 @@ Stop on 30 (Demo: Enable redaction) · ~7 min · Stage 7
 
 **RESET TO START STATE**
 
-- Continue from block 24 (or bash ~/cymbal/catch_up.sh 7)
-- Cloud Shell in ~/cymbal/07-launch
+- Continue from block 24 (or bash ~/cx-agent-studio/catch_up.sh 7)
+- Cloud Shell in ~/cx-agent-studio/07-launch
 
 **FILES**
 
@@ -1312,7 +1312,7 @@ Stop on 30 (Demo: Enable redaction) · ~7 min · Stage 7
 **CLOUD SHELL**
 
 ```text
-cd ~/cymbal/07-launch && bash dlp_templates.sh
+cd ~/cx-agent-studio/07-launch && bash dlp_templates.sh
 ```
 
 → *✓ for all four templates (setup.sh already made them; safe to rerun), then the two names to paste.*

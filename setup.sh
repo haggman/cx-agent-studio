@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Cymbal Energy demo: EVERYTHING that isn't a lesson, in one command. Run in Cloud Shell after unzipping the pack:
-#   unzip -o ~/cymbal-energy-demo-pack.zip -d ~/cymbal && bash ~/cymbal/setup.sh
+#   unzip -o ~/cymbal-energy-demo-pack.zip -d ~/cx-agent-studio && bash ~/cx-agent-studio/setup.sh
 # Safe to run any number of times (tonight, again in the morning, after a Cloud Shell reset): every step checks
 # first and only creates what's missing. Lines start with ✓ (already there) or + (created now).
 set -euo pipefail
@@ -38,7 +38,7 @@ fi
 
 echo "== 6/6 The app"
 APP="$(python3 "$PACK/stages/stage_helpers.py" find-app)"
-if [ -n "$APP" ]; then echo "   ✓ \"Cymbal Energy Care\" exists: $APP"; else echo "   (no \"Cymbal Energy Care\" app yet: M1 creates it live, or run: bash ~/cymbal/catch_up.sh 2)"; fi
+if [ -n "$APP" ]; then echo "   ✓ \"Cymbal Energy Care\" exists: $APP"; else echo "   (no \"Cymbal Energy Care\" app yet: M1 creates it live, or run: bash ~/cx-agent-studio/catch_up.sh 2)"; fi
 
 echo
-echo "Setup complete. Between modules:  bash ~/cymbal/catch_up.sh <module you are about to teach>"
+echo "Setup complete. Between modules:  bash ~/cx-agent-studio/catch_up.sh <module you are about to teach>"
