@@ -5,12 +5,28 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Cymbal Energy | Outage Center</title>
 <!--
-  M6 demo page (fictional company). Serve it over http, not by double-clicking:
+  M6 demo page (fictional company). The web widget code is already here: the console's three embed pieces (the
+  two <head> lines below and the <body> script at the bottom) never change. The one thing specific to your
+  channel is its Deployment ID: paste it into DEPLOYMENT_ID near the bottom of this file, save, and reload.
+  Serve it over http, not by double-clicking:
     Cloud Shell:  cd ~/cx-agent-studio/06-deploy && python3 -m http.server 8080
     then Web Preview > Preview on port 8080 > cymbal-energy-outage-center.html
-  Paste the web widget code from CX Agent Studio (Deploy > your web widget channel) between the two PASTE markers
-  at the bottom of this file, save, and reload the page.
+  Layout (the console snippet alone renders the chat full width across the bottom of the page): the styles below pin
+  the widget to the bottom-right corner, align-bottom-right makes the bubble open a panel down the right side, and
+  suppress-restore-on-load always starts it as the collapsed bubble. Don't add render-mode to <chat-messenger>: that
+  is a page-level slide-in panel with no bubble.
 -->
+<!-- CX Agent Studio web widget: <head> pieces (Deploy > web widget channel > Embed) -->
+<script defer src="https://www.gstatic.com/chat-messenger/sdk/prod/v1.16/chat-messenger.js"></script>
+<link rel="stylesheet" href="https://www.gstatic.com/chat-messenger/sdk/prod/v1.16/themes/chat-messenger-default.css">
+<link rel="stylesheet" href="https://www.gstatic.com/chat-messenger/sdk/prod/v1.16/themes/chat-messenger-layout.css">
+<style>
+  chat-messenger { z-index: 999; position: fixed; right: 24px; bottom: 24px; width: 64px; height: 64px; }
+  chat-messenger-chat-bubble { --chat-messenger-internal-chat-window-width: min(400px, calc(100vw - 32px));
+                               --chat-messenger-internal-chat-window-height: calc(100vh - 32px); }
+  .widget-setup { position: fixed; right: 24px; bottom: 100px; max-width: 360px; padding: 12px 16px; border-radius: 8px;
+                  background: #fff4dc; color: #5a3b00; border: 1px solid #f5a623; font-size: 14px; z-index: 1000; }
+</style>
 <style>
   :root { --navy:#0b2a4a; --blue:#1f6fd1; --amber:#f5a623; --ink:#1d2733; --muted:#5b6b7c; --bg:#f4f7fb; --card:#fff; --line:#dde5ee; }
   * { box-sizing:border-box; }
@@ -87,8 +103,34 @@
 </main>
 <footer>Cymbal Energy is a fictional company. Demo page for Build Agents with CX Agent Studio.</footer>
 
-<!-- ===== PASTE the web widget code from CX Agent Studio below this line ===== -->
+<!-- ===== CX Agent Studio web widget ===================================================================== -->
+<script>
+  // ▼ Paste your channel's Deployment ID between the quotes (Deploy > web widget channel > Deployment ID > copy).
+  const DEPLOYMENT_ID = "PASTE_DEPLOYMENT_ID_HERE";
 
-<!-- ===== PASTE above this line ===== -->
+  // The console's <body> embed script, reading the ID from above.
+  window.addEventListener("chat-messenger-loaded", () => {
+    chatSdk.registerContext(
+      chatSdk.prebuilts.ces.createContext({
+        deploymentName: DEPLOYMENT_ID,
+        tokenBroker: {
+          enableTokenBroker: true,
+          enableRecaptcha: false,
+        },
+        enableWelcomeEvent: true,
+      }),
+    );
+  });
+  if (!DEPLOYMENT_ID.startsWith("projects/")) {
+    document.addEventListener("DOMContentLoaded", () => document.body.insertAdjacentHTML("beforeend",
+      '<div class="widget-setup"><b>Chat not connected yet.</b> Paste the web widget channel\'s Deployment ID into ' +
+      'DEPLOYMENT_ID near the bottom of cymbal-energy-outage-center.html, save, and reload.</div>'));
+  }
+</script>
+<chat-messenger language-code="en" max-query-length="-1">
+  <chat-messenger-chat-bubble chat-title="Cymbal Energy" align-bottom-right suppress-restore-on-load>
+  </chat-messenger-chat-bubble>
+</chat-messenger>
+<!-- ======================================================================================================== -->
 </body>
 </html>

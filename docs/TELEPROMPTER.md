@@ -742,7 +742,7 @@ Versions ▸ + Create version ▸ v3-day1
 
 - [ ] Cloud Shell:  bash ~/cx-agent-studio/setup.sh   (both data stores should say "already has documents": the M4 dish is cooked)
 - [ ] Cloud Shell:  bash ~/cx-agent-studio/catch_up.sh 4   (end-of-M3 agent + cymbal_policies and cymbal_faq sitting in Tools, not attached)
-- [ ] Cloud Shell Editor: ~/cx-agent-studio/06-deploy/cymbal-energy-outage-center.html opens (paste markers at the bottom)
+- [ ] Cloud Shell Editor: ~/cx-agent-studio/06-deploy/cymbal-energy-outage-center.html opens (DEPLOYMENT_ID near the bottom)
 
 ---
 
@@ -1124,9 +1124,13 @@ Deploy (top) ▸ New channel ▸ Web widget ▸ name: cymbal-web ▸ version: v5
 
 **DO**
 
-Copy the widget code ▸ Cloud Shell ▸ Open Editor ▸ File ▸ Open  
+Channel created dialog ▸ Deployment ID ▸ copy button (the three Embed boxes are already in the page)
+
+**DO**
+
+Cloud Shell ▸ Open Editor ▸ File ▸ Open  
 &nbsp;&nbsp;&nbsp;&nbsp;~/cx-agent-studio/06-deploy/cymbal-energy-outage-center.html  
-▸ paste between the two PASTE markers at the bottom ▸ File ▸ Save ▸ Open Terminal
+▸ near the bottom, replace PASTE_DEPLOYMENT_ID_HERE (keep the quotes) ▸ File ▸ Save ▸ Open Terminal
 
 **CLOUD SHELL**
 
@@ -1138,6 +1142,8 @@ cd ~/cx-agent-studio/06-deploy && python3 -m http.server 8080
 
 Cloud Shell toolbar ▸ Web Preview ▸ Preview on port 8080 ▸ click cymbal-energy-outage-center.html ▸ open the chat bubble
 
+→ *Bubble at the bottom right; clicking it opens the chat as a panel down the right side; the ↘ button collapses it back to the bubble.*
+
 **TYPE in Preview**
 
 ```text
@@ -1146,7 +1152,7 @@ Is there an outage in Moss Point? ZIP 39562
 
 → *Tree limb, 310 customers, ETR 4:30 PM today (matches the table on the page).*
 
-> **If it goes wrong:** Widget doesn't appear: check the channel has public access ON and origin check OFF, and that the page came from Web Preview (http), not a downloaded file. Reload after saving the paste.
+> **If it goes wrong:** Yellow "Chat not connected yet" note: the ID wasn't saved, or the quotes went missing. Bubble opens but the chat errors: check the channel has public access ON and origin check OFF, then try the deploymentName value from the dialog's body box instead (same ID, written with the project number). Don't add render-mode to the page: it replaces the bubble with a panel that only a refresh brings back.
 
 ---
 

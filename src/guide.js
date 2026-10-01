@@ -112,7 +112,7 @@ add(H2("3.3 Morning of day 1 (5 minutes)"));
  "Browser microphone permission granted for ces.cloud.google.com; headset or speakers connected"].forEach(t => add(bullet(t)));
 add(H2("3.4 Morning of day 2 (5 minutes)"));
 ["bash ~/cx-agent-studio/setup.sh (both data stores say \"already has documents\"), then bash ~/cx-agent-studio/catch_up.sh 4 (end-of-M3 agent plus cymbal_policies and cymbal_faq in Tools, not attached: block 14 needs them there)",
- "Cloud Shell ▸ Open Editor: ~/cx-agent-studio/06-deploy/cymbal-energy-outage-center.html opens (the PASTE markers are at the bottom); block 21 serves it with python3 -m http.server 8080 and Web Preview",
+ "Cloud Shell ▸ Open Editor: ~/cx-agent-studio/06-deploy/cymbal-energy-outage-center.html opens (DEPLOYMENT_ID is near the bottom); block 21 serves it with python3 -m http.server 8080 and Web Preview",
  "Cloud Shell still has ~/cx-agent-studio (Cloud Shell home persists; clone again or re-upload the zip if the project was reset)"].forEach(t => add(bullet(t)));
 
 // ------------------------------------------------------------------ 4. blocks
@@ -200,7 +200,7 @@ add(P("CX Agent Studio docs changed as recently as September 24. These click pat
   "Voice: the Global model list shows gemini-3.1-flash-live and composite-v1, and Voice / Ambient sounds / interruptions live under Settings ▸ Basic ▸ Behavior.",
   "Data store tool: the Cloud Storage option names (Unstructured data / FAQ, One time sync), and whether the FAQ CSV imports cleanly.",
   "Evaluations: persona selection at run time, the Find issues with AI checkbox (needs 3+ runs), and how scenario expectations are entered.",
-  "Web widget: which snippet the console generates (<chat-messenger> in the current docs, <ces-messenger> on the slide), whether the Cloud Shell Web Preview page works with public access on and origin check off.",
+  "Web widget: which snippet the console generates (<chat-messenger> in the current docs, <ces-messenger> on the slide), whether the Cloud Shell Web Preview page works with public access on and origin check off. The outage page already holds the console's embed code (SDK v1.16, both stylesheets, the body script and the <chat-messenger> element), so the live step is pasting the Deployment ID into DEPLOYMENT_ID. Confirm the Deployment ID form (project ID) connects; if not, use the deploymentName value from the body box (project number), and update the page's SDK version if the console's snippet has moved past v1.16. Layout: on its own <chat-messenger> sits inline and renders full width across the bottom, so the page pins it bottom right with CSS and sets align-bottom-right and suppress-restore-on-load on the bubble; render-mode (slide-in, slide-over) is a different layout with no bubble.",
   "api_demo.sh: runSession on /v1/ with the widget's deployment; your user needs Owner or roles/ces.client.",
   "Antigravity CLI: the CX Agent Studio server shows Connected in /mcp; MCP calls prompt for approval; the optional skills appear as / commands when agy starts in ~/cx-agent-studio-skills (hooks from cxas init are registered for Claude Code and Gemini CLI only, not Antigravity).",
   "Data stores built by API (setup.sh) live in the us multi-region, next to the app (the AI Applications console lists global by default: switch the location to us). Sep 29 dry run: cymbal-policies indexed 3 documents; the first cymbal-faq import failed on every row (\"Custom Document Id (_id) was not found\") and is fixed with autoGenerateIds; rerun setup.sh to retry it. After catch_up.sh 4, cymbal_policies and cymbal_faq appear in Tools pointing at the indexed stores, and cymbal_faq answers verbatim like a UI-made FAQ store (created as NO_CONTENT + CSV import). If the FAQ one misbehaves, delete that tool and create it in the UI from the same CSV.",
@@ -225,7 +225,7 @@ add(table(["Path (repo root)", "Used in", "What it is"], [
   ["04-knowledge/policies/*.pdf · faq/*.csv · metadata/*.jsonl", "Blocks 14–17", "Data store content (also in the bucket)"],
   ["04-knowledge/root_agent_ADD_knowledge.txt · specialists_ADD_policies.txt", "Block 16", "Knowledge subtask for the root; the policy step for Outage and Billing agents (tools scoped by journey)"],
   ["05-evaluate/test_cases.txt · billing_agent_FIXED.txt", "Blocks 18–20", "Goldens, persona, scenarios; the fix"],
-  ["06-deploy/cymbal-energy-outage-center.html", "Block 21", "Mock outage page with the widget paste markers"],
+  ["06-deploy/cymbal-energy-outage-center.html", "Block 21", "Mock outage page with the web widget built in: paste the Deployment ID into DEPLOYMENT_ID"],
   ["06-deploy/api_demo.sh · global_instruction_ADD_escalation.txt · conversation_profile_OPTIONAL.json", "Blocks 22–23", "runSession script; escalation lines; Agent Assist profile body"],
   ["07-launch/root_agent_ADD_voice_disclaimer.txt · dlp_templates.sh", "Blocks 24–25", "Voice-only block; DLP template creation"],
   ["cymbal-energy-demo-pack.zip", "Setup", "The data folder zipped for the Cloud Shell upload (if you don't clone the repo)"],

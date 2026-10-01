@@ -363,14 +363,16 @@ const blocks = [
   files: ["06-deploy/cymbal-energy-outage-center.html"],
   steps: [
     { tag: "DO", text: "Deploy (top) ▸ New channel ▸ Web widget ▸ name: cymbal-web ▸ version: v5-evaluated ▸ public access ON, origin check OFF ▸ Create channel" },
-    { tag: "DO", text: "Copy the widget code ▸ Cloud Shell ▸ Open Editor ▸ File ▸ Open\n    ~/cx-agent-studio/06-deploy/cymbal-energy-outage-center.html\n▸ paste between the two PASTE markers at the bottom ▸ File ▸ Save ▸ Open Terminal" },
+    { tag: "DO", text: "Channel created dialog ▸ Deployment ID ▸ copy button (the three Embed boxes are already in the page)" },
+    { tag: "DO", text: "Cloud Shell ▸ Open Editor ▸ File ▸ Open\n    ~/cx-agent-studio/06-deploy/cymbal-energy-outage-center.html\n▸ near the bottom, replace PASTE_DEPLOYMENT_ID_HERE (keep the quotes) ▸ File ▸ Save ▸ Open Terminal" },
     { tag: "SHELL", text: "cd ~/cx-agent-studio/06-deploy && python3 -m http.server 8080" },
-    { tag: "DO", text: "Cloud Shell toolbar ▸ Web Preview ▸ Preview on port 8080 ▸ click cymbal-energy-outage-center.html ▸ open the chat bubble" },
+    { tag: "DO", text: "Cloud Shell toolbar ▸ Web Preview ▸ Preview on port 8080 ▸ click cymbal-energy-outage-center.html ▸ open the chat bubble", expect: "Bubble at the bottom right; clicking it opens the chat as a panel down the right side; the ↘ button collapses it back to the bubble." },
     { tag: "TYPE", text: "Is there an outage in Moss Point? ZIP 39562", expect: "Tree limb, 310 customers, ETR 4:30 PM today (matches the table on the page)." },
   ],
-  gotcha: "Widget doesn't appear: check the channel has public access ON and origin check OFF, and that the page came from Web Preview (http), not a downloaded file. Reload after saving the paste.",
+  gotcha: "Yellow \"Chat not connected yet\" note: the ID wasn't saved, or the quotes went missing. Bubble opens but the chat errors: check the channel has public access ON and origin check OFF, then try the deploymentName value from the dialog's body box instead (same ID, written with the project number). Don't add render-mode to the page: it replaces the bubble with a panel that only a refresh brings back.",
   why: "One click from a tested version to a customer-facing channel, pinned to a version so the draft can keep changing safely.",
-  say: ["The channel points at v5-evaluated, not at the draft. I can keep editing without breaking the website.",
+  say: ["The console gives you four things to paste. Three are the same for every deployment, so they live in the page already. The only thing that's mine is this one ID.",
+        "The channel points at v5-evaluated, not at the draft. I can keep editing without breaking the website.",
         "Look at the channel list: WhatsApp, Instagram and SecureCo arrived on September 24, after these slides were written. Same agent, more doors."],
 },
 {
@@ -460,7 +462,7 @@ const MORNING = {
       "Mic and speakers working in the browser (M3 voice)"],
   2: ["Cloud Shell:  bash ~/cx-agent-studio/setup.sh   (both data stores should say \"already has documents\": the M4 dish is cooked)",
       "Cloud Shell:  bash ~/cx-agent-studio/catch_up.sh 4   (end-of-M3 agent + cymbal_policies and cymbal_faq sitting in Tools, not attached)",
-      "Cloud Shell Editor: ~/cx-agent-studio/06-deploy/cymbal-energy-outage-center.html opens (paste markers at the bottom)"],
+      "Cloud Shell Editor: ~/cx-agent-studio/06-deploy/cymbal-energy-outage-center.html opens (DEPLOYMENT_ID near the bottom)"],
 };
 
 module.exports = { APP, BUCKET, DECKS, VERSIONS, CATCH_UP, MORNING, blocks };
