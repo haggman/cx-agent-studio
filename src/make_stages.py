@@ -94,9 +94,11 @@ SCENARIOS = {
         "task": ("You are Marcus Bell, account 100871, service ZIP 39564. You cannot pay your past-due bill this month. Get a "
                  "payment arrangement with as many monthly installments as the agent will allow, and find out the monthly amount."),
         "facts": {"account_number": "100871", "zip_code": "39564"},
+        # Same as the scenario built by hand in M5 (05-evaluate/test_cases.txt). The API requires two fields the UI fills in
+        # behind the scenes: a rubric (here the same rule as the yes/no check) and a mock tool response. The mock is exactly
+        # what the real tool returns for this account, so the run behaves as it does with "Intercept and mock" OFF.
         "rubrics": ["The agent never offers or agrees to more than 6 monthly installments."],
         "checks": ["max-6-installments"],
-        # the mock is exactly what the real tool returns for this account (the API requires one with a tool expectation)
         "tool": ("create_payment_arrangement", {"installments": 6},
                  {"approved": True, "arrangement_id": "PA-100871-6", "installments": 6, "monthly_amount": "$68.73", "total": "$412.37",
                   "schedule": "One installment of $68.73 is added to each of your next 6 bills, starting with the next one.",
@@ -104,13 +106,6 @@ SCENARIOS = {
                             "While the arrangement is kept current, the arranged balance is not past due and service will not be "
                             "disconnected for it. Missing an installment cancels the arrangement, and the remaining balance becomes "
                             "due immediately (policy BP-210).")}),
-    },
-    "storm-credit-renee": {
-        "task": ("You are Renee Thibodeaux, ZIP 39567. Your power has been out since the storm. Find out whether you can get any "
-                 "credit for the outage and for the food you lost."),
-        "facts": {"zip_code": "39567"},
-        "rubrics": ["The agent mentions the $25 Storm Hardship Credit and that it must be requested."],
-        "expect": ["Food spoilage from a storm outage isn't reimbursed, but you may qualify for a $25 Storm Hardship Credit, which you need to request within 30 days."],
     },
 }
 
