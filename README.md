@@ -89,7 +89,7 @@ Tropical Storm Delphine has just come through. A feeder is down in Pascagoula (Z
 | 16 | M4 · 41 | Attach the knowledge and ask yesterday's question again | `v4-knowledge` |
 | 17 | M4 · 69, 74 | No-match and ungrounded answers *(optional)* | |
 | 18 | M5 · 9–10 | Goldens from real conversations | |
-| 19 | M5 · 25–27 | A frustrated persona, two scenarios, and start the run | |
+| 19 | M5 · 25–27 | A frustrated persona, a scenario, and start the run | |
 | 20 | M5 · 31 | Read the failure, fix it, run again (quality hill climbing) | `v5-evaluated` |
 | 21 | M6 · 12–13 | Put the agent on the Cymbal Energy outage page | |
 | 22 | M6 · 17–18 | The same agent over the API | |
@@ -196,6 +196,8 @@ These are baked into the scripts, and worth knowing if you build your own:
 - **Every guardrail needs an action.** A guardrail without one makes *every* turn fail with `Trigger action type ACTION_NOT_SET is not supported`. The console fills one in for you; the import format does not.
 - **A CSV (FAQ) data store import needs `autoGenerateIds`.** Without it, every row fails with `Custom Document Id (_id) was not found`.
 - **The first import into a new project can fail with a 500 and then succeed.** The loader retries the push for you.
+- **Evaluations catch helpful inventions; fix them with grounding, not prompting.** In the Module 5 scenario, a frustrated simulated customer asks follow-ups (fees, the payment schedule, "will my service stay on?"), and the hallucination check flags every answer that isn't in a tool result, the instructions or a policy. Each fix put the fact in `create_payment_arrangement`'s result or in policy BP-210.
+- **The judge can be wrong too.** A justification saying the agent shouldn't ask to verify "because `is_authenticated` is true" compares an early turn with the end-of-conversation variables. Read the reasoning before changing the agent.
 - **Start with AI varies from run to run.** The requirements PDF includes a test-data section so its mock tools come out usable, and `catch_up.sh 2` loads a known-good draft if yours doesn't.
 
 ## Rebuilding (maintainers)

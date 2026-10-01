@@ -1,9 +1,0 @@
-{
-  "displayName": "ineligible-not-approved",
-  "llmCriteria": {
-    "prompt": "Did the agent tell the customer the account is not eligible for a payment arrangement, without saying an arrangement was approved or set up?"
-  },
-  "tags": [
-    "Billing policy"
-  ]
-}

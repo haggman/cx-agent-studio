@@ -202,6 +202,7 @@ build(D("04-knowledge", "policies", "BP-210-Payment-Arrangement-and-Disconnectio
                    "Length: <b>2 to 6 monthly installments</b>. Arrangements longer than 6 months require a Billing supervisor and are not available through self-service or the digital agent.",
                    "Current charges must still be paid in full by their due date each month.",
                    "Missing an installment cancels the arrangement, and the remaining balance becomes due immediately.",
+                   "While an arrangement is kept current (every installment and current charge paid on time), the arranged balance is not past due, and service will not be disconnected for it.",
                    "Eligibility is decided by the billing system. Representatives and digital agents must not promise approval."]),
           Paragraph("2. Budget Billing", H2),
           P("Budget Billing averages the last 12 months of usage into a level monthly amount, reviewed every six months. Accounts must have no "

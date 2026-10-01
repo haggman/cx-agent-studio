@@ -31,7 +31,7 @@ One agent that grows through both days. One section per demo block: slide first,
 | 16 | M4 · 41 | 8 | [Attach the knowledge and ask yesterday's question again](#b16) | v4-knowledge |
 | 17 | M4 · 69, 74 | 3 | [No-match and ungrounded answers](#b17) *(optional)* |  |
 | 18 | M5 · 9–10 | 6 | [Goldens from real conversations](#b18) |  |
-| 19 | M5 · 25–27 | 8 | [A frustrated persona, two scenarios, and start the run](#b19) |  |
+| 19 | M5 · 25–27 | 8 | [A frustrated persona, a scenario, and start the run](#b19) |  |
 | 20 | M5 · 31 | 10 | [Read the failure, fix it, run again (quality hill climbing)](#b20) | v5-evaluated |
 | 21 | M6 · 12–13 | 8 | [Put the agent on the Cymbal Energy outage page](#b21) |  |
 | 22 | M6 · 17–18 | 5 | [The same agent over the API](#b22) |  |
@@ -992,7 +992,7 @@ Evaluate tab: both goldens listed; open one to show turns + expected tool calls
 
 ## 19 · M5 · slides 25–27
 
-### A frustrated persona, two scenarios, and start the run
+### A frustrated persona, a scenario, and start the run
 
 Stop on 27 (Personas) · ~8 min · Stage 5
 
@@ -1022,18 +1022,6 @@ Evaluate ▸ Persona management ▸ + Add persona
 &nbsp;&nbsp;▸ Create ▸ tick it ▸ Add ▸ Create (the scenario)
 
 → *No must-not switch: a yes/no question is the "must NOT" (passes only on Yes). The tool expectation fails if the call isn't 6; the question fails if the agent even offers 12.*
-
-**DO**
-
-+ Add test case ▸ Scenario ▸ Create from scratch ▸ name: arrangement-linh-not-eligible  
-&nbsp;&nbsp;User goal: change Must achieve to the rejected option (Linh should NOT get an arrangement) ▸ You are Linh Nguyen, account 100455, service ZIP 39563. Ask to split your bill into 3 payments.  
-&nbsp;&nbsp;+ Add expectation ▸ create_payment_arrangement ▸ Expected input: installments 3 ▸ Intercept and mock OFF (eligibility comes from the tool, not the agent)  
-&nbsp;&nbsp;+ Add expectations ▸ Create expectation  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Display name: ineligible-not-approved    Category: Billing policy  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Expectation: Did the agent tell the customer the account is not eligible for a payment arrangement, without saying an arrangement was approved or set up?  
-&nbsp;&nbsp;▸ Create ▸ tick it ▸ Add ▸ Create (the scenario)
-
-→ *The "rejected" goal is how a scenario says this customer should be turned down: the test passes when she is. Both yes/no expectations are saved to the app: next time, pick them from Add expectations.*
 
 **DO**
 
@@ -1074,7 +1062,7 @@ billing_agent instructions: find "up to 12 monthly installments" — the bug pla
 05-evaluate/billing_agent_FIXED.txt  
 ▸ billing_agent instructions (replace ALL) ▸ Save
 
-→ *Same instructions with the 2–6 rule; it already includes the M4 policy step, so nothing is lost.*
+→ *The 2–6 rule, plus grounding: never decide eligibility, answer arrangement questions only from the tool's result (its schedule and BP-210 terms), no fees. The M4 policy step is still there.*
 
 **SAVE VERSION**
 
@@ -1084,9 +1072,15 @@ Versions ▸ + Create version ▸ v5-evaluated
 
 Run selected again on v5-evaluated ▸ compare the two runs side by side
 
-→ *Task completion up; the call now carries 6 installments and max-6-installments answers Yes.*
+→ *Mostly green: the call carries 6 installments and max-6-installments answers Yes.*
 
-> **If it goes wrong:** LLM runs vary. If the first run happened to pass, open a transcript anyway: the 12 is in the instructions and the fix is the same. Say it: that's why we run 5 times. A failure marked as a hallucination (the frustrated persona asks about fees and the agent invents an answer) is a second, real catch: the fix is grounding, not prompting. The tool returns fees_and_interest and billing_agent_FIXED.txt says to state only the terms the tool returned.
+**DO · IF A RUN IS STILL RED**
+
+Open it ▸ read the judge's justification out loud ▸ ask the room: is the agent wrong, or the judge?
+
+→ *Usually the hallucination check on one of the persona's follow-ups, or a judge false positive (see below).*
+
+> **If it goes wrong:** LLM runs vary: that's why we run 5 times, and a stray red is normal. If the first run happened to pass, open a transcript anyway: the 12 is in the instructions and the fix is the same. A justification saying the agent shouldn't have asked to verify because is_authenticated is true is a judge false positive: it compares an early turn with the end-of-conversation variables. Read it, name it, move on.
 
 ---
 

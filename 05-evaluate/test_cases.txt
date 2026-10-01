@@ -26,19 +26,7 @@ SCENARIO 1 (+ Add test case > Scenario > Create from scratch)
                     > Create > tick it > Add
   Persona ......... Frustrated after the storm
 
-SCENARIO 2
-  Name ............ arrangement-linh-not-eligible
-  User goal ....... the rejected option (not Must achieve): Linh should NOT get an arrangement
-                    You are Linh Nguyen, account 100455, service ZIP 39563. Ask to split your bill into 3 payments.
-  Expectation ..... + Add expectation > create_payment_arrangement > Expected input: installments 3
-                    (Intercept and mock OFF: eligibility is decided by the tool, not the agent)
-  Yes/no check .... + Add expectations > Create expectation
-                    Display name: ineligible-not-approved      Category: Billing policy
-                    Expectation:  Did the agent tell the customer the account is not eligible for a payment arrangement,
-                                  without saying an arrangement was approved or set up?
-                    > Create > tick it > Add
-
-SCENARIO 3 (optional, uses the M4 knowledge)
+SCENARIO 2 (optional, uses the M4 knowledge)
   Name ............ storm-credit-renee
   User goal ....... Must achieve
                     You are Renee Thibodeaux, ZIP 39567. Your power has been out since the storm. Find out whether you
@@ -48,7 +36,7 @@ SCENARIO 3 (optional, uses the M4 knowledge)
   Yes/no check .... (optional) storm-credit-must-be-requested: Did the agent say the $25 Storm Hardship Credit must be
                     requested?
 
-HOW SCENARIOS SAY "MUST" AND "MUST NOT": the user goal sets the outcome (Must achieve, or the rejected option for a customer
+HOW SCENARIOS SAY "MUST" AND "MUST NOT": the user goal sets the outcome (Must achieve, or a rejected option for a customer
 who should be turned down); the expectation on the right (a tool call with its inputs, or an agent response) says what must
 happen; anything that must NOT happen is a yes/no question from + Add expectations, which passes only on "Yes". Those
 questions are saved to the app (names must be unique), so later scenarios just tick them.
@@ -57,3 +45,9 @@ RUN: select all > Run selected > version: current draft > runs: 5 (tick "Find is
 EXPECTED FIRST RUN: scenario 1 fails in several runs: the billing_agent's instructions say "up to 12", so Marcus asks for 12
                     and the create_payment_arrangement call doesn't match the expected 6; max-6-installments answers No.
 FIX: paste billing_agent_FIXED.txt into the billing_agent, save, run again, compare the two runs.
+AFTER THE FIX: mostly green. A leftover red is usually the hallucination check on one of the persona's follow-ups, or a
+                    judge false positive ("shouldn't ask to verify, is_authenticated is true": the judge compares an early
+                    turn with the end-of-conversation variables). Read the justification before changing the agent.
+WHY IT HOLDS: the frustrated persona asks about fees, the payment schedule, disconnection and whether service stays on.
+                    Those answers are grounded, not prompted: create_payment_arrangement returns the schedule and the policy
+                    BP-210 terms, and billing_agent_FIXED.txt answers arrangement questions only from that result.

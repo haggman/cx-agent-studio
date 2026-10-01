@@ -44,7 +44,7 @@ add(table(["Stage", "Module", "The agent gains", "Version"], [
   ["2", "M2", "Root + outage_agent + billing_agent; global instruction (incl. gas safety); Restructure instructions; 8 variables; after-tool callback that writes outage state and the storm-credit flag; 5 Python tools; Prompt Guard, scam blocklist, no-promises rule", "v2-multi-agent"],
   ["3", "M3", "SCRAPI from Cloud Shell; Antigravity CLI + MCP creates a version; native audio call with an interruption", "v3-cli-checkpoint, v3-day1"],
   ["4", "M4", "cymbal_policies (3 PDFs) and cymbal_faq (CSV) data store tools; the storm question answered with a citation", "v4-knowledge"],
-  ["5", "M5", "Two goldens, a frustrated persona, two scenarios; the eval catches the 12-installment bug; fix and re-run", "v5-evaluated"],
+  ["5", "M5", "Two goldens, a frustrated persona, a scenario; the eval catches the 12-installment bug; fix and re-run", "v5-evaluated"],
   ["6", "M6", "Web widget on a mock outage page; runSession over curl; escalation with end_session", "v6-escalation"],
   ["7", "M7", "Voice-only recording disclaimer (no barge-in); DLP redaction of cards, SSNs, phones in logs; the version list as the course recap", "v7-launch-ready"],
 ], [700, 800, 6180, 2400]));

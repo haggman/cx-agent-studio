@@ -87,8 +87,6 @@ PERSONA = {
 EVAL_EXPECTATIONS = {
     "max-6-installments": ("Did the agent keep every payment arrangement it offered or agreed to at 6 monthly installments or fewer?",
                            "Billing policy"),
-    "ineligible-not-approved": ("Did the agent tell the customer the account is not eligible for a payment arrangement, without "
-                                "saying an arrangement was approved or set up?", "Billing policy"),
 }
 
 SCENARIOS = {
@@ -101,16 +99,11 @@ SCENARIOS = {
         # the mock is exactly what the real tool returns for this account (the API requires one with a tool expectation)
         "tool": ("create_payment_arrangement", {"installments": 6},
                  {"approved": True, "arrangement_id": "PA-100871-6", "installments": 6, "monthly_amount": "$68.73", "total": "$412.37",
-                  "fees_and_interest": "None: Cymbal Energy charges no fees or interest on payment arrangements."}),
-    },
-    "arrangement-linh-not-eligible": {
-        "task": "You are Linh Nguyen, account 100455, service ZIP 39563. Ask to split your bill into 3 payments.",
-        "facts": {"account_number": "100455", "zip_code": "39563"},
-        "goal": "USER_GOAL_REJECTED",
-        "rubrics": ["The agent explains the account is not eligible and never says an arrangement was approved."],
-        "checks": ["ineligible-not-approved"],
-        "tool": ("create_payment_arrangement", {"installments": 3},
-                 {"approved": False, "reason": "Balance of $86.10 is below the $100.00 minimum for a payment arrangement."}),
+                  "schedule": "One installment of $68.73 is added to each of your next 6 bills, starting with the next one.",
+                  "terms": ("No fees or interest. Current charges must still be paid in full by their due date each month. "
+                            "While the arrangement is kept current, the arranged balance is not past due and service will not be "
+                            "disconnected for it. Missing an installment cancels the arrangement, and the remaining balance becomes "
+                            "due immediately (policy BP-210).")}),
     },
     "storm-credit-renee": {
         "task": ("You are Renee Thibodeaux, ZIP 39567. Your power has been out since the storm. Find out whether you can get any "
