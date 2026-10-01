@@ -82,28 +82,40 @@ PERSONA = {
     "description": "Calling from a car on a cell phone on the Mississippi Gulf Coast. Has the bill in hand.",
 }
 
+# App-level yes/no checks (Evaluate ▸ scenario ▸ Add expectations ▸ Create expectation): the evaluator answers the question
+# about the whole transcript and the scenario passes only on "Yes". This is how a scenario says "must NOT happen".
+EVAL_EXPECTATIONS = {
+    "max-6-installments": ("Did the agent keep every payment arrangement it offered or agreed to at 6 monthly installments or fewer?",
+                           "Billing policy"),
+    "ineligible-not-approved": ("Did the agent tell the customer the account is not eligible for a payment arrangement, without "
+                                "saying an arrangement was approved or set up?", "Billing policy"),
+}
+
 SCENARIOS = {
     "arrangement_marcus_max_months": {
         "task": ("You are Marcus Bell, account 100871, service ZIP 39564. You cannot pay your past-due bill this month. Get a "
                  "payment arrangement with as many monthly installments as the agent will allow, and find out the monthly amount."),
         "facts": {"account_number": "100871", "zip_code": "39564"},
-        "rubrics": ["The agent calls create_payment_arrangement.",
-                    "The agent never offers or agrees to more than 6 monthly installments."],
-        "expect": ["Your payment arrangement is set up: 6 monthly installments of $68.73 added to your next bills."],
+        "rubrics": ["The agent never offers or agrees to more than 6 monthly installments."],
+        "checks": ["max-6-installments"],
+        # the mock is exactly what the real tool returns for this account (the API requires one with a tool expectation)
+        "tool": ("create_payment_arrangement", {"installments": 6},
+                 {"approved": True, "arrangement_id": "PA-100871-6", "installments": 6, "monthly_amount": "$68.73", "total": "$412.37"}),
     },
     "arrangement_linh_not_eligible": {
         "task": "You are Linh Nguyen, account 100455, service ZIP 39563. Ask to split your bill into 3 payments.",
         "facts": {"account_number": "100455", "zip_code": "39563"},
-        "rubrics": ["The agent explains that the account is not eligible for a payment arrangement.",
-                    "The agent never says an arrangement was approved or set up."],
-        "expect": ["I'm sorry, your account isn't eligible for a payment arrangement because the balance is below the $100 minimum."],
+        "goal": "USER_GOAL_REJECTED",
+        "rubrics": ["The agent explains the account is not eligible and never says an arrangement was approved."],
+        "checks": ["ineligible-not-approved"],
+        "tool": ("create_payment_arrangement", {"installments": 3},
+                 {"approved": False, "reason": "Balance of $86.10 is below the $100.00 minimum for a payment arrangement."}),
     },
     "storm_credit_renee": {
         "task": ("You are Renee Thibodeaux, ZIP 39567. Your power has been out since the storm. Find out whether you can get any "
                  "credit for the outage and for the food you lost."),
         "facts": {"zip_code": "39567"},
-        "rubrics": ["The agent says food spoilage from a storm is not reimbursed.",
-                    "The agent mentions the $25 Storm Hardship Credit and that it must be requested."],
+        "rubrics": ["The agent mentions the $25 Storm Hardship Credit and that it must be requested."],
         "expect": ["Food spoilage from a storm outage isn't reimbursed, but you may qualify for a $25 Storm Hardship Credit, which you need to request within 30 days."],
     },
 }
@@ -329,12 +341,24 @@ def multi_agent(sd, stage, root_instruction, global_text, billing, knowledge=Fal
 
 
 def evaluations(sd):
+    """Same shape as the UI (Evaluate ▸ + Add test case ▸ Scenario): a user goal with its expected outcome, positive
+    expectations (a tool call with its expected input, or an agent response), and rubrics for anything that must NOT happen."""
+    for name, (question, category) in EVAL_EXPECTATIONS.items():
+        wjson(os.path.join(sd, "evaluationExpectations", name, f"{name}.json"),
+              {"displayName": name, "llmCriteria": {"prompt": question}, "tags": [category]})
     for name, s in SCENARIOS.items():
+        if "tool" in s:
+            tool, args, mock = s["tool"]
+            expectations = [{"toolExpectation": {"expectedToolCall": {"tool": tool, "args": args},
+                                                 "mockToolResponse": {"tool": tool, "response": mock}}}]
+        else:
+            expectations = [{"agentResponse": {"role": "agent", "chunks": [{"text": r}]}} for r in s["expect"]]
         wjson(os.path.join(sd, "evaluations", name, f"{name}.json"), {
             "displayName": name,
             "scenario": {"task": s["task"], "userFacts": [{"name": k, "value": v} for k, v in s["facts"].items()],
-                         "maxTurns": 15, "rubrics": s["rubrics"],
-                         "scenarioExpectations": [{"agentResponse": {"role": "agent", "chunks": [{"text": r}]}} for r in s["expect"]]},
+                         "maxTurns": 15, "rubrics": s["rubrics"], "scenarioExpectations": expectations,
+                         "userGoalBehavior": s.get("goal", "USER_GOAL_SATISFIED"),
+                         **({"evaluationExpectations": s["checks"]} if s.get("checks") else {})},
         })
 
 

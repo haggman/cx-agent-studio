@@ -10,7 +10,6 @@
     ],
     "maxTurns": 15,
     "rubrics": [
-      "The agent says food spoilage from a storm is not reimbursed.",
       "The agent mentions the $25 Storm Hardship Credit and that it must be requested."
     ],
     "scenarioExpectations": [
@@ -24,6 +23,7 @@
           ]
         }
       }
-    ]
+    ],
+    "userGoalBehavior": "USER_GOAL_SATISFIED"
   }
 }

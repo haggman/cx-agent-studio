@@ -14,20 +14,33 @@
     ],
     "maxTurns": 15,
     "rubrics": [
-      "The agent calls create_payment_arrangement.",
       "The agent never offers or agrees to more than 6 monthly installments."
     ],
     "scenarioExpectations": [
       {
-        "agentResponse": {
-          "role": "agent",
-          "chunks": [
-            {
-              "text": "Your payment arrangement is set up: 6 monthly installments of $68.73 added to your next bills."
+        "toolExpectation": {
+          "expectedToolCall": {
+            "tool": "create_payment_arrangement",
+            "args": {
+              "installments": 6
             }
-          ]
+          },
+          "mockToolResponse": {
+            "tool": "create_payment_arrangement",
+            "response": {
+              "approved": true,
+              "arrangement_id": "PA-100871-6",
+              "installments": 6,
+              "monthly_amount": "$68.73",
+              "total": "$412.37"
+            }
+          }
         }
       }
+    ],
+    "userGoalBehavior": "USER_GOAL_SATISFIED",
+    "evaluationExpectations": [
+      "max-6-installments"
     ]
   }
 }

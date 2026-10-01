@@ -14,20 +14,30 @@
     ],
     "maxTurns": 15,
     "rubrics": [
-      "The agent explains that the account is not eligible for a payment arrangement.",
-      "The agent never says an arrangement was approved or set up."
+      "The agent explains the account is not eligible and never says an arrangement was approved."
     ],
     "scenarioExpectations": [
       {
-        "agentResponse": {
-          "role": "agent",
-          "chunks": [
-            {
-              "text": "I'm sorry, your account isn't eligible for a payment arrangement because the balance is below the $100 minimum."
+        "toolExpectation": {
+          "expectedToolCall": {
+            "tool": "create_payment_arrangement",
+            "args": {
+              "installments": 3
             }
-          ]
+          },
+          "mockToolResponse": {
+            "tool": "create_payment_arrangement",
+            "response": {
+              "approved": false,
+              "reason": "Balance of $86.10 is below the $100.00 minimum for a payment arrangement."
+            }
+          }
         }
       }
+    ],
+    "userGoalBehavior": "USER_GOAL_REJECTED",
+    "evaluationExpectations": [
+      "ineligible-not-approved"
     ]
   }
 }

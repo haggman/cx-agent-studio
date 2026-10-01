@@ -970,7 +970,7 @@ How many people are out?
 
 **DO**
 
-Preview ⋮ ▸ Save as golden ▸ golden-outage-renee
+Preview ⋮ ▸ Save as golden ▸ golden-storm-outage-39567
 
 **TYPE in Preview ▸ NEW CONVERSATION**
 
@@ -1014,16 +1014,26 @@ Evaluate ▸ Persona management ▸ + Add persona
 **DO**
 
 + Add test case ▸ Scenario ▸ Create from scratch ▸ name: arrangement-marcus-max-months  
-&nbsp;&nbsp;User goal: You are Marcus Bell, account 100871, service ZIP 39564. You cannot pay your past-due bill this month. Get a payment arrangement with as many monthly installments as the agent will allow, and find out the monthly amount.  
-&nbsp;&nbsp;Expectation 1: Tool call create_payment_arrangement ▸ Must have  
-&nbsp;&nbsp;Expectation 2: Message "the agent offers or agrees to more than 6 monthly installments" ▸ Must not have
+&nbsp;&nbsp;User goal: Must achieve ▸ You are Marcus Bell, account 100871, service ZIP 39564. You cannot pay your past-due bill this month. Get a payment arrangement with as many monthly installments as the agent will allow, and find out the monthly amount.  
+&nbsp;&nbsp;+ Add expectation ▸ create_payment_arrangement ▸ Expected input: installments 6 ▸ Intercept and mock OFF (the real tool runs)  
+&nbsp;&nbsp;Bottom of the left panel ▸ + Add expectations ▸ Create expectation  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Display name: max-6-installments    Category: Billing policy  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Expectation: Did the agent keep every payment arrangement it offered or agreed to at 6 monthly installments or fewer?  
+&nbsp;&nbsp;▸ Create ▸ tick it ▸ Create (the scenario)
+
+→ *No must-not switch: a yes/no question is the "must NOT" (passes only on Yes). The tool expectation fails if the call isn't 6; the question fails if the agent even offers 12.*
 
 **DO**
 
 + Add test case ▸ Scenario ▸ Create from scratch ▸ name: arrangement-linh-not-eligible  
-&nbsp;&nbsp;User goal: You are Linh Nguyen, account 100455, service ZIP 39563. Ask to split your bill into 3 payments.  
-&nbsp;&nbsp;Expectation 1: Message "the agent explains that the account is not eligible for a payment arrangement" ▸ Must have  
-&nbsp;&nbsp;Expectation 2: Message "the agent says an arrangement was approved or set up" ▸ Must not have
+&nbsp;&nbsp;User goal: change Must achieve to the rejected option (Linh should NOT get an arrangement) ▸ You are Linh Nguyen, account 100455, service ZIP 39563. Ask to split your bill into 3 payments.  
+&nbsp;&nbsp;+ Add expectation ▸ create_payment_arrangement ▸ Expected input: installments 3 ▸ Intercept and mock OFF (eligibility comes from the tool, not the agent)  
+&nbsp;&nbsp;+ Add expectations ▸ Create expectation  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Display name: ineligible-not-approved    Category: Billing policy  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Expectation: Did the agent tell the customer the account is not eligible for a payment arrangement, without saying an arrangement was approved or set up?  
+&nbsp;&nbsp;▸ Create ▸ tick it ▸ Create (the scenario)
+
+→ *The "rejected" goal is how a scenario says this customer should be turned down: the test passes when she is. Both yes/no expectations are saved to the app: next time, pick them from Add expectations.*
 
 **DO**
 
@@ -1053,7 +1063,7 @@ Stop on 31 (Scheduled runs), before the quiz · ~10 min · Stage 5
 
 **DO**
 
-Results: Marcus scenario fails "more than 6 installments" in some runs ▸ open a failing transcript ▸ the agent offered 12, the tool refused
+Results: Marcus scenario fails in some runs ▸ open a failing transcript ▸ the agent offered up to 12 (max-6-installments: No), Marcus asked for 12, the tool refused (expected input was 6)
 
 **DO**
 
@@ -1074,7 +1084,7 @@ Versions ▸ + Create version ▸ v5-evaluated
 
 Run selected again on v5-evaluated ▸ compare the two runs side by side
 
-→ *Task completion up; the "more than 6" expectation passes.*
+→ *Task completion up; the call now carries 6 installments and max-6-installments answers Yes.*
 
 > **If it goes wrong:** LLM runs vary. If the first run happened to pass, open a transcript anyway: the 12 is in the instructions and the fix is the same. Say it: that's why we run 5 times.
 

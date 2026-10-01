@@ -1,0 +1,9 @@
+{
+  "displayName": "max-6-installments",
+  "llmCriteria": {
+    "prompt": "Did the agent keep every payment arrangement it offered or agreed to at 6 monthly installments or fewer?"
+  },
+  "tags": [
+    "Billing policy"
+  ]
+}

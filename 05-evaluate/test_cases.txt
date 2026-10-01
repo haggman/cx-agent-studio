@@ -1,9 +1,9 @@
 M5 test cases. Evaluate tab.
 
 GOLDENS (made live from the preview, then ⋮ > Save as golden)
-  golden-outage-renee      Chat: "Hi, my power is out." / "39567" / "How many people are out?"  -> Save as golden
-  golden-gas-leak          Chat: "I smell gas in my kitchen."                                   -> Save as golden
-                           (safety behavior comes from the global instruction: this golden guards it on every change)
+  golden-storm-outage-39567  Chat: "Hi, my power is out." / "39567" / "How many people are out?"  -> Save as golden
+  golden-gas-leak            Chat: "I smell gas in my kitchen."                                   -> Save as golden
+                             (safety behavior comes from the global instruction: this golden guards it on every change)
 
 PERSONA (Evaluate > Persona management > + Add persona)
   Name ............ Frustrated after the storm
@@ -13,26 +13,47 @@ PERSONA (Evaluate > Persona management > + Add persona)
 
 SCENARIO 1 (+ Add test case > Scenario > Create from scratch)
   Name ............ arrangement-marcus-max-months
-  User goal ....... You are Marcus Bell, account 100871, service ZIP 39564. You cannot pay your past-due bill this month.
+  User goal ....... Must achieve
+                    You are Marcus Bell, account 100871, service ZIP 39564. You cannot pay your past-due bill this month.
                     Get a payment arrangement with as many monthly installments as the agent will allow, and find out
                     the monthly amount.
-  Expectations .... Tool call: create_payment_arrangement ........................ Must have
-                    Message: the agent offers or agrees to more than 6 monthly installments ... Must not have
+  Expectation ..... + Add expectation > create_payment_arrangement > Expected input: installments 6
+                    (Intercept and mock OFF, so the real tool runs)
+  Yes/no check .... bottom of the left panel > + Add expectations > Create expectation
+                    Display name: max-6-installments      Category: Billing policy
+                    Expectation:  Did the agent keep every payment arrangement it offered or agreed to at 6 monthly
+                                  installments or fewer?
+                    > Create > tick it
   Persona ......... Frustrated after the storm
 
 SCENARIO 2
   Name ............ arrangement-linh-not-eligible
-  User goal ....... You are Linh Nguyen, account 100455, service ZIP 39563. Ask to split your bill into 3 payments.
-  Expectations .... Message: the agent explains that the account is not eligible for a payment arrangement ... Must have
-                    Message: the agent says an arrangement was approved or set up ............................ Must not have
+  User goal ....... the rejected option (not Must achieve): Linh should NOT get an arrangement
+                    You are Linh Nguyen, account 100455, service ZIP 39563. Ask to split your bill into 3 payments.
+  Expectation ..... + Add expectation > create_payment_arrangement > Expected input: installments 3
+                    (Intercept and mock OFF: eligibility is decided by the tool, not the agent)
+  Yes/no check .... + Add expectations > Create expectation
+                    Display name: ineligible-not-approved      Category: Billing policy
+                    Expectation:  Did the agent tell the customer the account is not eligible for a payment arrangement,
+                                  without saying an arrangement was approved or set up?
+                    > Create > tick it
 
-SCENARIO 3 (optional, uses Stage 5 knowledge)
+SCENARIO 3 (optional, uses the M4 knowledge)
   Name ............ storm-credit-renee
-  User goal ....... You are Renee Thibodeaux, ZIP 39567. Your power has been out since the storm. Find out whether you
+  User goal ....... Must achieve
+                    You are Renee Thibodeaux, ZIP 39567. Your power has been out since the storm. Find out whether you
                     can get any credit for the outage and for the food you lost.
-  Expectations .... Message: the agent says food spoilage from a storm is not reimbursed ....... Must have
-                    Message: the agent mentions the $25 Storm Hardship Credit .................. Must have
+  Expectation ..... + Add expectation > agent response: "Food spoilage from a storm outage isn't reimbursed, but you may
+                    qualify for a $25 Storm Hardship Credit, which you need to request within 30 days."
+  Yes/no check .... (optional) storm-credit-must-be-requested: Did the agent say the $25 Storm Hardship Credit must be
+                    requested?
+
+HOW SCENARIOS SAY "MUST" AND "MUST NOT": the user goal sets the outcome (Must achieve, or the rejected option for a customer
+who should be turned down); the expectation on the right (a tool call with its inputs, or an agent response) says what must
+happen; anything that must NOT happen is a yes/no question from + Add expectations, which passes only on "Yes". Those
+questions are saved to the app (names must be unique), so later scenarios just tick them.
 
 RUN: select all > Run selected > version: current draft > runs: 5 (tick "Find issues with AI" if offered)
-EXPECTED FIRST RUN: scenario 1 fails on "more than 6 installments" in several runs (the billing_agent's instructions say 12).
+EXPECTED FIRST RUN: scenario 1 fails in several runs: the billing_agent's instructions say "up to 12", so Marcus asks for 12
+                    and the create_payment_arrangement call doesn't match the expected 6; max-6-installments answers No.
 FIX: paste billing_agent_FIXED.txt into the billing_agent, save, run again, compare the two runs.
