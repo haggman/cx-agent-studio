@@ -42,5 +42,6 @@ def create_payment_arrangement(installments: int) -> Dict[str, Any]:
         "monthly_amount": "$" + format(monthly, ".2f"),
         "total": "$" + format(bill["balance"], ".2f"),
         "first_installment": "added to the next bill",
+        "fees_and_interest": "None: Cymbal Energy charges no fees or interest on payment arrangements.",
         "note": "Current charges must still be paid by their due date each month.",
     }

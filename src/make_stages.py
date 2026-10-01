@@ -92,7 +92,7 @@ EVAL_EXPECTATIONS = {
 }
 
 SCENARIOS = {
-    "arrangement_marcus_max_months": {
+    "arrangement-marcus-max-months": {
         "task": ("You are Marcus Bell, account 100871, service ZIP 39564. You cannot pay your past-due bill this month. Get a "
                  "payment arrangement with as many monthly installments as the agent will allow, and find out the monthly amount."),
         "facts": {"account_number": "100871", "zip_code": "39564"},
@@ -100,9 +100,10 @@ SCENARIOS = {
         "checks": ["max-6-installments"],
         # the mock is exactly what the real tool returns for this account (the API requires one with a tool expectation)
         "tool": ("create_payment_arrangement", {"installments": 6},
-                 {"approved": True, "arrangement_id": "PA-100871-6", "installments": 6, "monthly_amount": "$68.73", "total": "$412.37"}),
+                 {"approved": True, "arrangement_id": "PA-100871-6", "installments": 6, "monthly_amount": "$68.73", "total": "$412.37",
+                  "fees_and_interest": "None: Cymbal Energy charges no fees or interest on payment arrangements."}),
     },
-    "arrangement_linh_not_eligible": {
+    "arrangement-linh-not-eligible": {
         "task": "You are Linh Nguyen, account 100455, service ZIP 39563. Ask to split your bill into 3 payments.",
         "facts": {"account_number": "100455", "zip_code": "39563"},
         "goal": "USER_GOAL_REJECTED",
@@ -111,7 +112,7 @@ SCENARIOS = {
         "tool": ("create_payment_arrangement", {"installments": 3},
                  {"approved": False, "reason": "Balance of $86.10 is below the $100.00 minimum for a payment arrangement."}),
     },
-    "storm_credit_renee": {
+    "storm-credit-renee": {
         "task": ("You are Renee Thibodeaux, ZIP 39567. Your power has been out since the storm. Find out whether you can get any "
                  "credit for the outage and for the food you lost."),
         "facts": {"zip_code": "39567"},

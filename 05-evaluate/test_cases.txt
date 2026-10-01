@@ -23,7 +23,7 @@ SCENARIO 1 (+ Add test case > Scenario > Create from scratch)
                     Display name: max-6-installments      Category: Billing policy
                     Expectation:  Did the agent keep every payment arrangement it offered or agreed to at 6 monthly
                                   installments or fewer?
-                    > Create > tick it
+                    > Create > tick it > Add
   Persona ......... Frustrated after the storm
 
 SCENARIO 2
@@ -36,7 +36,7 @@ SCENARIO 2
                     Display name: ineligible-not-approved      Category: Billing policy
                     Expectation:  Did the agent tell the customer the account is not eligible for a payment arrangement,
                                   without saying an arrangement was approved or set up?
-                    > Create > tick it
+                    > Create > tick it > Add
 
 SCENARIO 3 (optional, uses the M4 knowledge)
   Name ............ storm-credit-renee

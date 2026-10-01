@@ -1019,7 +1019,7 @@ Evaluate ▸ Persona management ▸ + Add persona
 &nbsp;&nbsp;Bottom of the left panel ▸ + Add expectations ▸ Create expectation  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Display name: max-6-installments    Category: Billing policy  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Expectation: Did the agent keep every payment arrangement it offered or agreed to at 6 monthly installments or fewer?  
-&nbsp;&nbsp;▸ Create ▸ tick it ▸ Create (the scenario)
+&nbsp;&nbsp;▸ Create ▸ tick it ▸ Add ▸ Create (the scenario)
 
 → *No must-not switch: a yes/no question is the "must NOT" (passes only on Yes). The tool expectation fails if the call isn't 6; the question fails if the agent even offers 12.*
 
@@ -1031,7 +1031,7 @@ Evaluate ▸ Persona management ▸ + Add persona
 &nbsp;&nbsp;+ Add expectations ▸ Create expectation  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Display name: ineligible-not-approved    Category: Billing policy  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Expectation: Did the agent tell the customer the account is not eligible for a payment arrangement, without saying an arrangement was approved or set up?  
-&nbsp;&nbsp;▸ Create ▸ tick it ▸ Create (the scenario)
+&nbsp;&nbsp;▸ Create ▸ tick it ▸ Add ▸ Create (the scenario)
 
 → *The "rejected" goal is how a scenario says this customer should be turned down: the test passes when she is. Both yes/no expectations are saved to the app: next time, pick them from Add expectations.*
 
@@ -1086,7 +1086,7 @@ Run selected again on v5-evaluated ▸ compare the two runs side by side
 
 → *Task completion up; the call now carries 6 installments and max-6-installments answers Yes.*
 
-> **If it goes wrong:** LLM runs vary. If the first run happened to pass, open a transcript anyway: the 12 is in the instructions and the fix is the same. Say it: that's why we run 5 times.
+> **If it goes wrong:** LLM runs vary. If the first run happened to pass, open a transcript anyway: the 12 is in the instructions and the fix is the same. Say it: that's why we run 5 times. A failure marked as a hallucination (the frustrated persona asks about fees and the agent invents an answer) is a second, real catch: the fix is grounding, not prompting. The tool returns fees_and_interest and billing_agent_FIXED.txt says to state only the terms the tool returned.
 
 ---
 

@@ -1,5 +1,5 @@
 {
-  "displayName": "storm_credit_renee",
+  "displayName": "storm-credit-renee",
   "scenario": {
     "task": "You are Renee Thibodeaux, ZIP 39567. Your power has been out since the storm. Find out whether you can get any credit for the outage and for the food you lost.",
     "userFacts": [

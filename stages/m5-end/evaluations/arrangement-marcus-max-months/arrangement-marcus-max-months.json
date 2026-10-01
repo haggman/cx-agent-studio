@@ -1,5 +1,5 @@
 {
-  "displayName": "arrangement_marcus_max_months",
+  "displayName": "arrangement-marcus-max-months",
   "scenario": {
     "task": "You are Marcus Bell, account 100871, service ZIP 39564. You cannot pay your past-due bill this month. Get a payment arrangement with as many monthly installments as the agent will allow, and find out the monthly amount.",
     "userFacts": [
@@ -32,7 +32,8 @@
               "arrangement_id": "PA-100871-6",
               "installments": 6,
               "monthly_amount": "$68.73",
-              "total": "$412.37"
+              "total": "$412.37",
+              "fees_and_interest": "None: Cymbal Energy charges no fees or interest on payment arrangements."
             }
           }
         }

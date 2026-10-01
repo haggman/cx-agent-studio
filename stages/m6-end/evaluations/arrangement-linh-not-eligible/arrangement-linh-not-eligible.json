@@ -1,5 +1,5 @@
 {
-  "displayName": "arrangement_linh_not_eligible",
+  "displayName": "arrangement-linh-not-eligible",
   "scenario": {
     "task": "You are Linh Nguyen, account 100455, service ZIP 39563. Ask to split your bill into 3 payments.",
     "userFacts": [
