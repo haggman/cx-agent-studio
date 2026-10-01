@@ -13,7 +13,7 @@ One agent that grows through both days. One section per demo block: slide first,
 | 3 | M2 · 3–4 | 5 | [Product tour on our own draft](#b3) |  |
 | 4 | M2 · 11 | 8 | [From one agent to a team: root + outage_agent + billing_agent](#b4) |  |
 | 5 | M2 · 19, 26–27 | 7 | [Global instruction (brand voice) and Restructure instructions](#b5) |  |
-| 6 | M2 · 28–30 | 6 | [Variables: the agent's memory](#b6) |  |
+| 6 | M2 · 28–30 | 7 | [Variables: the agent's memory](#b6) |  |
 | 7 | M2 · 40 | 8 | [After-tool callback: turn a tool result into state](#b7) |  |
 | 8 | M2 · 82 | 5 | [Python tools replace the placeholders; business rules live in code](#b8) |  |
 | 9 | M2 · 82 | 6 | [Wire the tools to the specialists and have a real conversation](#b9) |  |
@@ -328,7 +328,7 @@ I think I smell gas in my kitchen.
 
 ### Variables: the agent's memory
 
-Stop on 30 (Using variables) · ~6 min · Stage 2
+Stop on 30 (Using variables) · ~7 min · Stage 2
 
 **RESET TO START STATE**
 
@@ -359,6 +359,20 @@ Settings ▸ Advanced ▸ Global instruction ▸ add a last line, typing { to pi
 ```text
 - Once the customer is verified, call them by first name: {customer_name}
 ```
+
+**TYPE in Preview ▸ NEW CONVERSATION**
+
+```text
+Hi, I'm Renee. My account is 100234.
+```
+
+→ *A friendly reply.*
+
+**DO**
+
+Under the reply: Steps row ▸ expand (˅) ▸ Variables ▸ › ▸ Overview panel ▸ All
+
+→ *All eight at their defaults: is_authenticated false, customer_name and account_id still empty, even though the customer just gave both. The model can't write them. Also there: current_date and _session (modality, channel), built in.*
 
 > **If it goes wrong:** Instructions can READ variables; only tools and callbacks can WRITE them. The callback on slide 40 fills the last four; the tools on slide 82 fill the first four.
 
@@ -400,13 +414,19 @@ outage_agent title bar ▸ Add callback ▸ After tool ▸ PASTE:
 If {storm_credit_eligible} is true, tell the customer they may qualify for a storm hardship credit and offer to explain how to request it.
 ```
 
-**TYPE in Preview ▸ NEW CONVERSATION · open the Variables panel first**
+**TYPE in Preview ▸ NEW CONVERSATION · keep the trace open**
 
 ```text
 My power has been out since the storm. I'm in 39567.
 ```
 
-→ *Trace: check_outage, then the after-tool callback and its [after_tool] print line. Variables fill in: outage_id OUT-58812, estimated_restoration 11:00 PM tonight, hours_without_power 76, storm_credit_eligible true. The agent mentions a possible storm credit.*
+→ *Trace: check_outage, then the after-tool callback and its [after_tool] print line. The agent mentions a possible storm credit.*
+
+**DO**
+
+Under the reply: Steps row ▸ expand (˅) ▸ Variables (4 updated) ▸ › ▸ Overview panel ▸ Updated
+
+→ *Filled by the callback (blue dot = changed this turn): outage_id OUT-58812, estimated_restoration 11:00 PM tonight, hours_without_power 76, storm_credit_eligible true. The first four are still empty: nobody has verified yet.*
 
 **TYPE in Preview ▸ NEW CONVERSATION (the contrast)**
 
@@ -498,7 +518,13 @@ What's my balance?
 100234, 39567
 ```
 
-→ *Verified, Renee. $142.80 due October 6. Variables panel: is_authenticated true, service_zip 39567.*
+→ *Verified, Renee. $142.80 due October 6, in the same reply. Trace: verify_customer and its [verify_customer] print line, then get_bill_summary.*
+
+**DO**
+
+Under the reply: Steps row ▸ expand (˅) ▸ Variables (4 updated) ▸ › ▸ Overview panel ▸ Updated
+
+→ *Filled by the tool (blue dot = changed this turn): is_authenticated true, account_id 100234, customer_name Renee Thibodeaux, service_zip 39567.*
 
 **TYPE in Preview**
 
@@ -508,7 +534,7 @@ Is my power still out?
 
 → *Transfers to outage_agent, does NOT ask for the ZIP again (read {service_zip}), quotes 11:00 PM tonight.*
 
-> **If it goes wrong:** If an agent says it has no way to look something up, the tool isn't attached to THAT agent (tools are per agent). Don't point out the "up to 12 monthly installments" line in the billing_agent: M5's evaluation catches it.
+> **If it goes wrong:** If an agent says it has no way to look something up, the tool isn't attached to THAT agent (tools are per agent). "One moment while I get that" and then nothing: the model replied instead of calling the tool; the global instruction line and verify_customer's agent_action prevent it (type "ok?" to nudge it). Don't point out the "up to 12 monthly installments" line in the billing_agent: M5's evaluation catches it.
 
 ---
 

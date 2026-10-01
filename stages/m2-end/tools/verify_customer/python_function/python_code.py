@@ -25,4 +25,7 @@ def verify_customer(account_number: str, zip_code: str) -> Dict[str, Any]:
     set_variable("account_id", acct)
     set_variable("customer_name", record["name"])
     set_variable("service_zip", record["zip"])
-    return {"verified": True, "customer_name": record["name"], "service_address": record["address"]}
+    print(f"[verify_customer] {acct} verified: is_authenticated=True, customer_name={record['name']}, service_zip={record['zip']}")
+    return {"verified": True, "customer_name": record["name"], "service_address": record["address"],
+            "agent_action": "Verification is complete. Continue with the customer's request now, calling the next tool "
+                            "(for example get_bill_summary) before you reply."}
