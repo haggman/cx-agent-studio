@@ -112,8 +112,7 @@ add(H2("3.3 Morning of day 1 (5 minutes)"));
  "Browser microphone permission granted for ces.cloud.google.com; headset or speakers connected"].forEach(t => add(bullet(t)));
 add(H2("3.4 Morning of day 2 (5 minutes)"));
 ["bash ~/cx-agent-studio/setup.sh (both data stores say \"already has documents\"), then bash ~/cx-agent-studio/catch_up.sh 4 (end-of-M3 agent plus cymbal_policies and cymbal_faq in Tools, not attached: block 14 needs them there)",
- "VS Code: 06-deploy/cymbal-energy-outage-center.html open (the PASTE markers are at the bottom)",
- "A local terminal ready for python3 -m http.server 8000 in 06-deploy of your local clone",
+ "Cloud Shell ▸ Open Editor: ~/cx-agent-studio/06-deploy/cymbal-energy-outage-center.html opens (the PASTE markers are at the bottom); block 21 serves it with python3 -m http.server 8080 and Web Preview",
  "Cloud Shell still has ~/cx-agent-studio (Cloud Shell home persists; clone again or re-upload the zip if the project was reset)"].forEach(t => add(bullet(t)));
 
 // ------------------------------------------------------------------ 4. blocks
@@ -201,7 +200,7 @@ add(P("CX Agent Studio docs changed as recently as September 24. These click pat
   "Voice: the Global model list shows gemini-3.1-flash-live and composite-v1, and Voice / Ambient sounds / interruptions live under Settings ▸ Basic ▸ Behavior.",
   "Data store tool: the Cloud Storage option names (Unstructured data / FAQ, One time sync), and whether the FAQ CSV imports cleanly.",
   "Evaluations: persona selection at run time, the Find issues with AI checkbox (needs 3+ runs), and how scenario expectations are entered.",
-  "Web widget: which snippet the console generates (<chat-messenger> in the current docs, <ces-messenger> on the slide), whether localhost works with public access on and origin check off.",
+  "Web widget: which snippet the console generates (<chat-messenger> in the current docs, <ces-messenger> on the slide), whether the Cloud Shell Web Preview page works with public access on and origin check off.",
   "api_demo.sh: runSession on /v1/ with the widget's deployment; your user needs Owner or roles/ces.client.",
   "Antigravity CLI: the CX Agent Studio server shows Connected in /mcp; MCP calls prompt for approval; the optional skills appear as / commands when agy starts in ~/cx-agent-studio-skills (hooks from cxas init are registered for Claude Code and Gemini CLI only, not Antigravity).",
   "Data stores built by API (setup.sh) live in the us multi-region, next to the app (the AI Applications console lists global by default: switch the location to us). Sep 29 dry run: cymbal-policies indexed 3 documents; the first cymbal-faq import failed on every row (\"Custom Document Id (_id) was not found\") and is fixed with autoGenerateIds; rerun setup.sh to retry it. After catch_up.sh 4, cymbal_policies and cymbal_faq appear in Tools pointing at the indexed stores, and cymbal_faq answers verbatim like a UI-made FAQ store (created as NO_CONTENT + CSV import). If the FAQ one misbehaves, delete that tool and create it in the UI from the same CSV.",

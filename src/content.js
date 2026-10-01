@@ -359,16 +359,16 @@ const blocks = [
 {
   id: "m6-widget", day: 2, module: "M6", n: 20, stage: 6, slides: "12–13", stop: "13 (web widget code)",
   title: "Put the agent on the Cymbal Energy outage page", mins: 8,
-  reset: restore("v5-evaluated").concat(["VS Code + a Terminal on the Mac"]),
+  reset: restore("v5-evaluated").concat(["Cloud Shell open (a second browser tab)"]),
   files: ["06-deploy/cymbal-energy-outage-center.html"],
   steps: [
     { tag: "DO", text: "Deploy (top) ▸ New channel ▸ Web widget ▸ name: cymbal-web ▸ version: v5-evaluated ▸ public access ON, origin check OFF ▸ Create channel" },
-    { tag: "DO", text: "Copy the widget code ▸ VS Code: open\n    06-deploy/cymbal-energy-outage-center.html\n▸ paste between the two PASTE markers at the bottom ▸ Save" },
-    { tag: "MAC", text: "cd <your local clone>/06-deploy && python3 -m http.server 8000" },
-    { tag: "DO", text: "Browser: http://localhost:8000/cymbal-energy-outage-center.html ▸ open the chat bubble" },
+    { tag: "DO", text: "Copy the widget code ▸ Cloud Shell ▸ Open Editor ▸ File ▸ Open\n    ~/cx-agent-studio/06-deploy/cymbal-energy-outage-center.html\n▸ paste between the two PASTE markers at the bottom ▸ File ▸ Save ▸ Open Terminal" },
+    { tag: "SHELL", text: "cd ~/cx-agent-studio/06-deploy && python3 -m http.server 8080" },
+    { tag: "DO", text: "Cloud Shell toolbar ▸ Web Preview ▸ Preview on port 8080 ▸ click cymbal-energy-outage-center.html ▸ open the chat bubble" },
     { tag: "TYPE", text: "Is there an outage in Moss Point? ZIP 39562", expect: "Tree limb, 310 customers, ETR 4:30 PM today (matches the table on the page)." },
   ],
-  gotcha: "Widget doesn't appear on localhost: the snippet needs http(s), not file://. Fallback: Cloud Shell ▸ upload the html ▸ python3 -m http.server 8080 ▸ Web Preview ▸ port 8080.",
+  gotcha: "Widget doesn't appear: check the channel has public access ON and origin check OFF, and that the page came from Web Preview (http), not a downloaded file. Reload after saving the paste.",
   why: "One click from a tested version to a customer-facing channel, pinned to a version so the draft can keep changing safely.",
   say: ["The channel points at v5-evaluated, not at the draft. I can keep editing without breaking the website.",
         "Look at the channel list: WhatsApp, Instagram and SecureCo arrived on September 24, after these slides were written. Same agent, more doors."],
@@ -376,7 +376,7 @@ const blocks = [
 {
   id: "m6-api", day: 2, module: "M6", n: 21, stage: 6, slides: "17–18", stop: "18 (API access code)",
   title: "The same agent over the API", mins: 5,
-  reset: ["Continue from block 21", "Cloud Shell in ~/cx-agent-studio/06-deploy"],
+  reset: ["Continue from block 21 (leave the web server running)", "Cloud Shell ▸ + (new tab) ▸ cd ~/cx-agent-studio/06-deploy"],
   files: ["06-deploy/api_demo.sh"],
   steps: [
     { tag: "DO", text: "Deploy ▸ cymbal-web ▸ copy the deployment name: …/apps/APP_ID/deployments/DEPLOYMENT_ID" },
@@ -460,8 +460,7 @@ const MORNING = {
       "Mic and speakers working in the browser (M3 voice)"],
   2: ["Cloud Shell:  bash ~/cx-agent-studio/setup.sh   (both data stores should say \"already has documents\": the M4 dish is cooked)",
       "Cloud Shell:  bash ~/cx-agent-studio/catch_up.sh 4   (end-of-M3 agent + cymbal_policies and cymbal_faq sitting in Tools, not attached)",
-      "VS Code has 06-deploy/cymbal-energy-outage-center.html open (paste markers at the bottom)",
-      "Local terminal ready for python3 -m http.server 8000 in 06-deploy"],
+      "Cloud Shell Editor: ~/cx-agent-studio/06-deploy/cymbal-energy-outage-center.html opens (paste markers at the bottom)"],
 };
 
 module.exports = { APP, BUCKET, DECKS, VERSIONS, CATCH_UP, MORNING, blocks };

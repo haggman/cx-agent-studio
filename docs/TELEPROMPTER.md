@@ -742,8 +742,7 @@ Versions ▸ + Create version ▸ v3-day1
 
 - [ ] Cloud Shell:  bash ~/cx-agent-studio/setup.sh   (both data stores should say "already has documents": the M4 dish is cooked)
 - [ ] Cloud Shell:  bash ~/cx-agent-studio/catch_up.sh 4   (end-of-M3 agent + cymbal_policies and cymbal_faq sitting in Tools, not attached)
-- [ ] VS Code has 06-deploy/cymbal-energy-outage-center.html open (paste markers at the bottom)
-- [ ] Local terminal ready for python3 -m http.server 8000 in 06-deploy
+- [ ] Cloud Shell Editor: ~/cx-agent-studio/06-deploy/cymbal-energy-outage-center.html opens (paste markers at the bottom)
 
 ---
 
@@ -1113,7 +1112,7 @@ Stop on 13 (web widget code) · ~8 min · Stage 6
 - On track? Continue. Behind or broken? Cloud Shell:  bash ~/cx-agent-studio/catch_up.sh 6   (loads v5-evaluated, 1–2 min)
 - Or: Versions button (right side) ▸ v5-evaluated ▸ ⋮ ▸ Restore
 - Preview agent ▸ Start new conversation
-- VS Code + a Terminal on the Mac
+- Cloud Shell open (a second browser tab)
 
 **FILES**
 
@@ -1125,19 +1124,19 @@ Deploy (top) ▸ New channel ▸ Web widget ▸ name: cymbal-web ▸ version: v5
 
 **DO**
 
-Copy the widget code ▸ VS Code: open  
-&nbsp;&nbsp;&nbsp;&nbsp;06-deploy/cymbal-energy-outage-center.html  
-▸ paste between the two PASTE markers at the bottom ▸ Save
+Copy the widget code ▸ Cloud Shell ▸ Open Editor ▸ File ▸ Open  
+&nbsp;&nbsp;&nbsp;&nbsp;~/cx-agent-studio/06-deploy/cymbal-energy-outage-center.html  
+▸ paste between the two PASTE markers at the bottom ▸ File ▸ Save ▸ Open Terminal
 
-**LOCAL TERMINAL**
+**CLOUD SHELL**
 
 ```text
-cd <your local clone>/06-deploy && python3 -m http.server 8000
+cd ~/cx-agent-studio/06-deploy && python3 -m http.server 8080
 ```
 
 **DO**
 
-Browser: http://localhost:8000/cymbal-energy-outage-center.html ▸ open the chat bubble
+Cloud Shell toolbar ▸ Web Preview ▸ Preview on port 8080 ▸ click cymbal-energy-outage-center.html ▸ open the chat bubble
 
 **TYPE in Preview**
 
@@ -1147,7 +1146,7 @@ Is there an outage in Moss Point? ZIP 39562
 
 → *Tree limb, 310 customers, ETR 4:30 PM today (matches the table on the page).*
 
-> **If it goes wrong:** Widget doesn't appear on localhost: the snippet needs http(s), not file://. Fallback: Cloud Shell ▸ upload the html ▸ python3 -m http.server 8080 ▸ Web Preview ▸ port 8080.
+> **If it goes wrong:** Widget doesn't appear: check the channel has public access ON and origin check OFF, and that the page came from Web Preview (http), not a downloaded file. Reload after saving the paste.
 
 ---
 
@@ -1161,8 +1160,8 @@ Stop on 18 (API access code) · ~5 min · Stage 6
 
 **RESET TO START STATE**
 
-- Continue from block 21
-- Cloud Shell in ~/cx-agent-studio/06-deploy
+- Continue from block 21 (leave the web server running)
+- Cloud Shell ▸ + (new tab) ▸ cd ~/cx-agent-studio/06-deploy
 
 **FILES**
 
